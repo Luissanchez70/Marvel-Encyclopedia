@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C55119C2BD2C3A70069C7B7 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C55119B2BD2C3A70069C7B7 /* DetailsViewController.swift */; };
 		D2D87FC12BD27FFB008352FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D87FC02BD27FFB008352FE /* AppDelegate.swift */; };
 		D2D87FC32BD27FFB008352FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D87FC22BD27FFB008352FE /* SceneDelegate.swift */; };
 		D2D87FC52BD27FFB008352FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D87FC42BD27FFB008352FE /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C55119B2BD2C3A70069C7B7 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		D2D87FBD2BD27FFB008352FE /* Marvel Encyclopedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Marvel Encyclopedia.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D87FC02BD27FFB008352FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2D87FC22BD27FFB008352FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +78,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C5511952BD2C29A0069C7B7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		1C5511962BD2C2AF0069C7B7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D2D87FCB2BD27FFD008352FE /* LaunchScreen.storyboard */,
+				D2D87FC62BD27FFB008352FE /* Main.storyboard */,
+				1C5511972BD2C2C10069C7B7 /* Controllers */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1C5511972BD2C2C10069C7B7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1C55119B2BD2C3A70069C7B7 /* DetailsViewController.swift */,
+				D2D87FC42BD27FFB008352FE /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1C5511982BD2C3260069C7B7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		D2D87FB42BD27FFB008352FE = {
 			isa = PBXGroup;
 			children = (
@@ -99,12 +134,12 @@
 		D2D87FBF2BD27FFB008352FE /* Marvel Encyclopedia */ = {
 			isa = PBXGroup;
 			children = (
+				1C5511982BD2C3260069C7B7 /* Model */,
+				1C5511962BD2C2AF0069C7B7 /* View */,
+				1C5511952BD2C29A0069C7B7 /* ViewModel */,
 				D2D87FC02BD27FFB008352FE /* AppDelegate.swift */,
 				D2D87FC22BD27FFB008352FE /* SceneDelegate.swift */,
-				D2D87FC42BD27FFB008352FE /* ViewController.swift */,
-				D2D87FC62BD27FFB008352FE /* Main.storyboard */,
 				D2D87FC92BD27FFD008352FE /* Assets.xcassets */,
-				D2D87FCB2BD27FFD008352FE /* LaunchScreen.storyboard */,
 				D2D87FCE2BD27FFD008352FE /* Info.plist */,
 			);
 			path = "Marvel Encyclopedia";
@@ -261,6 +296,7 @@
 				D2D87FC52BD27FFB008352FE /* ViewController.swift in Sources */,
 				D2D87FC12BD27FFB008352FE /* AppDelegate.swift in Sources */,
 				D2D87FC32BD27FFB008352FE /* SceneDelegate.swift in Sources */,
+				1C55119C2BD2C3A70069C7B7 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +485,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -476,6 +513,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
