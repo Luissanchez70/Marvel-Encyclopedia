@@ -32,6 +32,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HMY-sg-NwY" userLabel="DescriptionView">
+                                <rect key="frame" x="0.0" y="58.999999999999972" width="393" height="455.33333333333326"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personaje" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INg-UX-Fav">
+                                        <rect key="frame" x="120.66666666666669" y="185.33333333333334" width="152" height="43"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="wqP-cZ-wrP">
+                                        <rect key="frame" x="118" y="22" width="157" height="154"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="wqP-cZ-wrP" secondAttribute="height" multiplier="1:1" id="oSl-Xg-GhQ"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FxY-gO-Kbc" userLabel="Description">
+                                        <rect key="frame" x="20" y="236" width="353" height="199"/>
+                                        <string key="text">May Mayday Parker is the daughter of Spider-Man and Mary Jane Watson-Parker. Born with all her father powers-and the same silly sense of humor-shes grown up to become one of Earths most trusted heroes and a fitting tribute to her proud papa.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="FxY-gO-Kbc" firstAttribute="leading" secondItem="HMY-sg-NwY" secondAttribute="leading" constant="20" symbolic="YES" id="0mk-ZF-VAr"/>
+                                    <constraint firstItem="INg-UX-Fav" firstAttribute="centerX" secondItem="HMY-sg-NwY" secondAttribute="centerX" id="2fn-MD-XGe"/>
+                                    <constraint firstAttribute="trailing" secondItem="FxY-gO-Kbc" secondAttribute="trailing" constant="20" symbolic="YES" id="5JM-FO-bjI"/>
+                                    <constraint firstItem="wqP-cZ-wrP" firstAttribute="width" secondItem="HMY-sg-NwY" secondAttribute="width" multiplier="0.4" id="Avt-PT-D8h"/>
+                                    <constraint firstItem="wqP-cZ-wrP" firstAttribute="centerX" secondItem="HMY-sg-NwY" secondAttribute="centerX" id="BGV-GI-4iA"/>
+                                    <constraint firstItem="wqP-cZ-wrP" firstAttribute="top" secondItem="HMY-sg-NwY" secondAttribute="top" constant="20" symbolic="YES" id="DWl-5Z-YJw"/>
+                                    <constraint firstItem="INg-UX-Fav" firstAttribute="top" secondItem="wqP-cZ-wrP" secondAttribute="bottom" constant="8" symbolic="YES" id="K9F-mX-a7Y"/>
+                                    <constraint firstItem="FxY-gO-Kbc" firstAttribute="top" secondItem="INg-UX-Fav" secondAttribute="bottom" constant="8" symbolic="YES" id="dvY-oi-CTI"/>
+                                    <constraint firstAttribute="bottom" secondItem="FxY-gO-Kbc" secondAttribute="bottom" constant="20" symbolic="YES" id="fF0-A8-Jat"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="547-iZ-XeD" userLabel="ResourcesView">
                                 <rect key="frame" x="0.0" y="514.33333333333337" width="393" height="303.66666666666663"/>
                                 <subviews>
@@ -58,43 +95,6 @@
                                     <constraint firstAttribute="trailing" secondItem="w40-TB-UhN" secondAttribute="trailing" constant="20" symbolic="YES" id="pzo-e7-rW6"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HMY-sg-NwY" userLabel="DescriptionView">
-                                <rect key="frame" x="0.0" y="58.999999999999972" width="393" height="455.33333333333326"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="wqP-cZ-wrP">
-                                        <rect key="frame" x="118" y="22" width="157" height="154"/>
-                                        <color key="tintColor" systemColor="labelColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="wqP-cZ-wrP" secondAttribute="height" multiplier="1:1" id="oSl-Xg-GhQ"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FxY-gO-Kbc" userLabel="Description">
-                                        <rect key="frame" x="20" y="236.33333333333331" width="353" height="199"/>
-                                        <string key="text">May Mayday Parker is the daughter of Spider-Man and Mary Jane Watson-Parker. Born with all her father powers-and the same silly sense of humor-shes grown up to become one of Earths most trusted heroes and a fitting tribute to her proud papa.</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personaje" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INg-UX-Fav">
-                                        <rect key="frame" x="120.66666666666669" y="185.33333333333334" width="152" height="43"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="FxY-gO-Kbc" firstAttribute="leading" secondItem="HMY-sg-NwY" secondAttribute="leading" constant="20" symbolic="YES" id="0mk-ZF-VAr"/>
-                                    <constraint firstItem="INg-UX-Fav" firstAttribute="centerX" secondItem="HMY-sg-NwY" secondAttribute="centerX" id="2fn-MD-XGe"/>
-                                    <constraint firstAttribute="trailing" secondItem="FxY-gO-Kbc" secondAttribute="trailing" constant="20" symbolic="YES" id="5JM-FO-bjI"/>
-                                    <constraint firstItem="wqP-cZ-wrP" firstAttribute="width" secondItem="HMY-sg-NwY" secondAttribute="width" multiplier="0.4" id="Avt-PT-D8h"/>
-                                    <constraint firstItem="wqP-cZ-wrP" firstAttribute="centerX" secondItem="HMY-sg-NwY" secondAttribute="centerX" id="BGV-GI-4iA"/>
-                                    <constraint firstItem="wqP-cZ-wrP" firstAttribute="top" secondItem="HMY-sg-NwY" secondAttribute="top" constant="20" symbolic="YES" id="DWl-5Z-YJw"/>
-                                    <constraint firstItem="INg-UX-Fav" firstAttribute="top" secondItem="wqP-cZ-wrP" secondAttribute="bottom" constant="8" symbolic="YES" id="K9F-mX-a7Y"/>
-                                    <constraint firstItem="FxY-gO-Kbc" firstAttribute="top" secondItem="INg-UX-Fav" secondAttribute="bottom" constant="8" symbolic="YES" id="dvY-oi-CTI"/>
-                                    <constraint firstAttribute="bottom" secondItem="FxY-gO-Kbc" secondAttribute="bottom" constant="20" symbolic="YES" id="fF0-A8-Jat"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OUx-qm-jV9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -109,6 +109,13 @@
                             <constraint firstItem="HMY-sg-NwY" firstAttribute="width" secondItem="3OL-bV-552" secondAttribute="width" id="wCC-vO-h8M"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="desc" destination="FxY-gO-Kbc" id="yKN-nJ-60j"/>
+                        <outlet property="image" destination="wqP-cZ-wrP" id="gxt-SQ-SCb"/>
+                        <outlet property="name" destination="INg-UX-Fav" id="sMu-7q-q15"/>
+                        <outlet property="resourceSelector" destination="w40-TB-UhN" id="rwO-fo-nKh"/>
+                        <outlet property="tableView" destination="ZF6-Yu-LIW" id="qxD-yT-PNx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vJU-nw-ueA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
