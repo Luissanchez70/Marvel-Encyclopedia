@@ -15,7 +15,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var resourceSelector: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-    var characterId: Int?
+    var characterId: Int = 0
     var viewModel : DetailsViewModel? // set viewModel in prepare
     var cancelebles: Set<AnyCancellable> = []
     
