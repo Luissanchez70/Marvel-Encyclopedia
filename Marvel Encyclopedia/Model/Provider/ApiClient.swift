@@ -15,11 +15,11 @@ class ApiClient {
     
     func executeApi(urlBase: String, complition: @escaping (ResponseCharacter?)  -> () ) throws {
         
-        let endPoint: String = "\(urlBase)?ts=1&\(publicKey)&\(hash)"
+        let endPoint: String = "\(urlBase)ts=1&\(publicKey)&\(hash)"
         guard let url = URL(string: endPoint) else { return }
         urlSession.dataTask(with: url) { data, response, error in
             if let error = error {
-              return
+                print("Error -------> \(error.localizedDescription)")
             }
            if (200...299).contains((response as! HTTPURLResponse).statusCode) {
                if let data = data {
@@ -35,7 +35,7 @@ class ApiClient {
         guard let url = URL(string: endPoint) else { return }
         urlSession.dataTask(with: url) { data, response, error in
             if let error = error {
-              return
+                print("Error -------> \(error.localizedDescription)")
             }
             if (200...299).contains((response as! HTTPURLResponse).statusCode) {
                 if let data = data {
@@ -43,7 +43,6 @@ class ApiClient {
                     complition(image)
                 }
              }
-
-        }
+        }.resume()
     }
 }

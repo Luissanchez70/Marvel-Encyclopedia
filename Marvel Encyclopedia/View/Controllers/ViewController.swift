@@ -39,4 +39,21 @@ extension ViewController: UITableViewDelegate {
         return cell
     }
 }
-
+extension ViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            mainViewModel.getCharacters { success in
+                if success {
+                    DispatchQueue.main.async {self.CharacterTable.reloadData()}
+                }
+            }
+        } else {
+            mainViewModel.getCharactersFilter(filter: searchText) { success in
+                if success {
+                    DispatchQueue.main.async {self.CharacterTable.reloadData()}
+                }
+            }
+        }
+    }
+}

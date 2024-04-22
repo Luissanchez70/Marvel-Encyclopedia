@@ -18,6 +18,10 @@ class MainViewModel {
     func getCharacters(complition: @escaping (Bool) -> () ) {
         updateCharacter(complition:  complition)
     }
+    func getCharactersFilter(filter: String, complition: @escaping (Bool) -> () ) {
+        let base = "https://gateway.marvel.com/v1/public/characters?nameStartsWith=\(filter)&"
+        updateCharacter(urlBase: base, complition:  complition)
+    }
     
     func getList() -> [MarvelCharacter] {
         characterList
@@ -28,7 +32,21 @@ private extension MainViewModel {
     
     func updateCharacter(complition: @escaping (Bool) -> () ) {
         do {
-            let urlBase: String = "https://gateway.marvel.com/v1/public/characters"
+            let urlBase: String = "https://gateway.marvel.com/v1/public/characters?"
+            try ApiClient().executeApi(urlBase: urlBase) { list in
+                guard let list = list else { return }
+                self.characterList = list.data.results
+                complition(true)
+            }
+           
+        } catch let error {
+            print(error.localizedDescription)
+        }
+       
+    }
+    
+    func updateCharacter(urlBase: String,complition: @escaping (Bool) -> () ) {
+        do {
             try ApiClient().executeApi(urlBase: urlBase) { list in
                 guard let list = list else { return }
                 self.characterList = list.data.results
