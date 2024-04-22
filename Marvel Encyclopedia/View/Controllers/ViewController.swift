@@ -7,37 +7,30 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, UITableViewDataSource {
+    
+    @IBOutlet weak var CharacterSearchBar: UISearchBar!
+    @IBOutlet weak var CharacterTable: UITableView!
+    private let mainViewModel = MainViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-        holi()
+        CharacterTable.dataSource = self
+        CharacterTable.delegate = self
+    }
+}
+extension ViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        mainViewModel.getList().count
     }
     
-    func holi() {
-        // Esto es una prueba para ver que esta dando los datos correctamente
-        Task {
-            do {
-                let response:ResponseCharacter? = try await ApiClient().executeApi()
-                if response != nil{
-                    guard let lista = response?.data.results else { return }
-                    
-                    for x in lista {
-                        print(x.name)
-                    }
-                }else {
-                    print("nada")
-                }
-            } catch let error{
-                print(error.localizedDescription)
-            
-            }
-            
-           
-        }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterItem", for: indexPath) as! CharacterItem
+        let character = mainViewModel.getList()[indexPath.row]
+        cell.configure(charater: character)
+        
+        return cell
     }
-
-
 }
 
