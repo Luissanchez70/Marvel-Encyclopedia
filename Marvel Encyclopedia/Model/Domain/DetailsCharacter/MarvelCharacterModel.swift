@@ -5,7 +5,7 @@
 //  Created by Diogo Filipe Abreu Rodrigues on 22/04/2024.
 //
 
-import Foundation
+import UIKit
 
 class MarvelCharacterModel : DetailableObject {
     
@@ -34,18 +34,23 @@ class MarvelCharacterModel : DetailableObject {
     }
     
     func getThumbnail() -> String {
-        return "imagePlaceholder"
+        return " "
     }
     
-    func getRessources() -> [Any] {
+    func getRessources() -> [[Any]] {
         return [comics,stories,events,series]
     }
     
     func fetchResources(completionHandle: @escaping (Bool) -> Void) {
         
+        fetchComics(completionHandle: completionHandle)
+        fetchSeries(completionHandle: completionHandle)
+    }
+    
+    func fetchComics(completionHandle: @escaping (Bool) -> Void){
         Task {
             do {
-                let response:ResponseComic? = try await ApiClient().fetchComics(ByCharacterId: 1011054)
+                let response:ResponseComic? = try await ApiClient().fetchComics(ByCharacterId: id)
                 if response != nil{
                     guard let lista = response?.data.results else { return }
                     comics = lista
@@ -61,4 +66,22 @@ class MarvelCharacterModel : DetailableObject {
         }
     }
     
+    func fetchSeries(completionHandle: @escaping (Bool) -> Void) {
+        Task {
+            do {
+                let response:ResponseSeries? = try await ApiClient().fetchSeries(ByCharacterId: id)
+                if response != nil{
+                    guard let lista = response?.data.results else { return }
+                    series = lista
+                    completionHandle(true)
+                }else {
+                    print("nada")
+                }
+            } catch let error{
+                print(error)
+                completionHandle(false)
+            }
+            
+        }
+    }
 }

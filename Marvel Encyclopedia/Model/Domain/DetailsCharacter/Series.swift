@@ -12,3 +12,11 @@ struct Series : Codable {
     let title : String
     let description : String
 }
+
+struct ResponseSeries : Codable {
+    let data : SeriesData
+}
+
+struct SeriesData: Codable {
+    let results: [Series]
+}

@@ -11,7 +11,7 @@ protocol DetailableObject {
     func getName() -> String
     func getDesc() -> String
     func getThumbnail() -> String
-    func getRessources() -> [Any]
+    func getRessources() -> [[Any]]
     func fetchResources( completionHandle : @escaping (Bool) -> Void )
 }
 
