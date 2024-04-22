@@ -8,7 +8,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    var selectedCharacter : MarvelCharacter?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
       
@@ -24,6 +26,7 @@ class ViewController: UIViewController {
                     guard let lista = response?.data.results else { return }
                     
                     for x in lista {
+                        selectedCharacter = x
                         print(x.name)
                     }
                 }else {
@@ -37,7 +40,17 @@ class ViewController: UIViewController {
            
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ToDetailsView" {
+            if let nextViewController = segue.destination as? DetailsViewController 
+            {
+                nextViewController.viewModel = DetailsViewModel(detailableObject: MarvelCharacterModel(selectedCharacter!))
+            }
+        }
+    }
+    
 
-
+    
 }
 

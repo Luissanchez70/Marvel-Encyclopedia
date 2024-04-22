@@ -26,4 +26,18 @@ class ApiClient {
         
         return apiResponse
     }
+    
+    func fetchComics(ByCharacterId id : Int ) async throws -> ResponseComic? {
+        var apiResponse: ResponseComic? = nil
+        let endPoint: String = "\(urlBase)/\(id)/comics?ts=1&\(publicKey)&\(hash)"
+        print(endPoint)
+        if let url = URL(string: endPoint) {
+            let (data, response) = try await URLSession.shared.data(from: url)
+            if (200...299).contains((response as! HTTPURLResponse).statusCode) {
+                apiResponse = try JSONDecoder().decode(ResponseComic.self, from: data)
+            }
+        }
+        
+        return apiResponse
+    }
 }

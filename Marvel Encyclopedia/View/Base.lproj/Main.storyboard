@@ -15,8 +15,22 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BZe-ae-q47">
+                                <rect key="frame" x="159" y="408.66666666666669" width="75" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                <connections>
+                                    <segue destination="Hsh-R7-EGQ" kind="show" identifier="ToDetailsView" id="EYX-T6-Gkl"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BZe-ae-q47" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ESj-2R-UBO"/>
+                            <constraint firstItem="BZe-ae-q47" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="x9U-7q-xcI"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="epS-od-7s3"/>
                 </viewController>
@@ -33,10 +47,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HMY-sg-NwY" userLabel="DescriptionView">
-                                <rect key="frame" x="0.0" y="58.999999999999972" width="393" height="455.33333333333326"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="429"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personaje" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INg-UX-Fav">
-                                        <rect key="frame" x="120.66666666666669" y="185.33333333333334" width="152" height="43"/>
+                                        <rect key="frame" x="120.66666666666669" y="185.33333333333331" width="152" height="43"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -49,7 +63,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FxY-gO-Kbc" userLabel="Description">
-                                        <rect key="frame" x="20" y="236" width="353" height="199"/>
+                                        <rect key="frame" x="20" y="236.33333333333331" width="353" height="172.66666666666669"/>
                                         <string key="text">May Mayday Parker is the daughter of Spider-Man and Mary Jane Watson-Parker. Born with all her father powers-and the same silly sense of humor-shes grown up to become one of Earths most trusted heroes and a fitting tribute to her proud papa.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -70,10 +84,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="547-iZ-XeD" userLabel="ResourcesView">
-                                <rect key="frame" x="0.0" y="514.33333333333337" width="393" height="303.66666666666663"/>
+                                <rect key="frame" x="0.0" y="532" width="393" height="286"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZF6-Yu-LIW">
-                                        <rect key="frame" x="20" y="58.999999999999986" width="353" height="224.66666666666663"/>
+                                        <rect key="frame" x="20" y="59" width="353" height="207"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="w40-TB-UhN">
@@ -109,6 +123,7 @@
                             <constraint firstItem="HMY-sg-NwY" firstAttribute="width" secondItem="3OL-bV-552" secondAttribute="width" id="wCC-vO-h8M"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="iy2-mG-doX"/>
                     <connections>
                         <outlet property="desc" destination="FxY-gO-Kbc" id="yKN-nJ-60j"/>
                         <outlet property="image" destination="wqP-cZ-wrP" id="gxt-SQ-SCb"/>
