@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rmm-lQ-7Ck">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,14 +17,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dbb-tE-9Vh">
-                                <rect key="frame" x="0.0" y="59" width="393" height="56"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="GS3-St-yZI"/>
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="u0D-B6-znc">
-                                <rect key="frame" x="8" y="115" width="377" height="693"/>
+                                <rect key="frame" x="8" y="159" width="377" height="649"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CharacterItem" id="LFc-Lh-GSr" customClass="CharacterItem" customModule="Marvel_Encyclopedia" customModuleProvider="target">
@@ -57,6 +57,7 @@
                             <constraint firstItem="u0D-B6-znc" firstAttribute="top" secondItem="dbb-tE-9Vh" secondAttribute="bottom" id="pXh-ro-ScN"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="RjU-1b-iMF"/>
                     <connections>
                         <outlet property="CharacterSearchBar" destination="dbb-tE-9Vh" id="aSI-3w-CLk"/>
                         <outlet property="CharacterTable" destination="u0D-B6-znc" id="Aqh-sJ-1UW"/>
@@ -64,10 +65,130 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1118.320610687023" y="12.67605633802817"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="1Bq-tu-Fa9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Rmm-lQ-7Ck" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Y7j-Fu-kHb">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="QqK-w1-caA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ffo-r7-DXs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="191.6030534351145" y="12.67605633802817"/>
+        </scene>
+        <!--Details View Controller-->
+        <scene sceneID="jGg-1T-VYC">
+            <objects>
+                <viewController id="CLN-f1-4L6" customClass="DetailsViewController" customModule="Marvel_Encyclopedia" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sSM-B6-WvV">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tA6-0Q-t4f" userLabel="DescriptionView">
+                                <rect key="frame" x="0.0" y="58.999999999999972" width="393" height="455.33333333333326"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personaje" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FeD-TL-NGI">
+                                        <rect key="frame" x="120.66666666666669" y="185.33333333333334" width="152" height="43"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="IBE-iZ-FXB">
+                                        <rect key="frame" x="118" y="22" width="157" height="154"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="IBE-iZ-FXB" secondAttribute="height" multiplier="1:1" id="ff5-BP-cb8"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O4W-R3-PEE" userLabel="Description">
+                                        <rect key="frame" x="20" y="236.33333333333331" width="353" height="199"/>
+                                        <string key="text">May Mayday Parker is the daughter of Spider-Man and Mary Jane Watson-Parker. Born with all her father powers-and the same silly sense of humor-shes grown up to become one of Earths most trusted heroes and a fitting tribute to her proud papa.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="IBE-iZ-FXB" firstAttribute="top" secondItem="tA6-0Q-t4f" secondAttribute="top" constant="20" symbolic="YES" id="7Uq-pf-sS9"/>
+                                    <constraint firstAttribute="trailing" secondItem="O4W-R3-PEE" secondAttribute="trailing" constant="20" symbolic="YES" id="9Xv-cI-1VG"/>
+                                    <constraint firstItem="FeD-TL-NGI" firstAttribute="top" secondItem="IBE-iZ-FXB" secondAttribute="bottom" constant="8" symbolic="YES" id="IH3-Xh-foh"/>
+                                    <constraint firstItem="IBE-iZ-FXB" firstAttribute="centerX" secondItem="tA6-0Q-t4f" secondAttribute="centerX" id="JWM-ca-3jb"/>
+                                    <constraint firstItem="O4W-R3-PEE" firstAttribute="leading" secondItem="tA6-0Q-t4f" secondAttribute="leading" constant="20" symbolic="YES" id="T6y-p4-Qlz"/>
+                                    <constraint firstAttribute="bottom" secondItem="O4W-R3-PEE" secondAttribute="bottom" constant="20" symbolic="YES" id="VeH-TL-5qO"/>
+                                    <constraint firstItem="IBE-iZ-FXB" firstAttribute="width" secondItem="tA6-0Q-t4f" secondAttribute="width" multiplier="0.4" id="Z4c-wn-GGH"/>
+                                    <constraint firstItem="O4W-R3-PEE" firstAttribute="top" secondItem="FeD-TL-NGI" secondAttribute="bottom" constant="8" symbolic="YES" id="f56-Vu-kOx"/>
+                                    <constraint firstItem="FeD-TL-NGI" firstAttribute="centerX" secondItem="tA6-0Q-t4f" secondAttribute="centerX" id="ip1-Dk-B52"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ld-mi-cC2" userLabel="ResourcesView">
+                                <rect key="frame" x="0.0" y="514.33333333333337" width="393" height="303.66666666666663"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pqn-RT-3Lo">
+                                        <rect key="frame" x="20" y="58.999999999999986" width="353" height="224.66666666666663"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </tableView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NLY-cn-DdI">
+                                        <rect key="frame" x="20" y="20" width="353" height="32"/>
+                                        <segments>
+                                            <segment title="First"/>
+                                            <segment title="Second"/>
+                                        </segments>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="NLY-cn-DdI" firstAttribute="top" secondItem="4Ld-mi-cC2" secondAttribute="top" constant="20" symbolic="YES" id="3ex-In-apB"/>
+                                    <constraint firstItem="NLY-cn-DdI" firstAttribute="leading" secondItem="4Ld-mi-cC2" secondAttribute="leading" constant="20" symbolic="YES" id="A6Q-XZ-ii3"/>
+                                    <constraint firstAttribute="bottom" secondItem="pqn-RT-3Lo" secondAttribute="bottom" constant="20" symbolic="YES" id="Aqm-hJ-XKU"/>
+                                    <constraint firstItem="pqn-RT-3Lo" firstAttribute="leading" secondItem="4Ld-mi-cC2" secondAttribute="leading" constant="20" symbolic="YES" id="RaQ-gM-TCS"/>
+                                    <constraint firstItem="pqn-RT-3Lo" firstAttribute="top" secondItem="NLY-cn-DdI" secondAttribute="bottom" constant="8" symbolic="YES" id="fUf-Co-52v"/>
+                                    <constraint firstAttribute="trailing" secondItem="pqn-RT-3Lo" secondAttribute="trailing" constant="20" symbolic="YES" id="lT2-vo-pZI"/>
+                                    <constraint firstAttribute="trailing" secondItem="NLY-cn-DdI" secondAttribute="trailing" constant="20" symbolic="YES" id="wb3-MA-l5v"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="8Qn-sH-QNo"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="4Ld-mi-cC2" firstAttribute="height" secondItem="8Qn-sH-QNo" secondAttribute="height" multiplier="0.4" id="99H-sc-onO"/>
+                            <constraint firstItem="tA6-0Q-t4f" firstAttribute="width" secondItem="sSM-B6-WvV" secondAttribute="width" id="DtY-G9-eds"/>
+                            <constraint firstItem="tA6-0Q-t4f" firstAttribute="top" secondItem="8Qn-sH-QNo" secondAttribute="top" id="EPT-jy-G1z"/>
+                            <constraint firstItem="4Ld-mi-cC2" firstAttribute="width" secondItem="sSM-B6-WvV" secondAttribute="width" id="GgG-nS-OYj"/>
+                            <constraint firstItem="tA6-0Q-t4f" firstAttribute="height" secondItem="8Qn-sH-QNo" secondAttribute="height" multiplier="0.6" id="NBb-c4-GIQ"/>
+                            <constraint firstItem="8Qn-sH-QNo" firstAttribute="trailing" secondItem="4Ld-mi-cC2" secondAttribute="trailing" id="Yu3-6C-l9Z"/>
+                            <constraint firstItem="tA6-0Q-t4f" firstAttribute="leading" secondItem="8Qn-sH-QNo" secondAttribute="leading" id="Zzt-6O-Jln"/>
+                            <constraint firstItem="8Qn-sH-QNo" firstAttribute="bottom" secondItem="4Ld-mi-cC2" secondAttribute="bottom" id="bBw-4X-yBp"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="l8i-PQ-VGz"/>
+                    <connections>
+                        <outlet property="desc" destination="O4W-R3-PEE" id="RIs-QI-IIp"/>
+                        <outlet property="image" destination="IBE-iZ-FXB" id="MdM-hS-TCI"/>
+                        <outlet property="name" destination="FeD-TL-NGI" id="leE-vy-iQL"/>
+                        <outlet property="resourceSelector" destination="NLY-cn-DdI" id="hPT-LX-tgj"/>
+                        <outlet property="tableView" destination="pqn-RT-3Lo" id="WxZ-wQ-yLX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d8z-7Y-6FU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2028" y="13"/>
         </scene>
     </scenes>
     <resources>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
