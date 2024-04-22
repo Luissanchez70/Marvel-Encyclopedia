@@ -10,7 +10,7 @@ import UIKit
 
 class MainViewModel {
     
-    var characterList: [MarvelCharacter] = []
+    private var characterList: [MarvelCharacter] = []
     
     init(){
     }
@@ -18,6 +18,7 @@ class MainViewModel {
     func getCharacters(complition: @escaping (Bool) -> () ) {
         updateCharacter(complition:  complition)
     }
+    
     func getList() -> [MarvelCharacter] {
         characterList
     }
