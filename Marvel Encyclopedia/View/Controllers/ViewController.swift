@@ -12,7 +12,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var CharacterSearchBar: UISearchBar!
     @IBOutlet weak var CharacterTable: UITableView!
     private let mainViewModel = MainViewModel()
-    private var characterId: Int?
+    private var characterId: Int = 0
  
     
     override func viewDidLoad() {
@@ -41,6 +41,7 @@ extension ViewController: UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterItem", for: indexPath) as! CharacterItem
         let character = mainViewModel.getList()[indexPath.row]
         cell.configure(charater: character)
+        characterId = character.id
         return cell
     }
     
