@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "6D66E096-EDD4-4B97-9262-90FD4590D73D"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B72F8FE7-B161-4606-9CFB-1BD6207AEDC4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Marvel Encyclopedia/View/Controllers/DetailsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "setupBinders()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B72F8FE7-B161-4606-9CFB-1BD6207AEDC4 - 3f91f35088bb3af7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Marvel_Encyclopedia.DetailsViewController.setupBinders() -&gt; ()"
+                  moduleName = "Marvel Encyclopedia"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/diogo.rodrigues/Documents/GitHub/Marvel-Encyclopedia/Marvel%20Encyclopedia/View/Controllers/DetailsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "176">
+               </Location>
+               <Location
+                  uuid = "B72F8FE7-B161-4606-9CFB-1BD6207AEDC4 - 2cd6ed6f96e5fd4b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.String&gt;) -&gt; () in Marvel_Encyclopedia.DetailsViewController.setupBinders() -&gt; ()"
+                  moduleName = "Marvel Encyclopedia"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/diogo.rodrigues/Documents/GitHub/Marvel-Encyclopedia/Marvel%20Encyclopedia/View/Controllers/DetailsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "88">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

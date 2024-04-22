@@ -14,6 +14,7 @@
 		1C51265F2BD688D500EA45CA /* Storie .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C51265B2BD688D500EA45CA /* Storie .swift */; };
 		1C5126602BD688D500EA45CA /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C51265C2BD688D500EA45CA /* Comic.swift */; };
 		1C5126612BD688D500EA45CA /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C51265D2BD688D500EA45CA /* Event.swift */; };
+		1C5126652BD6B70700EA45CA /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C5126642BD6B70700EA45CA /* Launch Screen.storyboard */; };
 		D2AF2FC12BD636570098AF75 /* CharacterItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AF2FC02BD636570098AF75 /* CharacterItem.swift */; };
 		D2AF2FC32BD64CB00098AF75 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AF2FC22BD64CB00098AF75 /* MainViewModel.swift */; };
 		D2D87FC12BD27FFB008352FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D87FC02BD27FFB008352FE /* AppDelegate.swift */; };
@@ -21,7 +22,6 @@
 		D2D87FC52BD27FFB008352FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D87FC42BD27FFB008352FE /* ViewController.swift */; };
 		D2D87FC82BD27FFB008352FE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D2D87FC72BD27FFB008352FE /* Base */; };
 		D2D87FCA2BD27FFD008352FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2D87FC92BD27FFD008352FE /* Assets.xcassets */; };
-		D2D87FCD2BD27FFD008352FE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D2D87FCC2BD27FFD008352FE /* Base */; };
 		D2D87FD82BD27FFD008352FE /* Marvel_EncyclopediaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D87FD72BD27FFD008352FE /* Marvel_EncyclopediaTests.swift */; };
 		D2D87FE22BD27FFD008352FE /* Marvel_EncyclopediaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D87FE12BD27FFD008352FE /* Marvel_EncyclopediaUITests.swift */; };
 		D2D87FE42BD27FFD008352FE /* Marvel_EncyclopediaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D87FE32BD27FFD008352FE /* Marvel_EncyclopediaUITestsLaunchTests.swift */; };
@@ -56,6 +56,7 @@
 		1C51265B2BD688D500EA45CA /* Storie .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Storie .swift"; sourceTree = "<group>"; };
 		1C51265C2BD688D500EA45CA /* Comic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
 		1C51265D2BD688D500EA45CA /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		1C5126642BD6B70700EA45CA /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		D2AF2FC02BD636570098AF75 /* CharacterItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterItem.swift; sourceTree = "<group>"; };
 		D2AF2FC22BD64CB00098AF75 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		D2D87FBD2BD27FFB008352FE /* Marvel Encyclopedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Marvel Encyclopedia.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,7 +65,6 @@
 		D2D87FC42BD27FFB008352FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D2D87FC72BD27FFB008352FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D2D87FC92BD27FFD008352FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D2D87FCC2BD27FFD008352FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2D87FCE2BD27FFD008352FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2D87FD32BD27FFD008352FE /* Marvel EncyclopediaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Marvel EncyclopediaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D87FD72BD27FFD008352FE /* Marvel_EncyclopediaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marvel_EncyclopediaTests.swift; sourceTree = "<group>"; };
@@ -135,6 +135,7 @@
 		D2D87FB42BD27FFB008352FE = {
 			isa = PBXGroup;
 			children = (
+				1C5126642BD6B70700EA45CA /* Launch Screen.storyboard */,
 				D2D87FBF2BD27FFB008352FE /* Marvel Encyclopedia */,
 				D2D87FD62BD27FFD008352FE /* Marvel EncyclopediaTests */,
 				D2D87FE02BD27FFD008352FE /* Marvel EncyclopediaUITests */,
@@ -161,7 +162,6 @@
 				D2D87FC02BD27FFB008352FE /* AppDelegate.swift */,
 				D2D87FC22BD27FFB008352FE /* SceneDelegate.swift */,
 				D2D87FC92BD27FFD008352FE /* Assets.xcassets */,
-				D2D87FCB2BD27FFD008352FE /* LaunchScreen.storyboard */,
 				D2D87FCE2BD27FFD008352FE /* Info.plist */,
 			);
 			path = "Marvel Encyclopedia";
@@ -342,8 +342,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C5126652BD6B70700EA45CA /* Launch Screen.storyboard in Resources */,
 				D2D87FCA2BD27FFD008352FE /* Assets.xcassets in Resources */,
-				D2D87FCD2BD27FFD008352FE /* Base in Resources */,
 				D2D87FC82BD27FFB008352FE /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,14 +427,6 @@
 				D2D87FC72BD27FFB008352FE /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		D2D87FCB2BD27FFD008352FE /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D2D87FCC2BD27FFD008352FE /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -573,6 +565,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -600,6 +593,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
