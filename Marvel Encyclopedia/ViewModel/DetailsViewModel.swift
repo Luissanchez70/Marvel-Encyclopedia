@@ -22,8 +22,31 @@ class DetailsViewModel {
     @Published var thumbnail : String?
     @Published var resources : [Any]?
     
-    var detailableObject : DetailableObject
+    private var marvelCharacter: MarvelCharacter
+    //var detailableObject : DetailableObject
     
+    init(marvelCharacter: MarvelCharacter) {
+        self.marvelCharacter = marvelCharacter
+        getResources()
+    
+    }
+    
+    func getResources() {
+        Task {
+
+            do{
+                let response = try await ApiClient().fetchComics(ByCharacterId: marvelCharacter.id)
+                guard let xxx = response else { return }
+                for aux in xxx.data.results {
+                    print(aux.title)
+                }
+            }catch {
+                print("KLK")
+            }
+        }
+    }
+    
+    /*
     init(detailableObject: DetailableObject) {
         self.detailableObject = detailableObject
         name = detailableObject.getName()
@@ -41,5 +64,6 @@ class DetailsViewModel {
     private func updateResources() {
         resources = detailableObject.getRessources()
     }
+     */
     
 }

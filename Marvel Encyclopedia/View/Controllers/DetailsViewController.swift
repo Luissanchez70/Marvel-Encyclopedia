@@ -15,16 +15,17 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var resourceSelector: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-    var characterId: Int = 0
+    var marvelCharacter: MarvelCharacter?
     var viewModel : DetailsViewModel? // set viewModel in prepare
     var cancelebles: Set<AnyCancellable> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupBinders()
-        print("---> \(characterId)")
-        viewModel?.getResources()
+        loadDetails()
+        //setupBinders()
+        //viewModel?.getResources()
+       
     }
     
     private func setupBinders()  {
@@ -39,5 +40,20 @@ class DetailsViewController: UIViewController {
                 }
             }
         }.store(in: &cancelebles)
+    }
+}
+private extension DetailsViewController {
+    
+    func loadDetails() {
+        guard let character = marvelCharacter else { return }
+        viewModel = DetailsViewModel(marvelCharacter: character)
+        name.text = character.name
+        desc.text = character.description
+        let base = character.thumbnail.path.replacingOccurrences(of: "http:", with: "https:")
+        ApiClient().downloadImage(urlBase: "\(base).\(character.thumbnail.extension)") { image in
+            DispatchQueue.main.async { [weak self] in
+                self?.image.image = image
+            }
+        }
     }
 }
