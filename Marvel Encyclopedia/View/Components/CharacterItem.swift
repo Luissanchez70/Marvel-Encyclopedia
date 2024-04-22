@@ -31,7 +31,9 @@ class CharacterItem: UITableViewCell {
         setUpView()
     }
     
+    
     func configure(charater: MarvelCharacter) {
+        
         tittleLabel.text = charater.name
         descriptionLabel.text = charater.description
     }
@@ -44,7 +46,7 @@ private extension CharacterItem {
         addSubview(imageViewL)
         addSubview(tittleLabel)
         addSubview(descriptionLabel)
-        
+        self.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             imageViewL.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             imageViewL.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),

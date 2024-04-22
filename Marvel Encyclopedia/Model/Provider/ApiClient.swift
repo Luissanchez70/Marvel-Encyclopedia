@@ -12,11 +12,11 @@ class ApiClient {
     private let hash: String = "hash=aebd96392d20f5aa7027d0de97255c03"
     private let urlSession = URLSession.shared
     
-    func executeApi(urlBase: String) throws -> ResponseCharacter? {
+    func executeApi(urlBase: String, complition: @escaping (ResponseCharacter?)  -> () ) throws {
         
         let endPoint: String = "\(urlBase)?ts=1&\(publicKey)&\(hash)"
         var apiResponse: ResponseCharacter? = nil
-        guard let url = URL(string: endPoint) else { return apiResponse }
+        guard let url = URL(string: endPoint) else { return }
         urlSession.dataTask(with: url) { data, response, error in
             if let error = error {
               return
@@ -24,10 +24,9 @@ class ApiClient {
            if (200...299).contains((response as! HTTPURLResponse).statusCode) {
                if let data = data {
                    apiResponse = try! JSONDecoder().decode(ResponseCharacter.self, from: data)
+                   complition(apiResponse)
                }
             }
         }.resume()
-        
-        return apiResponse
     }
 }

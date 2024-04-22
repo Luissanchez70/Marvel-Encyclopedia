@@ -10,24 +10,30 @@ import UIKit
 
 class MainViewModel {
     
-    private var characterList: [MarvelCharacter] = []
+    var characterList: [MarvelCharacter] = []
     
     init(){
-        updateCharacter()
     }
     
+    func getCharacters(complition: @escaping (Bool) -> () ) {
+        updateCharacter(complition:  complition)
+    }
     func getList() -> [MarvelCharacter] {
         characterList
     }
     
 }
 private extension MainViewModel {
-    func updateCharacter() {
+    
+    func updateCharacter(complition: @escaping (Bool) -> () ) {
         do {
             let urlBase: String = "https://gateway.marvel.com/v1/public/characters"
-            let list = try ApiClient().executeApi(urlBase: urlBase)
-            guard let list = list else { return }
-            characterList = list.data.results
+            try ApiClient().executeApi(urlBase: urlBase) { list in
+                guard let list = list else { return }
+                self.characterList = list.data.results
+                complition(true)
+            }
+           
         } catch let error {
             print(error.localizedDescription)
         }

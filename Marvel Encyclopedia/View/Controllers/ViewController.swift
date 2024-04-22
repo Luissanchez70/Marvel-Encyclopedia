@@ -12,11 +12,17 @@ class ViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var CharacterSearchBar: UISearchBar!
     @IBOutlet weak var CharacterTable: UITableView!
     private let mainViewModel = MainViewModel()
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         CharacterTable.dataSource = self
         CharacterTable.delegate = self
+        mainViewModel.getCharacters { success in
+            if success {
+                DispatchQueue.main.async {self.CharacterTable.reloadData()}
+            }
+        }
     }
 }
 extension ViewController: UITableViewDelegate {
