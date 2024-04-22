@@ -48,7 +48,7 @@ class ApiClient {
     
     func fetchComics(ByCharacterId id : Int ) async throws -> ResponseComic? {
         var apiResponse: ResponseComic? = nil
-        let endPoint: String = "\(urlBase)/\(id)/comics?ts=1&\(publicKey)&\(hash)"
+        let endPoint: String = "https://gateway.marvel.com:443/v1/public/characters/\(id)/?ts=1&\(publicKey)&\(hash)"
         print(endPoint)
         if let url = URL(string: endPoint) {
             let (data, response) = try await URLSession.shared.data(from: url)

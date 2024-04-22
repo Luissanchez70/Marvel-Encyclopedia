@@ -12,6 +12,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var CharacterSearchBar: UISearchBar!
     @IBOutlet weak var CharacterTable: UITableView!
     private let mainViewModel = MainViewModel()
+    private var characterId: Int?
  
     
     override func viewDidLoad() {
@@ -24,6 +25,11 @@ class ViewController: UIViewController, UITableViewDataSource {
             }
         }
     }
+    @IBSegueAction func showViewDetailsController(_ coder: NSCoder) -> DetailsViewController? {
+        let vc = DetailsViewController(coder: coder)
+        vc?.characterId = self.characterId
+        return vc
+    }
 }
 extension ViewController: UITableViewDelegate {
     
@@ -35,8 +41,13 @@ extension ViewController: UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterItem", for: indexPath) as! CharacterItem
         let character = mainViewModel.getList()[indexPath.row]
         cell.configure(charater: character)
-        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let character = mainViewModel.getList()[indexPath.row]
+        characterId = character.id
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 extension ViewController: UISearchBarDelegate {

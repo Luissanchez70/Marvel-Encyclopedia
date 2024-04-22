@@ -15,7 +15,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var resourceSelector: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-    
+    var characterId: Int?
     var viewModel : DetailsViewModel? // set viewModel in prepare
     var cancelebles: Set<AnyCancellable> = []
     
@@ -23,6 +23,7 @@ class DetailsViewController: UIViewController {
         super.viewDidLoad()
         
         setupBinders()
+        print("---> \(characterId)")
         viewModel?.getResources()
     }
     

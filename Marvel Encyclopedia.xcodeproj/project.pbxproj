@@ -110,6 +110,28 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		D2AF2FC62BD6A2330098AF75 /* ListsCharacter */ = {
+			isa = PBXGroup;
+			children = (
+				D2D87FF82BD2A370008352FE /* ResponseCharacter.swift */,
+				D2D87FFA2BD2A3CF008352FE /* Data.swift */,
+				D2D87FFC2BD2A404008352FE /* MarvelCharacter.swift */,
+			);
+			path = ListsCharacter;
+			sourceTree = "<group>";
+		};
+		D2AF2FC72BD6A24D0098AF75 /* DetailsCharacter */ = {
+			isa = PBXGroup;
+			children = (
+				1C5126582BD688C300EA45CA /* MarvelCharacterModel.swift */,
+				1C51265C2BD688D500EA45CA /* Comic.swift */,
+				1C51265D2BD688D500EA45CA /* Event.swift */,
+				1C51265A2BD688D500EA45CA /* Series.swift */,
+				1C51265B2BD688D500EA45CA /* Storie .swift */,
+			);
+			path = DetailsCharacter;
+			sourceTree = "<group>";
+		};
 		D2D87FB42BD27FFB008352FE = {
 			isa = PBXGroup;
 			children = (
@@ -175,7 +197,6 @@
 		D2D87FF12BD2A2E0008352FE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1C5126582BD688C300EA45CA /* MarvelCharacterModel.swift */,
 				D2D87FF52BD2A313008352FE /* Domain */,
 				D2D87FF42BD2A30A008352FE /* Provider */,
 			);
@@ -211,13 +232,8 @@
 		D2D87FF52BD2A313008352FE /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				1C51265C2BD688D500EA45CA /* Comic.swift */,
-				1C51265D2BD688D500EA45CA /* Event.swift */,
-				1C51265A2BD688D500EA45CA /* Series.swift */,
-				1C51265B2BD688D500EA45CA /* Storie .swift */,
-				D2D87FF82BD2A370008352FE /* ResponseCharacter.swift */,
-				D2D87FFA2BD2A3CF008352FE /* Data.swift */,
-				D2D87FFC2BD2A404008352FE /* MarvelCharacter.swift */,
+				D2AF2FC72BD6A24D0098AF75 /* DetailsCharacter */,
+				D2AF2FC62BD6A2330098AF75 /* ListsCharacter */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
