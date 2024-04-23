@@ -33,7 +33,7 @@ private extension MainViewModel {
     func updateCharacter(complition: @escaping (Bool) -> () ) {
         do {
             let urlBase: String = "https://gateway.marvel.com/v1/public/characters?"
-            try ApiClient().executeApi(urlBase: urlBase) { list in
+            try ApiClient().getCharacters(urlBase: urlBase) { list in
                 guard let list = list else { return }
                 self.characterList = list.data.results
                 complition(true)
@@ -47,7 +47,7 @@ private extension MainViewModel {
     
     func updateCharacter(urlBase: String,complition: @escaping (Bool) -> () ) {
         do {
-            try ApiClient().executeApi(urlBase: urlBase) { list in
+            try ApiClient().getCharacters(urlBase: urlBase) { list in
                 guard let list = list else { return }
                 self.characterList = list.data.results
                 complition(true)
