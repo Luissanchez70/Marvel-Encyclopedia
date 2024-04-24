@@ -22,14 +22,13 @@ class DetailsViewModel {
     
     var name : String
     var desc : String
-    var thumbnail : Thumbnail
+    var thumbnail = PassthroughSubject<UIImage?, Never>()
     var resources = CurrentValueSubject<[String:[Any]], Never>([:])
 
     init(detailableObject: DetailableObject) {
         self.detailableObject = detailableObject
         name = detailableObject.getName()
         desc = detailableObject.getDesc()
-        thumbnail = detailableObject.getThumbnail()
     }
 }
 
@@ -43,8 +42,14 @@ extension DetailsViewModel { //MARK: - Trying combine
         desc
     }
     
-    func getThumbnail() -> Thumbnail {
-        thumbnail
+    func fetThumbnail() {
+        let thumbnail = detailableObject.getThumbnail()
+        let base = thumbnail.path.replacingOccurrences(of: "http:", with: "https:")
+        ApiClient().downloadImage(urlBase: "\(base).\(thumbnail.extension)") { image in
+            DispatchQueue.main.async { [weak self] in
+                self?.thumbnail.send(image)
+            }
+        }
     }
     
     func fetchResources() {

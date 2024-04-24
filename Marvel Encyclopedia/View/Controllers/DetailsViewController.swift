@@ -82,19 +82,10 @@ private extension DetailsViewController {
         guard let viewModel  else { return }
         name.text = viewModel.getName()
         desc.text = viewModel.getDesc()
-        imageDownload(thumbnail: viewModel.getThumbnail())
+        viewModel.fetThumbnail()
         viewModel.fetchResources()
     }
     
-    private func imageDownload(thumbnail: Thumbnail) {
-        
-        let base = thumbnail.path.replacingOccurrences(of: "http:", with: "https:")
-        ApiClient().downloadImage(urlBase: "\(base).\(thumbnail.extension)") { image in
-            DispatchQueue.main.async { [weak self] in
-                self?.image.image = image
-            }
-        }
-    }
 }
 
 extension  DetailsViewController{ // trying with combine
@@ -103,6 +94,12 @@ extension  DetailsViewController{ // trying with combine
         viewModel.resources.sink(receiveValue: { received in
             self.setSegmentedControl(resources : received)
         }).store(in: &cancelebles)
+        
+        viewModel.thumbnail.sink { image in
+            DispatchQueue.main.async { [weak self] in
+                self?.image.image = image
+            }
+        }.store(in: &cancelebles)
     }
     
     func setSegmentedControl(resources : [String:[Any]]) {
