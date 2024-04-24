@@ -14,7 +14,8 @@ class MarvelCharacterModel  {
     var id: Int
     var name: String
     var desc: String
-    var thumbnail: Thumbnail
+    var thumbnail: Thumbnail?
+    
     var comics: [Comic] = []
     var stories: [Storie] = []
     var events: [Event] = []
@@ -81,18 +82,6 @@ extension MarvelCharacterModel {
 
 // MARK: - getters and setters
 extension MarvelCharacterModel: DetailableObject {
-    
-    func getName() -> String{
-        name
-    }
-    
-    func getDesc() -> String {
-        desc
-    }
-    
-    func getThumbnail() -> Thumbnail {
-       thumbnail
-    }
     
     func getResources() -> [String:[Any]] {
         ["Comics" : comics, "Stories" : stories, "Events" : events, "Series" : series]

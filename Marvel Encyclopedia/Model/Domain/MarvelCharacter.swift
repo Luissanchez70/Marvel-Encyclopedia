@@ -15,7 +15,7 @@ struct MarvelCharacter: Decodable {
     let id: Int
     let name: String
     let description: String
-    let thumbnail: Thumbnail
+    let thumbnail: Thumbnail?
 }
 
 struct ResponseCharacter: Decodable {

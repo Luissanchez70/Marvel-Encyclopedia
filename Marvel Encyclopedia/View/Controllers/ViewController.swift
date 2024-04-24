@@ -41,8 +41,10 @@ extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let character = mainViewModel.getList()[indexPath.row]
-        marvelCharacter = character
-        performSegue(withIdentifier: "ShowDetailSegue", sender: character)
+        let dvc = DetailsViewController(nibName: "DetailsViewController", bundle: nil)
+        dvc.viewModel = DetailsViewModel(detailableObject: MarvelCharacterModel(character))
+        self.navigationController?.pushViewController(dvc, animated: true)
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

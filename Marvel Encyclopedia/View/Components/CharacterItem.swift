@@ -50,8 +50,8 @@ class CharacterItem: UITableViewCell {
         } else {
             descriptionLabel.text = charater.description
         }
-        let base = charater.thumbnail.path.replacingOccurrences(of: "http:", with: "https:")
-        getImageView("\(base).\(charater.thumbnail.extension)")
+        let base = charater.thumbnail!.path.replacingOccurrences(of: "http:", with: "https:")
+        getImageView("\(base).\(charater.thumbnail!.extension)")
     }
     
     

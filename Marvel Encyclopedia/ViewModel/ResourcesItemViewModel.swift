@@ -8,38 +8,46 @@
 import UIKit
 import Combine
 
+protocol ResourceItem {
+    var thumbnail: Thumbnail? {set get}
+    var title : String? {set get}
+    var description : String? {set get}
+}
 class ResourcesItemViewModel {
     var thumbnail = PassthroughSubject<UIImage?, Never>()
+    
     var thumbnailLink : Thumbnail?
     var title : String
     var desc : String
+    var defaultImage : String
     
-    init( from comic: Comic) {
-        title = comic.title ?? "No title"
-        desc = comic.description ?? "No description"
-        thumbnailLink = comic.thumbnail
+    init( from resorceItem: ResourceItem) {
+        title = resorceItem.title ?? "No title"
+        desc = resorceItem.description ?? "No description"
+        thumbnailLink = resorceItem.thumbnail
+        defaultImage = "book.fill"
     }
     
-    init( from series: Series) {
-        title = series.title ?? "No title"
-        desc = series.description ?? "No description"
-        thumbnailLink = series.thumbnail
+    init( from character : MarvelCharacter) {
+        title = character.name
+        desc = character.description
+        thumbnailLink = character.thumbnail
+        defaultImage = "person.fill"
     }
     
-    init( from storie: Storie) {
-        title = storie.title ?? "No title"
-        desc = storie.description ?? "No description"
-        thumbnailLink = storie.thumbnail
-    }
-    
-    init( from event : Event) {
-        title = event.title ?? "No title"
-        desc = event.description ?? "No description"
-        thumbnailLink = event.thumbnail
+    init( from creator : Creator) {
+        title = "\(creator.firstName!) \(creator.lastName!)"
+        desc = ""
+        thumbnailLink = creator.thumbnail
+        defaultImage = "person.fill"
     }
     
     func getThumbnail() {
-        guard let thumbnailLink else { return }
+        guard let thumbnailLink else {
+            self.thumbnail.send(UIImage(systemName: defaultImage))
+            return
+        }
+        
         let path = "\(thumbnailLink.path).\(thumbnailLink.extension)"
         let base = path.replacingOccurrences(of: "http:", with: "https:")
         

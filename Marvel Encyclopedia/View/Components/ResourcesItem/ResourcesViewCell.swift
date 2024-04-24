@@ -33,7 +33,9 @@ class ResourcesViewCell: UITableViewCell {
         self.resorceItem = resorceItem
         bind()
         thumbnail.isHidden = true
+        
         loadingIndicator.style = UIActivityIndicatorView.Style.large
+        loadingIndicator.hidesWhenStopped = true
         loadingIndicator.startAnimating()
         
         tittleLabel.text = resorceItem.title

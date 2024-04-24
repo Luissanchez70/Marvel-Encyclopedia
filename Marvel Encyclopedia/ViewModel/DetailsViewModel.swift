@@ -8,14 +8,6 @@
 import UIKit
 import Combine
 
-protocol DetailableObject {
-    func getName() -> String
-    func getDesc() -> String
-    func getThumbnail() -> Thumbnail
-    func getResources() -> [String:[Any]]
-    func fetchResources( completionHandle : @escaping (Bool) -> Void )
-}
-
 class DetailsViewModel {
 
     var detailableObject : DetailableObject
@@ -30,10 +22,7 @@ class DetailsViewModel {
         name = detailableObject.getName()
         desc = detailableObject.getDesc()
     }
-}
 
-extension DetailsViewModel { //MARK: - Trying combine
-   
     func getName() -> String{
         name
     }
@@ -43,7 +32,7 @@ extension DetailsViewModel { //MARK: - Trying combine
     }
     
     func fetThumbnail() {
-        let thumbnail = detailableObject.getThumbnail()
+        guard let thumbnail = detailableObject.getThumbnail() else { return }
         let base = thumbnail.path.replacingOccurrences(of: "http:", with: "https:")
         ApiClient().downloadImage(urlBase: "\(base).\(thumbnail.extension)") { image in
             DispatchQueue.main.async { [weak self] in
@@ -61,6 +50,4 @@ extension DetailsViewModel { //MARK: - Trying combine
             }
         }
     }
-    
-    
 }

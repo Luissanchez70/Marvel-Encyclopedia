@@ -8,13 +8,14 @@
 import UIKit
 import Combine
 
-class DetailsViewController: UIViewController{
-   
+class DetailsViewController: UIViewController {
+
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var desc: UILabel!
-    @IBOutlet weak var resourceSelector: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var resourceSelector: UISegmentedControl!
+    
     var viewModel : DetailsViewModel?
     
     var cancelebles: Set<AnyCancellable> = []
@@ -24,28 +25,30 @@ class DetailsViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UINib(nibName: "ResourcesViewCell", bundle: nil), forCellReuseIdentifier: "ResourcesViewCell")
-        
-        setBinds()
         setupView()
     }
     
-    
-    @IBAction func onClickSegmentControl(_ sender: UISegmentedControl) {
+    @IBAction func segmentControlClicked(_ sender: UISegmentedControl) {
         guard let viewModel  else { return  }
         let index = sender.selectedSegmentIndex
         selectedKey = sender.titleForSegment(at: index) ?? "Title not found received nill "
         selectedResource = viewModel.resources.value[selectedKey] ?? []
-        print(selectedKey)
         tableView.reloadData()
     }
-    
 }
 
 extension DetailsViewController: UITableViewDelegate, UITableViewDataSource  {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return selectedResource.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let comic = selectedResource[indexPath.row] as? Comic {
+            let nvc = DetailsViewController()
+            nvc.viewModel = DetailsViewModel(detailableObject: ComicModel(comic))
+            self.navigationController?.pushViewController(nvc, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -56,14 +59,12 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource  {
     
     private func selectedObject(_ resource: [Any], _ indexPath: IndexPath, _ cell: ResourcesViewCell) {
         var item : ResourcesItemViewModel?
-        if let comic = resource[indexPath.row] as? Comic {
-            item = ResourcesItemViewModel(from: comic)
-        } else if let serie = resource[indexPath.row] as? Series {
-            item = ResourcesItemViewModel(from: serie)
-        } else if let storie = resource[indexPath.row] as? Storie {
-            item = ResourcesItemViewModel(from: storie)
-        } else if let event = resource[indexPath.row] as? Event {
-            item = ResourcesItemViewModel(from: event)
+        if let resource = resource[indexPath.row] as? ResourceItem {
+            item = ResourcesItemViewModel(from: resource)
+        }else if let character = resource[indexPath.row] as? MarvelCharacter {
+            item = ResourcesItemViewModel(from: character)
+        }else if let creator = resource[indexPath.row] as? Creator {
+            item = ResourcesItemViewModel(from: creator)
         }
         guard let item  else { return  }
         cell.configure(resorceItem: item)
@@ -73,9 +74,12 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource  {
 private extension DetailsViewController {
     
     func setupView() {
+        name.text = ""
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(UINib(nibName: "ResourcesViewCell", bundle: nil), forCellReuseIdentifier: "ResourcesViewCell")
         loadDetails()
+        setBinds()
     }
     
     func loadDetails() {
@@ -108,6 +112,11 @@ extension  DetailsViewController{ // trying with combine
             if !items.isEmpty {
                 resourceSelector.insertSegment(withTitle: name, at: 0, animated: false)
             }
+        }
+        if !resources.isEmpty {
+            selectedKey = resourceSelector.titleForSegment(at: 0) ?? "Title not found received nill "
+            selectedResource = viewModel!.resources.value[selectedKey] ?? []
+            tableView.reloadData()
         }
     }
 }
