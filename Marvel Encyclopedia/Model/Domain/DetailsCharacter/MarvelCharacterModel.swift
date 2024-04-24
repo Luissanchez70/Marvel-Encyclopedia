@@ -7,13 +7,7 @@
 
 import UIKit
 
-protocol DetailableObject {
-    func getName() -> String
-    func getDesc() -> String
-    func getThumbnail() -> String
-    func getRessources() -> [[Any]]
-    func fetchResources( completionHandle : @escaping (Bool) -> Void )
-}
+
 
 class MarvelCharacterModel  {
     
@@ -59,69 +53,56 @@ extension MarvelCharacterModel {
         }
     }
     
-    
-    func fetchComics(completionHandle: @escaping (Bool) -> ()){
-        Task {
-            do {
-                let response:ResponseComic? = try await ApiClient().fetchComics(ByCharacterId: id)
-                if response != nil{
-                    guard let lista = response?.data.results else { return }
-                    comics = lista
-                    completionHandle(true)
-                }else {
-                    print("nada")
-                }
-            } catch let error{
-                print(error)
-                completionHandle(false)
+    func getEvents(complition: @escaping (Bool) -> ()){
+        do {
+            try ApiClient().getEvents(characterId: id) { response in
+                guard let response = response else { return }
+                self.events = response.data.results
+                complition(true)
             }
-            
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
     
-    func fetchSeries(completionHandle: @escaping (Bool) -> Void) {
-        Task {
-            do {
-                let response:ResponseSeries? = try await ApiClient().fetchSeries(ByCharacterId: id)
-                if response != nil{
-                    guard let lista = response?.data.results else { return }
-                    series = lista
-                    completionHandle(true)
-                }else {
-                    print("nada")
-                }
-            } catch let error{
-                print(error)
-                completionHandle(false)
+    func getStories(complition: @escaping (Bool) -> ()){
+        do {
+            try ApiClient().getStories(characterId: id) { response in
+                guard let response = response else { return }
+                self.stories = response.data.results
+                complition(true)
             }
-            
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
+
 }
 
 // MARK: - getters and setters
 extension MarvelCharacterModel: DetailableObject {
     
     func getName() -> String{
-        return name
+        name
     }
     
     func getDesc() -> String {
         desc
     }
     
-    func getThumbnail() -> String {
-        return " "
+    func getThumbnail() -> Thumbnail {
+       thumbnail
     }
     
-    func getRessources() -> [[Any]] {
-        return [comics,stories,events,series]
+    func getResources() -> [String:[Any]] {
+        ["Comics" : comics, "Stories" : stories, "Events" : events, "Series" : series]
     }
     
     func fetchResources(completionHandle: @escaping (Bool) -> Void) {
-        
-        fetchComics(completionHandle: completionHandle)
-        fetchSeries(completionHandle: completionHandle)
+        getComics(complition: completionHandle)
+        getSeries(complition: completionHandle)
+        getStories(complition: completionHandle)
+        getEvents(complition: completionHandle)
     }
 }
 

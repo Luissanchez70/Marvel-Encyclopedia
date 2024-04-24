@@ -76,6 +76,37 @@ class ResourcesItem: UITableViewCell {
         getImageView(base)
     }
     
+    func configure(character: Storie) {
+        guard let title = character.title,
+              let description = character.description,
+              let thumbnail = character.thumbnail else { return }
+        
+        tittleLabel.text = title
+        if description.isEmpty {
+            descriptionLabel.text = "Without description"
+        } else {
+            descriptionLabel.text = description
+        }
+        let path = "\(thumbnail.path).\(thumbnail.extension)"
+        let base = path.replacingOccurrences(of: "http:", with: "https:")
+        getImageView(base)
+    }
+    
+    func configure(character: Event) {
+        guard let title = character.title,
+              let description = character.description,
+              let thumbnail = character.thumbnail else { return }
+        
+        tittleLabel.text = title
+        if description.isEmpty {
+            descriptionLabel.text = "Without description"
+        } else {
+            descriptionLabel.text = description
+        }
+        let path = "\(thumbnail.path).\(thumbnail.extension)"
+        let base = path.replacingOccurrences(of: "http:", with: "https:")
+        getImageView(base)
+    }
     
     
 }

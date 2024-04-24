@@ -7,8 +7,17 @@
 
 import Foundation
 
-struct Event : Codable {
-    let id : Int
-    let title : String
-    let description : String
+struct Event : Decodable {
+    let id : Int?
+    let title : String?
+    let description : String?
+    let thumbnail: Thumbnail?
+}
+
+struct ResponseEvent : Decodable {
+    let data : EventData
+}
+
+struct EventData: Decodable {
+    let results: [Event]
 }

@@ -6,38 +6,56 @@
 //
 
 import UIKit
+import Combine
+
+protocol DetailableObject {
+    func getName() -> String
+    func getDesc() -> String
+    func getThumbnail() -> Thumbnail
+    func getResources() -> [String:[Any]]
+    func fetchResources( completionHandle : @escaping (Bool) -> Void )
+}
 
 class DetailsViewModel {
-    
-    @Published var name : String?
-    @Published var desc : String?
-    @Published var thumbnail : String?
-    @Published var resources : [Any]?
-    var detailableObject : MarvelCharacterModel
 
-    init(marvelCharacter: MarvelCharacter) {
-        detailableObject = MarvelCharacterModel(marvelCharacter)
+    var detailableObject : DetailableObject
+    
+    var name : String
+    var desc : String
+    var thumbnail : Thumbnail
+    var resources = CurrentValueSubject<[String:[Any]], Never>([:])
+
+    init(detailableObject: DetailableObject) {
+        self.detailableObject = detailableObject
         name = detailableObject.getName()
         desc = detailableObject.getDesc()
-        getResourcesComics()
+        thumbnail = detailableObject.getThumbnail()
+    }
+}
+
+extension DetailsViewModel { //MARK: - Trying combine
+   
+    func getName() -> String{
+        name
     }
     
-    func getResourcesComics() {
-        detailableObject.getComics { success in
+    func getDesc() -> String{
+        desc
+    }
+    
+    func getThumbnail() -> Thumbnail {
+        thumbnail
+    }
+    
+    func fetchResources() {
+        detailableObject.fetchResources { success in
             if success {
                 DispatchQueue.main.sync {
-                    self.resources = self.detailableObject.comics
+                    self.resources.send(self.detailableObject.getResources())
                 }
             }
         }
     }
-    func getResourcesSeries() {
-        detailableObject.getSeries { success in
-            if success {
-                DispatchQueue.main.sync {
-                    self.resources = self.detailableObject.series
-                }
-            }
-        }
-    }
+    
+    
 }

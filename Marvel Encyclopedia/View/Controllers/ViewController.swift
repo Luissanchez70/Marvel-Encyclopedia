@@ -49,7 +49,8 @@ extension ViewController: UITableViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDetailSegue",
            let dvc = segue.destination as? DetailsViewController {
-            dvc.marvelCharacter = marvelCharacter
+             guard let marvelCharacter else { return  }
+             dvc.viewModel = DetailsViewModel(detailableObject: MarvelCharacterModel(marvelCharacter))
         }
     }
 }

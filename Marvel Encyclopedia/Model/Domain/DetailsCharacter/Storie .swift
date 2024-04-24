@@ -8,8 +8,16 @@
 import Foundation
 
 struct Storie : Decodable {
-    let id : Int
-    let title : String
-    let description : String
+    let id : Int?
+    let title : String?
+    let description : String?
+    let thumbnail: Thumbnail?
 }
 
+struct ResponseStorie : Decodable {
+    let data : StorieData
+}
+
+struct StorieData: Decodable {
+    let results: [Storie]
+}

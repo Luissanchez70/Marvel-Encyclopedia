@@ -31,61 +31,44 @@ class ApiClient {
         }
     }
    
-    
-// TODO: - Diogo mira la opcion corta que hice 
-    func fetchComics(ByCharacterId id : Int ) async throws -> ResponseComic? {
-        
-        var apiResponse: ResponseComic? = nil
-        let endPoint: String = "https://gateway.marvel.com/v1/public/characters/\(id)/comics?ts=1&\(publicKey)&\(hash)"
-        if let url = URL(string: endPoint) {
-            let (data, response) = try await URLSession.shared.data(from: url)
-            if (200...299).contains((response as! HTTPURLResponse).statusCode) {
-                apiResponse = try JSONDecoder().decode(ResponseComic.self, from: data)
-                guard let arra = apiResponse?.data.results else { return apiResponse }
-                for comic in arra {
-                    print("--> \(comic.id) --> \(comic.title)")
-                }
-            }
-        }
-        return apiResponse
-    }
-    
-    func fetchSeries(_ endPoint : String) async throws -> ResponseSeries? {
-        var apiResponse: ResponseSeries? = nil
-        if let url = URL(string: endPoint) {
-            let (data, response) = try await URLSession.shared.data(from: url)
-            if (200...299).contains((response as! HTTPURLResponse).statusCode) {
-                let apiResponse = try JSONDecoder().decode(ResponseSeries.self, from: data)
-            }
-        }
-        return apiResponse
-    }
-    
-    func fetchSeries(ByCharacterId id : Int )  async throws -> ResponseSeries? {
-        let endPoint: String = "https://gateway.marvel.com/v1/public/characters/\(id)/series?ts=1&\(publicKey)&\(hash)"
-        return try await fetchSeries(endPoint)
-    }
-    
 }
 // MARK: - Pruebas Luis comics
 extension ApiClient {
    
-    func getComics(characterId: Int, complition: @escaping (ResponseComic?)  -> () ) throws {
+    func getComics(characterId: Int, limit : Int = 5, complition: @escaping (ResponseComic?)  -> () ) throws {
         
-        let endPoint: String = "https://gateway.marvel.com/v1/public/characters/\(characterId)/comics?ts=1&\(publicKey)&\(hash)"
+        let endPoint: String = "https://gateway.marvel.com/v1/public/characters/\(characterId)/comics?limit=\(limit)&ts=1&\(publicKey)&\(hash)"
         return connectionApi(endpoint: endPoint) { data in
             let apiResponse: ResponseComic = try! JSONDecoder().decode(ResponseComic.self, from: data)
             complition(apiResponse)
         }
     }
-    func getSeries(characterId: Int, complition: @escaping (ResponseSeries?)  -> () ) throws {
+    
+    func getSeries(characterId: Int,limit : Int = 5, complition: @escaping (ResponseSeries?)  -> () ) throws {
         
-        let endPoint: String = "https://gateway.marvel.com/v1/public/characters/\(characterId)/series?ts=1&\(publicKey)&\(hash)"
+        let endPoint: String = "https://gateway.marvel.com/v1/public/characters/\(characterId)/series?limit=\(limit)&ts=1&\(publicKey)&\(hash)"
         return connectionApi(endpoint: endPoint) { data in
             let apiResponse: ResponseSeries = try! JSONDecoder().decode(ResponseSeries.self, from: data)
             complition(apiResponse)
         }
     }
+    
+    func getEvents(characterId: Int,limit : Int = 5, complition: @escaping (ResponseEvent?)  -> () ) throws {
+        let endPoint: String = "https://gateway.marvel.com/v1/public/characters/\(characterId)/events?limit=\(limit)&ts=1&\(publicKey)&\(hash)"
+        return connectionApi(endpoint: endPoint) { data in
+            let apiResponse: ResponseEvent = try! JSONDecoder().decode(ResponseEvent.self, from: data)
+            complition(apiResponse)
+        }
+    }
+    
+    func getStories(characterId: Int,limit : Int = 5, complition: @escaping (ResponseStorie?)  -> () ) throws {
+        let endPoint: String = "https://gateway.marvel.com/v1/public/characters/\(characterId)/stories?limit=\(limit)&ts=1&\(publicKey)&\(hash)"
+        return connectionApi(endpoint: endPoint) { data in
+            let apiResponse: ResponseStorie = try! JSONDecoder().decode(ResponseStorie.self, from: data)
+            complition(apiResponse)
+        }
+    }
+    
     
     func connectionApi(endpoint: String, complition: @escaping (Foundation.Data) -> ()) {
         

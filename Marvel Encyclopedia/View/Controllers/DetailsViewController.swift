@@ -15,51 +15,58 @@ class DetailsViewController: UIViewController{
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var resourceSelector: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-    var marvelCharacter: MarvelCharacter?
     var viewModel : DetailsViewModel?
-    var cancelebles: AnyCancellable?
+    
+    var cancelebles: Set<AnyCancellable> = []
+    var selectedKey = "None"
+    var selectedResource : [Any] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.register(UINib(nibName: "ResourcesViewCell", bundle: nil), forCellReuseIdentifier: "ResourcesViewCell")
+        
+        setBinds()
         setupView()
     }
     
     
     @IBAction func onClickSegmentControl(_ sender: UISegmentedControl) {
+        guard let viewModel  else { return  }
         let index = sender.selectedSegmentIndex
-        switch index {
-        case 0:
-            viewModel?.getResourcesComics()
-        case 1:
-            viewModel?.getResourcesSeries()
-        default:
-            // TODO: the rest of the lists need to be made
-            print("Otros")
-        }
+        selectedKey = sender.titleForSegment(at: index) ?? "Title not found received nill "
+        selectedResource = viewModel.resources.value[selectedKey] ?? []
+        print(selectedKey)
+        tableView.reloadData()
     }
     
 }
+
 extension DetailsViewController: UITableViewDelegate, UITableViewDataSource  {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let resource = viewModel?.resources else { return 0 }
-        return resource.count
+        return selectedResource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ResourcesItem", for: indexPath) as! ResourcesItem
-        guard let resource = viewModel?.resources else { return cell }
-        selectedObject(resource, indexPath, cell)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ResourcesViewCell", for: indexPath) as! ResourcesViewCell
+        selectedObject(selectedResource, indexPath, cell)
         return cell
     }
     
-    private func selectedObject(_ resource: [Any], _ indexPath: IndexPath, _ cell: ResourcesItem) {
+    private func selectedObject(_ resource: [Any], _ indexPath: IndexPath, _ cell: ResourcesViewCell) {
+        var item : ResourcesItemViewModel?
         if let comic = resource[indexPath.row] as? Comic {
-            cell.configure(character: comic)
+            item = ResourcesItemViewModel(from: comic)
         } else if let serie = resource[indexPath.row] as? Series {
-            cell.configure(character: serie)
+            item = ResourcesItemViewModel(from: serie)
+        } else if let storie = resource[indexPath.row] as? Storie {
+            item = ResourcesItemViewModel(from: storie)
+        } else if let event = resource[indexPath.row] as? Event {
+            item = ResourcesItemViewModel(from: event)
         }
+        guard let item  else { return  }
+        cell.configure(resorceItem: item)
     }
 }
 
@@ -72,23 +79,37 @@ private extension DetailsViewController {
     }
     
     func loadDetails() {
-        guard let character = marvelCharacter else { return }
-        viewModel = DetailsViewModel(marvelCharacter: character)
-        name.text = character.name
-        desc.text = character.description
-        imageDownload(character: character)
-        
-        cancelebles = viewModel?.$resources.receive(on: DispatchQueue.main).sink { [weak self] _ in
-            self?.tableView.reloadData()
-        }
+        guard let viewModel  else { return }
+        name.text = viewModel.getName()
+        desc.text = viewModel.getDesc()
+        imageDownload(thumbnail: viewModel.getThumbnail())
+        viewModel.fetchResources()
     }
     
-    private func imageDownload(character: MarvelCharacter) {
+    private func imageDownload(thumbnail: Thumbnail) {
         
-        let base = character.thumbnail.path.replacingOccurrences(of: "http:", with: "https:")
-        ApiClient().downloadImage(urlBase: "\(base).\(character.thumbnail.extension)") { image in
+        let base = thumbnail.path.replacingOccurrences(of: "http:", with: "https:")
+        ApiClient().downloadImage(urlBase: "\(base).\(thumbnail.extension)") { image in
             DispatchQueue.main.async { [weak self] in
                 self?.image.image = image
+            }
+        }
+    }
+}
+
+extension  DetailsViewController{ // trying with combine
+    func setBinds() {
+        guard let viewModel  else { return }
+        viewModel.resources.sink(receiveValue: { received in
+            self.setSegmentedControl(resources : received)
+        }).store(in: &cancelebles)
+    }
+    
+    func setSegmentedControl(resources : [String:[Any]]) {
+        resourceSelector.removeAllSegments()
+        for (name , items) in resources {
+            if !items.isEmpty {
+                resourceSelector.insertSegment(withTitle: name, at: 0, animated: false)
             }
         }
     }
