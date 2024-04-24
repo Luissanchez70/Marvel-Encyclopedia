@@ -13,74 +13,49 @@ class ApiClient {
     private let hash: String = "hash=aebd96392d20f5aa7027d0de97255c03"
     private let urlSession = URLSession.shared
     
-    func executeApi(urlBase: String, complition: @escaping (ResponseCharacter?)  -> () ) throws {
+    func getCharacters(urlBase: String, complition: @escaping (ResponseCharacter?)  -> () ) throws {
         
         let endPoint: String = "\(urlBase)ts=1&\(publicKey)&\(hash)"
-        guard let url = URL(string: endPoint) else { return }
-        urlSession.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Error -------> \(error.localizedDescription)")
-            }
-            if (200...299).contains((response as! HTTPURLResponse).statusCode) {
-                if let data = data {
-                    let apiResponse: ResponseCharacter = try! JSONDecoder().decode(ResponseCharacter.self, from: data)
-                    complition(apiResponse)
-                }
-            }
-        }.resume()
+        return connectionApi(endpoint: endPoint) { data in
+            let apiResponse: ResponseCharacter = try! JSONDecoder().decode(ResponseCharacter.self, from: data)
+            complition(apiResponse)
+        }
     }
     
     func downloadImage(urlBase: String, complition: @escaping (UIImage?) -> () ) {
+        
         let endPoint: String = "\(urlBase)?ts=1&\(publicKey)&\(hash)"
-        guard let url = URL(string: endPoint) else { return }
-        urlSession.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Error -------> \(error.localizedDescription)")
-            }
+        return connectionApi(endpoint: endPoint) { data in
+            guard let image: UIImage = UIImage(data: data) else { return }
+            complition(image)
+        }
+    }
+   
+    
+// TODO: - Diogo mira la opcion corta que hice 
+    func fetchComics(ByCharacterId id : Int ) async throws -> ResponseComic? {
+        
+        var apiResponse: ResponseComic? = nil
+        let endPoint: String = "https://gateway.marvel.com/v1/public/characters/\(id)/comics?ts=1&\(publicKey)&\(hash)"
+        if let url = URL(string: endPoint) {
+            let (data, response) = try await URLSession.shared.data(from: url)
             if (200...299).contains((response as! HTTPURLResponse).statusCode) {
-                if let data = data {
-                    guard let image: UIImage = UIImage(data: data) else { return }
-                    complition(image)
+                apiResponse = try JSONDecoder().decode(ResponseComic.self, from: data)
+                guard let arra = apiResponse?.data.results else { return apiResponse }
+                for comic in arra {
+                    print("--> \(comic.id) --> \(comic.title)")
                 }
             }
-        }.resume()
-    }
-
-    
-    func fetchComics(_ endPoint : String) async throws -> ResponseComic?  {
-        print(endPoint)
-        var apiResponse: ResponseComic? = nil
-        if let url = URL(string: endPoint) {
-            print(1)
-            let (data, response) = try await URLSession.shared.data(from: url)
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = .prettyPrinted
-            
-            print(String(data: data, encoding: .utf8)!)   //print to console
-            
-            if (200...299).contains((response as! HTTPURLResponse).statusCode) {
-                print(2)
-                apiResponse = try JSONDecoder().decode(ResponseComic.self, from: data)
-                print(3)
-            }
         }
-        
-        print(4)
         return apiResponse
-    }
-
-    func fetchComics(ByCharacterId id : Int ) async throws -> ResponseComic? {
-        let endPoint: String = "https://gateway.marvel.com/v1/public/characters/\(id)/comics?ts=1&\(publicKey)&\(hash)"
-        return try await fetchComics(endPoint)
     }
     
     func fetchSeries(_ endPoint : String) async throws -> ResponseSeries? {
         var apiResponse: ResponseSeries? = nil
-        
         if let url = URL(string: endPoint) {
             let (data, response) = try await URLSession.shared.data(from: url)
             if (200...299).contains((response as! HTTPURLResponse).statusCode) {
-                apiResponse = try JSONDecoder().decode(ResponseSeries.self, from: data)
+                let apiResponse = try JSONDecoder().decode(ResponseSeries.self, from: data)
             }
         }
         return apiResponse
@@ -91,6 +66,35 @@ class ApiClient {
         return try await fetchSeries(endPoint)
     }
     
+}
+// MARK: - Pruebas Luis comics
+extension ApiClient {
+   
+    func getComics(characterId: Int, complition: @escaping (ResponseComic?)  -> () ) throws {
+        
+        let endPoint: String = "https://gateway.marvel.com/v1/public/characters/\(characterId)/comics?ts=1&\(publicKey)&\(hash)"
+        return connectionApi(endpoint: endPoint) { data in
+            let apiResponse: ResponseComic = try! JSONDecoder().decode(ResponseComic.self, from: data)
+            complition(apiResponse)
+        }
+    }
+    func getSeries(characterId: Int, complition: @escaping (ResponseSeries?)  -> () ) throws {
+        
+        let endPoint: String = "https://gateway.marvel.com/v1/public/characters/\(characterId)/series?ts=1&\(publicKey)&\(hash)"
+        return connectionApi(endpoint: endPoint) { data in
+            let apiResponse: ResponseSeries = try! JSONDecoder().decode(ResponseSeries.self, from: data)
+            complition(apiResponse)
+        }
+    }
     
-    
+    func connectionApi(endpoint: String, complition: @escaping (Foundation.Data) -> ()) {
+        
+        guard let url = URL(string: endpoint) else { return }
+        urlSession.dataTask(with: url) {data, response, error in
+            if (200...299).contains((response as! HTTPURLResponse).statusCode) {
+                guard let data = data else { return }
+                 complition(data)
+            }
+        }.resume()
+    }
 }

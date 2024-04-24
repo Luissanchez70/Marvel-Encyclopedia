@@ -7,18 +7,19 @@
 
 import Foundation
 
-struct ResponseComic : Codable {
+struct ResponseComic : Decodable {
     let data: ComicData
 }
 
-struct ComicData: Codable {
+struct ComicData: Decodable {
     let results: [Comic]
     let offset: Int
 }
 
-struct Comic : Codable {
-    let id : Int
-    let title : String
-    let description : String
+struct Comic : Decodable {
+    let id : Int?
+    let title : String?
+    let description : String?
+    let thumbnail: Thumbnail?
 }
 

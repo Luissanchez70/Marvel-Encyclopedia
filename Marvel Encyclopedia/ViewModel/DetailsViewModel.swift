@@ -7,63 +7,37 @@
 
 import UIKit
 
-protocol DetailableObject {
-    func getName() -> String
-    func getDesc() -> String
-    func getThumbnail() -> String
-    func getRessources() -> [[Any]]
-    func fetchResources( completionHandle : @escaping (Bool) -> Void )
-}
-
 class DetailsViewModel {
     
     @Published var name : String?
     @Published var desc : String?
     @Published var thumbnail : String?
     @Published var resources : [Any]?
-    
-    private var marvelCharacter: MarvelCharacter
-    //var detailableObject : DetailableObject
-    
-    init(marvelCharacter: MarvelCharacter) {
-        self.marvelCharacter = marvelCharacter
-        getResources()
-    
-    }
-    
-    func getResources() {
-        Task {
+    var detailableObject : MarvelCharacterModel
 
-            do{
-                let response = try await ApiClient().fetchComics(ByCharacterId: marvelCharacter.id)
-                guard let xxx = response else { return }
-                for aux in xxx.data.results {
-                    print(aux.title)
-                }
-            }catch {
-                print("KLK")
-            }
-        }
-    }
-    
-    /*
-    init(detailableObject: DetailableObject) {
-        self.detailableObject = detailableObject
+    init(marvelCharacter: MarvelCharacter) {
+        detailableObject = MarvelCharacterModel(marvelCharacter)
         name = detailableObject.getName()
         desc = detailableObject.getDesc()
+        getResourcesComics()
     }
     
-    func getResources() {
-        detailableObject.fetchResources { sucess in
-            if sucess {
-                self.updateResources()
+    func getResourcesComics() {
+        detailableObject.getComics { success in
+            if success {
+                DispatchQueue.main.sync {
+                    self.resources = self.detailableObject.comics
+                }
             }
         }
     }
-    
-    private func updateResources() {
-        resources = detailableObject.getRessources()
+    func getResourcesSeries() {
+        detailableObject.getSeries { success in
+            if success {
+                DispatchQueue.main.sync {
+                    self.resources = self.detailableObject.series
+                }
+            }
+        }
     }
-     */
-    
 }

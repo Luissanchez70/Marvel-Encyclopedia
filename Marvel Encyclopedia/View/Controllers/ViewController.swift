@@ -25,12 +25,6 @@ class ViewController: UIViewController, UITableViewDataSource {
             }
         }
     }
-    @IBSegueAction func showViewDetailsController(_ coder: NSCoder) -> DetailsViewController? {
-        let vc = DetailsViewController(coder: coder)
-        vc?.marvelCharacter = self.marvelCharacter
-        self.marvelCharacter = nil
-        return vc
-    }
 }
 extension ViewController: UITableViewDelegate {
     
@@ -48,7 +42,15 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let character = mainViewModel.getList()[indexPath.row]
         marvelCharacter = character
+        performSegue(withIdentifier: "ShowDetailSegue", sender: character)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDetailSegue",
+           let dvc = segue.destination as? DetailsViewController {
+            dvc.marvelCharacter = marvelCharacter
+        }
     }
 }
 extension ViewController: UISearchBarDelegate {

@@ -7,16 +7,18 @@
 
 import Foundation
 
-struct Series : Codable {
-    let id : Int
-    let title : String
-    let description : String
+struct Series : Decodable {
+    let id : Int?
+    let title : String?
+    let description : String?
+    let thumbnail: Thumbnail?
+
 }
 
-struct ResponseSeries : Codable {
+struct ResponseSeries : Decodable {
     let data : SeriesData
 }
 
-struct SeriesData: Codable {
+struct SeriesData: Decodable {
     let results: [Series]
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Storie : Codable {
+struct Storie : Decodable {
     let id : Int
     let title : String
     let description : String

@@ -7,16 +7,24 @@
 
 import UIKit
 
-class MarvelCharacterModel : DetailableObject {
+protocol DetailableObject {
+    func getName() -> String
+    func getDesc() -> String
+    func getThumbnail() -> String
+    func getRessources() -> [[Any]]
+    func fetchResources( completionHandle : @escaping (Bool) -> Void )
+}
+
+class MarvelCharacterModel  {
     
-    var id : Int
-    var name : String
-    var desc : String
-    var thumbnail : Thumbnail
-    var comics : [Comic] = []
-    var stories : [Storie] = []
-    var events : [Event] = []
-    var series : [Series] = []
+    var id: Int
+    var name: String
+    var desc: String
+    var thumbnail: Thumbnail
+    var comics: [Comic] = []
+    var stories: [Storie] = []
+    var events: [Event] = []
+    var series: [Series] = []
     
     init(_ marvelCharacter : MarvelCharacter) {
         id = marvelCharacter.id
@@ -24,30 +32,35 @@ class MarvelCharacterModel : DetailableObject {
         desc = marvelCharacter.description
         thumbnail = marvelCharacter.thumbnail
     }
+}
+// MARK: - Fetch Comics, Series, stories, events
+extension MarvelCharacterModel {
     
-    func getName() -> String{
-        return name
+    func getComics(complition: @escaping (Bool) -> ()) {
+        do {
+            try ApiClient().getComics(characterId: id) { response in
+                guard let response = response else { return }
+                self.comics = response.data.results
+                complition(true)
+            }
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    func getSeries(complition: @escaping (Bool) -> ()) {
+        do {
+            try ApiClient().getSeries(characterId: id) { response in
+                guard let response = response else { return }
+                self.series = response.data.results
+                complition(true)
+            }
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
     
-    func getDesc() -> String {
-        return desc
-    }
     
-    func getThumbnail() -> String {
-        return " "
-    }
-    
-    func getRessources() -> [[Any]] {
-        return [comics,stories,events,series]
-    }
-    
-    func fetchResources(completionHandle: @escaping (Bool) -> Void) {
-        
-        fetchComics(completionHandle: completionHandle)
-        fetchSeries(completionHandle: completionHandle)
-    }
-    
-    func fetchComics(completionHandle: @escaping (Bool) -> Void){
+    func fetchComics(completionHandle: @escaping (Bool) -> ()){
         Task {
             do {
                 let response:ResponseComic? = try await ApiClient().fetchComics(ByCharacterId: id)
@@ -85,3 +98,30 @@ class MarvelCharacterModel : DetailableObject {
         }
     }
 }
+
+// MARK: - getters and setters
+extension MarvelCharacterModel: DetailableObject {
+    
+    func getName() -> String{
+        return name
+    }
+    
+    func getDesc() -> String {
+        desc
+    }
+    
+    func getThumbnail() -> String {
+        return " "
+    }
+    
+    func getRessources() -> [[Any]] {
+        return [comics,stories,events,series]
+    }
+    
+    func fetchResources(completionHandle: @escaping (Bool) -> Void) {
+        
+        fetchComics(completionHandle: completionHandle)
+        fetchSeries(completionHandle: completionHandle)
+    }
+}
+

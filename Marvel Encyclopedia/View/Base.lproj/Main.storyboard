@@ -34,9 +34,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="377" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="CLN-f1-4L6" kind="show" destinationCreationSelector="showViewDetailsController:" id="ULU-Aj-tZS"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -64,6 +61,7 @@
                     <connections>
                         <outlet property="CharacterSearchBar" destination="dbb-tE-9Vh" id="aSI-3w-CLk"/>
                         <outlet property="CharacterTable" destination="u0D-B6-znc" id="Aqh-sJ-1UW"/>
+                        <segue destination="CLN-f1-4L6" kind="show" identifier="ShowDetailSegue" id="mJE-Ix-PpV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -139,13 +137,28 @@
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pqn-RT-3Lo">
                                         <rect key="frame" x="20" y="59" width="353" height="207"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ResourcesItem" id="EUN-Bn-FSa" customClass="ResourcesItem" customModule="Marvel_Encyclopedia" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="50" width="353" height="43.666667938232422"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EUN-Bn-FSa" id="hch-Au-pOa">
+                                                    <rect key="frame" x="0.0" y="0.0" width="353" height="43.666667938232422"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
                                     </tableView>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NLY-cn-DdI">
                                         <rect key="frame" x="20" y="20" width="353" height="32"/>
                                         <segments>
-                                            <segment title="First"/>
-                                            <segment title="Second"/>
+                                            <segment title="Comics"/>
+                                            <segment title="Series"/>
+                                            <segment title="Events"/>
+                                            <segment title="Stories"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="onClickSegmentControl:" destination="CLN-f1-4L6" eventType="valueChanged" id="9X0-N8-arP"/>
+                                        </connections>
                                     </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
