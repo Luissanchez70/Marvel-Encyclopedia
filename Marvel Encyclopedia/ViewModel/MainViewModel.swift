@@ -44,11 +44,6 @@ class MainViewModel {
         } receiveValue: { list in
             self.characterList = list
         }.store(in: &cancellables)
-        
-    }
-    
-    func getList() -> [MarvelCharacter] {
-        characterList
     }
     
 }

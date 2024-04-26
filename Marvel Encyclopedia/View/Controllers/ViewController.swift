@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class ViewController: UIViewController, UITableViewDataSource {
     
@@ -13,17 +14,23 @@ class ViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var CharacterTable: UITableView!
     private let mainViewModel = MainViewModel()
     private var marvelCharacter: MarvelCharacter? = nil
- 
+    private var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         CharacterTable.dataSource = self
         CharacterTable.delegate = self
-        let cc = mainViewModel.$characterList.sink { list in
-            self.CharacterTable.reloadData()
-        }
-        mainViewModel.getCharacters()
         
+        dataSource()
+    }
+    
+    private func dataSource() {
+        mainViewModel.$characterList.sink { list in
+            DispatchQueue.main.async {
+                self.CharacterTable.reloadData()
+            }
+        }.store(in: &cancellables)
+        mainViewModel.getCharacters()
     }
 }
 extension ViewController: UITableViewDelegate {

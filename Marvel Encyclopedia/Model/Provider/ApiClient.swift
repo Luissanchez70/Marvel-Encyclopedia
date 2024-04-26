@@ -21,31 +21,45 @@ class ApiClient {
         apiIdentification = "ts=1&\(publicKey)&\(hash)"
         urlSession = URLSession.shared
     }
-   
-    
     
     func getMarvelCharacter() -> AnyPublisher<[MarvelCharacter], Error> {
         let endpoint = "\(urlBase)characters?\(apiIdentification)"
+        print(endpoint)
         guard let url = URL(string: endpoint) else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
-        return urlSession.dataTaskPublisher(for: url)
-            .map(\.data)
-            .decode(type: ResponseCharacter.self, decoder: JSONDecoder())
-            .map { $0.data.results }
-            .eraseToAnyPublisher()
+        return responseCharacters(url)
     }
+    
     func getMarvelCharacter(whereClause: String) -> AnyPublisher<[MarvelCharacter], Error> {
         let endpoint = "\(urlBase)characters?\(whereClause)&\(apiIdentification)"
+        print(endpoint)
         guard let url = URL(string: endpoint) else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
+        return responseCharacters(url)
+    }
+    
+    func responseCharacters(_ url: URL) -> AnyPublisher<[MarvelCharacter], Publishers.Map<Publishers.Decode<Publishers.MapKeyPath<URLSession.DataTaskPublisher, JSONDecoder.Input>, ResponseCharacter, JSONDecoder>, [MarvelCharacter]>.Failure> {
         return urlSession.dataTaskPublisher(for: url)
             .map(\.data)
             .decode(type: ResponseCharacter.self, decoder: JSONDecoder())
             .map { $0.data.results }
             .eraseToAnyPublisher()
     }
+    
+    func downloadImage(urlBase: String, complition: @escaping (UIImage?) -> () ) {
+        
+        let endPoint: String = "\(urlBase)?ts=1&\(publicKey)&\(hash)"
+        return connectionApi(endpoint: endPoint) { data in
+            guard let image: UIImage = UIImage(data: data) else { return }
+            complition(image)
+        }
+    }
+}
+
+//MARK: - Requests to stories
+extension ApiClient {
     
     func connectionApi(endpoint: String, complition: @escaping (Foundation.Data) -> ()) {
         
@@ -58,21 +72,6 @@ class ApiClient {
         }.resume()
     }
     
-    func downloadImage(urlBase: String, complition: @escaping (UIImage?) -> () ) {
-        
-        let endPoint: String = "\(urlBase)?ts=1&\(publicKey)&\(hash)"
-        return connectionApi(endpoint: endPoint) { data in
-            guard let image: UIImage = UIImage(data: data) else { return }
-            complition(image)
-        }
-    }
-    
-   
-   
-}
-
-//MARK: - Requests to stories
-extension ApiClient {
     func getStories( endPoint : String , complition: @escaping (ResponseStorie?)  -> () ) throws {
         return connectionApi(endpoint: endPoint) { data in
             let apiResponse: ResponseStorie = try! JSONDecoder().decode(ResponseStorie.self, from: data)
