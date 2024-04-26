@@ -7,55 +7,48 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class MainViewModel {
     
-    private var characterList: [MarvelCharacter] = []
+    @Published var characterList: [MarvelCharacter] = []
+    private var cancellables = Set<AnyCancellable>()
+    private let marvelCharacterUseCase: MarvelCharacterUseCase
     
-    init(){
+    init() {
+        marvelCharacterUseCase = MarvelCharacterUseCase()
     }
     
-    func getCharacters(complition: @escaping (Bool) -> () ) {
-        updateCharacter(complition:  complition)
+    func getCharacters() {
+        marvelCharacterUseCase.execute().sink { completion in
+            switch completion {
+            case .finished:
+                break
+            case .failure(let error):
+                print("--> \(error.localizedDescription)")
+            }
+        } receiveValue: { list in
+            self.characterList = list
+        }.store(in: &cancellables)
     }
-    func getCharactersFilter(filter: String, complition: @escaping (Bool) -> () ) {
-        let base = "https://gateway.marvel.com/v1/public/characters?nameStartsWith=\(filter)&"
-        updateCharacter(urlBase: base, complition:  complition)
+    
+    func getCharactersFilter(filter: String) {
+        let whereClause = "nameStartsWith=\(filter)&"
+        marvelCharacterUseCase.execute(whereClause: whereClause).sink { completion in
+            switch completion {
+            case .finished:
+                break
+            case .failure(let error):
+                print("--> \(error.localizedDescription)")
+            }
+        } receiveValue: { list in
+            self.characterList = list
+        }.store(in: &cancellables)
+        
     }
     
     func getList() -> [MarvelCharacter] {
         characterList
     }
     
-}
-private extension MainViewModel {
-    
-    func updateCharacter(complition: @escaping (Bool) -> () ) {
-        do {
-            let urlBase: String = "https://gateway.marvel.com/v1/public/characters?"
-            try ApiClient().getCharacters(urlBase: urlBase) { list in
-                guard let list = list else { return }
-                self.characterList = list.data.results
-                complition(true)
-            }
-           
-        } catch let error {
-            print(error.localizedDescription)
-        }
-       
-    }
-    
-    func updateCharacter(urlBase: String,complition: @escaping (Bool) -> () ) {
-        do {
-            try ApiClient().getCharacters(urlBase: urlBase) { list in
-                guard let list = list else { return }
-                self.characterList = list.data.results
-                complition(true)
-            }
-           
-        } catch let error {
-            print(error.localizedDescription)
-        }
-       
-    }
 }

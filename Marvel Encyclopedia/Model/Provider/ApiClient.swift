@@ -6,22 +6,45 @@
 //
 
 import Foundation
+import Combine
 import UIKit
 
 class ApiClient {
+    
+    private let urlBase: String = "https://gateway.marvel.com/v1/public/"
     private let publicKey: String = "apikey=bc4a5be3c71e12dfd6eb20c3f3495f7e"
     private let hash: String = "hash=aebd96392d20f5aa7027d0de97255c03"
-    private let urlSession = URLSession.shared
+    private let apiIdentification:String
+    private let urlSession: URLSession
+    
+    init() {
+        apiIdentification = "ts=1&\(publicKey)&\(hash)"
+        urlSession = URLSession.shared
+    }
+   
     
     
-    
-    func downloadImage(urlBase: String, complition: @escaping (UIImage?) -> () ) {
-        
-        let endPoint: String = "\(urlBase)?ts=1&\(publicKey)&\(hash)"
-        return connectionApi(endpoint: endPoint) { data in
-            guard let image: UIImage = UIImage(data: data) else { return }
-            complition(image)
+    func getMarvelCharacter() -> AnyPublisher<[MarvelCharacter], Error> {
+        let endpoint = "\(urlBase)characters?\(apiIdentification)"
+        guard let url = URL(string: endpoint) else {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
+        return urlSession.dataTaskPublisher(for: url)
+            .map(\.data)
+            .decode(type: ResponseCharacter.self, decoder: JSONDecoder())
+            .map { $0.data.results }
+            .eraseToAnyPublisher()
+    }
+    func getMarvelCharacter(whereClause: String) -> AnyPublisher<[MarvelCharacter], Error> {
+        let endpoint = "\(urlBase)characters?\(whereClause)&\(apiIdentification)"
+        guard let url = URL(string: endpoint) else {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        }
+        return urlSession.dataTaskPublisher(for: url)
+            .map(\.data)
+            .decode(type: ResponseCharacter.self, decoder: JSONDecoder())
+            .map { $0.data.results }
+            .eraseToAnyPublisher()
     }
     
     func connectionApi(endpoint: String, complition: @escaping (Foundation.Data) -> ()) {
@@ -34,6 +57,17 @@ class ApiClient {
             }
         }.resume()
     }
+    
+    func downloadImage(urlBase: String, complition: @escaping (UIImage?) -> () ) {
+        
+        let endPoint: String = "\(urlBase)?ts=1&\(publicKey)&\(hash)"
+        return connectionApi(endpoint: endPoint) { data in
+            guard let image: UIImage = UIImage(data: data) else { return }
+            complition(image)
+        }
+    }
+    
+   
    
 }
 
