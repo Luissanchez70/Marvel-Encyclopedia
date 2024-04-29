@@ -21,7 +21,7 @@ class MarvelCharacterModel  {
     var events: [Event] = []
     var series: [Series] = []
     
-    init(_ marvelCharacter : MarvelCharacter) {
+    init(_ marvelCharacter : Character) {
         id = marvelCharacter.id
         name = marvelCharacter.name
         desc = marvelCharacter.description

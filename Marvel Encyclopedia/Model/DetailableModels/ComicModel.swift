@@ -15,7 +15,7 @@ class ComicModel : DetailableObject {
     var desc: String
     var thumbnail: Thumbnail?
     
-    var characters : [MarvelCharacter] = []
+    var characters : [Character] = []
     var creators: [Creator] = []
     var events : [Event] = []
     var stories: [Storie] = []

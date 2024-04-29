@@ -11,7 +11,7 @@ struct Thumbnail: Decodable {
     let `extension`: String
 }
 
-struct MarvelCharacter: Decodable {
+struct Character: Decodable {
     let id: Int
     let name: String
     let description: String
@@ -23,5 +23,5 @@ struct ResponseCharacter: Decodable {
 }
 
 struct Data: Decodable {
-    let results: [MarvelCharacter]
+    let results: [Character]
 }

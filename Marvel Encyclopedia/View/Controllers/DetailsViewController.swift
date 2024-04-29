@@ -61,7 +61,7 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource  {
         var item : ResourcesItemViewModel?
         if let resource = resource[indexPath.row] as? ResourceItem {
             item = ResourcesItemViewModel(from: resource)
-        }else if let character = resource[indexPath.row] as? MarvelCharacter {
+        }else if let character = resource[indexPath.row] as? Character {
             item = ResourcesItemViewModel(from: character)
         }else if let creator = resource[indexPath.row] as? Creator {
             item = ResourcesItemViewModel(from: creator)
@@ -100,8 +100,8 @@ extension  DetailsViewController{ // trying with combine
         }).store(in: &cancelebles)
         
         viewModel.thumbnail.sink { image in
-            DispatchQueue.main.async { [weak self] in
-                self?.image.image = image
+            DispatchQueue.main.async {
+                self.image.image = image
             }
         }.store(in: &cancelebles)
     }

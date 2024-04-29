@@ -14,8 +14,8 @@
             filePath = "Marvel Encyclopedia/View/Components/CharacterItem.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "setUpView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -32,7 +32,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
             endingLineNumber = "34"
-            landmarkName = "getResourcesSeries()"
+            landmarkName = "fetThumbnail()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

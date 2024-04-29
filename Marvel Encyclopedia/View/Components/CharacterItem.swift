@@ -7,9 +7,10 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class CharacterItem: UITableViewCell {
-    
+    private var cancellables = Set<AnyCancellable>()
     private var imageViewL: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleToFill
@@ -42,7 +43,7 @@ class CharacterItem: UITableViewCell {
     }
     
     
-    func configure(charater: MarvelCharacter) {
+    func configure(charater: Character) {
         
         tittleLabel.text = charater.name
         if charater.description.isEmpty {
@@ -82,10 +83,18 @@ private extension CharacterItem {
     
     func getImageView(_ urlBase: String) {
         
-        ApiClient().downloadImage(urlBase: urlBase) { image in
-            DispatchQueue.main.async { [weak self] in
-                self?.imageViewL.image = image
+        DownloadImageFromAPI().execute(urlBase: urlBase).sink { completion in
+            switch completion {
+            case .finished:
+                break
+            case .failure(let error):
+                print("--> \(error.localizedDescription)")
             }
-        }
+        } receiveValue: { image in
+            DispatchQueue.main.async {
+                self.imageViewL.image = image
+
+            }
+        }.store(in: &cancellables)
     }
 }

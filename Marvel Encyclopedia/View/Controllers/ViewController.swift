@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var CharacterSearchBar: UISearchBar!
     @IBOutlet weak var CharacterTable: UITableView!
     private let mainViewModel = MainViewModel()
-    private var marvelCharacter: MarvelCharacter? = nil
+    private var marvelCharacter: Character? = nil
     private var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
