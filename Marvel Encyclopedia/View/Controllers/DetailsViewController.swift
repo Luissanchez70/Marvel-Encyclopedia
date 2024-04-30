@@ -52,16 +52,20 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource  {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ResourcesViewCell", for: indexPath) as! ResourcesViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ResourcesViewCell", for: indexPath)
+                as? ResourcesViewCell else {
+            let defaultCell = UITableViewCell(style: .default, reuseIdentifier: "DefaultCell")
+            defaultCell.textLabel?.text = "error"
+            return defaultCell
+        }
         selectedObject(selectedResource, indexPath, cell)
         return cell
     }
-    
     private func selectedObject(_ resource: [Any], _ indexPath: IndexPath, _ cell: ResourcesViewCell) {
         var item : ResourcesItemViewModel?
         if let resource = resource[indexPath.row] as? ResourceItem {
             item = ResourcesItemViewModel(from: resource)
-        }else if let character = resource[indexPath.row] as? MarvelCharacter {
+        }else if let character = resource[indexPath.row] as? Character {
             item = ResourcesItemViewModel(from: character)
         }else if let creator = resource[indexPath.row] as? Creator {
             item = ResourcesItemViewModel(from: creator)
@@ -70,9 +74,7 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource  {
         cell.configure(resorceItem: item)
     }
 }
-
 private extension DetailsViewController {
-    
     func setupView() {
         name.text = ""
         tableView.delegate = self
@@ -81,7 +83,6 @@ private extension DetailsViewController {
         loadDetails()
         setBinds()
     }
-    
     func loadDetails() {
         guard let viewModel  else { return }
         name.text = viewModel.getName()
@@ -89,9 +90,7 @@ private extension DetailsViewController {
         viewModel.fetThumbnail()
         viewModel.fetchResources()
     }
-    
 }
-
 extension  DetailsViewController{ // trying with combine
     func setBinds() {
         guard let viewModel  else { return }
@@ -99,13 +98,10 @@ extension  DetailsViewController{ // trying with combine
             self.setSegmentedControl(resources : received)
         }).store(in: &cancelebles)
         
-        viewModel.thumbnail.sink { image in
-            DispatchQueue.main.async { [weak self] in
-                self?.image.image = image
-            }
-        }.store(in: &cancelebles)
+        viewModel.thumbnail.sink(receiveValue: { image in
+            self.image.image = image
+        }).store(in: &cancelebles)
     }
-    
     func setSegmentedControl(resources : [String:[Any]]) {
         resourceSelector.removeAllSegments()
         for (name , items) in resources {

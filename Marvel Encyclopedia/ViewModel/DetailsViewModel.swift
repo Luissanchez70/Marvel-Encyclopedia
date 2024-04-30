@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class DetailsViewModel {
-
+    private var cancellables = Set<AnyCancellable>()
     var detailableObject : DetailableObject
     
     var name : String
@@ -33,20 +33,29 @@ class DetailsViewModel {
     
     func fetThumbnail() {
         guard let thumbnail = detailableObject.getThumbnail() else { return }
-        let base = thumbnail.path.replacingOccurrences(of: "http:", with: "https:")
-        ApiClient().downloadImage(urlBase: "\(base).\(thumbnail.extension)") { image in
-            DispatchQueue.main.async { [weak self] in
-                self?.thumbnail.send(image)
+        var base = thumbnail.path.replacingOccurrences(of: "http:", with: "https:")
+        base = base + "." + thumbnail.extension
+        print(base)
+        DownloadImageFromAPI().execute(urlBase: base).sink { completion in
+            switch completion {
+            case .finished:
+                break
+            case .failure(let error):
+                print("--> \(error.localizedDescription)")
             }
-        }
+        } receiveValue: { image in
+            DispatchQueue.main.sync {
+                self.thumbnail.send(image)
+                print("echo imagen descargada")
+            }
+        }.store(in: &cancellables)
+
     }
     
     func fetchResources() {
         detailableObject.fetchResources { success in
             if success {
-                DispatchQueue.main.sync {
-                    self.resources.send(self.detailableObject.getResources())
-                }
+                self.resources.send(self.detailableObject.getResources())
             }
         }
     }

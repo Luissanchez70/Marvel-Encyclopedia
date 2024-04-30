@@ -15,7 +15,7 @@ protocol ResourceItem {
 }
 class ResourcesItemViewModel {
     var thumbnail = PassthroughSubject<UIImage?, Never>()
-    
+    private var cancellables = Set<AnyCancellable>()
     var thumbnailLink : Thumbnail?
     var title : String
     var desc : String
@@ -28,7 +28,7 @@ class ResourcesItemViewModel {
         defaultImage = "book.fill"
     }
     
-    init( from character : MarvelCharacter) {
+    init( from character : Character) {
         title = character.name
         desc = character.description
         thumbnailLink = character.thumbnail
@@ -51,8 +51,18 @@ class ResourcesItemViewModel {
         let path = "\(thumbnailLink.path).\(thumbnailLink.extension)"
         let base = path.replacingOccurrences(of: "http:", with: "https:")
         
-        ApiClient().downloadImage(urlBase: base) { image in
-            self.thumbnail.send(image)
-        }
+        
+        DownloadImageFromAPI().execute(urlBase: base).sink {  completion in
+            switch completion {
+            case .finished:
+                break
+            case .failure(let error):
+                print("--> \(error.localizedDescription)")
+            }
+        } receiveValue: { image in
+            DispatchQueue.main.async {
+                self.thumbnail.send(image)
+            }
+        }.store(in: &cancellables)
     }
 }

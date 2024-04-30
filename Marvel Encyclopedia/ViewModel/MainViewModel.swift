@@ -11,12 +11,14 @@ import Combine
 
 class MainViewModel {
     
-    @Published var characterList: [MarvelCharacter] = []
+    @Published var characterList: [Character] = []
     private var cancellables = Set<AnyCancellable>()
-    private let marvelCharacterUseCase: MarvelCharacterUseCase
+    private let fetchMarvelCharacter: FetchCharacter
+    private let searchMarvelCharacterByName: FetchCharacterByName
     
     init() {
-        marvelCharacterUseCase = MarvelCharacterUseCase()
+        fetchMarvelCharacter = FetchCharacter()
+        searchMarvelCharacterByName = FetchCharacterByName()
     }
     
     func getCharacters() {
@@ -31,7 +33,7 @@ class MainViewModel {
             .store(in: &cancellables)
 */
         
-        marvelCharacterUseCase.execute().sink { completion in
+        fetchMarvelCharacter.execute().sink { completion in
             switch completion {
             case .finished:
                 break
@@ -46,8 +48,7 @@ class MainViewModel {
     
     // Se puede hacer exactamente lo mismo.
     func getCharactersFilter(filter: String) {
-        let whereClause = "nameStartsWith=\(filter)&"
-        marvelCharacterUseCase.execute(whereClause: whereClause).sink { completion in
+        searchMarvelCharacterByName.execute(name: filter).sink { completion in
             switch completion {
             case .finished:
                 break

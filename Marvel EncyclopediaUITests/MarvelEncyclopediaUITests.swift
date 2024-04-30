@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class Marvel_EncyclopediaUITests: XCTestCase {
+final class MarvelEncyclopediaUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

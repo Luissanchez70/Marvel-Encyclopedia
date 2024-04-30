@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ResponseComic : Decodable {
+struct ResponseComic: Decodable {
     let data: ComicData
 }
 
@@ -16,10 +16,9 @@ struct ComicData: Decodable {
     let offset: Int
 }
 
-struct Comic : Decodable, ResourceItem {
-    let id : Int?
-    var title : String?
-    var description : String?
+struct Comic: Decodable, ResourceItem {
+    let id: Int?
+    var title: String?
+    var description: String?
     var thumbnail: Thumbnail?
 }
-

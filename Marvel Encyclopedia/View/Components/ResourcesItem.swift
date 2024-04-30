@@ -7,9 +7,10 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class ResourcesItem: UITableViewCell {
-    
+    private var cancellables = Set<AnyCancellable>()
     private var imageViewL: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleToFill
@@ -135,11 +136,13 @@ private extension ResourcesItem {
     }
     
     func getImageView(_ urlBase: String) {
-        
-        ApiClient().downloadImage(urlBase: urlBase) { image in
-            DispatchQueue.main.async { [weak self] in
-                self?.imageViewL.image = image
+
+        DownloadImageFromAPI().execute(urlBase: urlBase).sink { error in
+            print(error)
+        } receiveValue: { image in
+            DispatchQueue.main.async {
+                self.imageViewL.image = image
             }
-        }
+        }.store(in: &cancellables)
     }
 }

@@ -7,9 +7,10 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class CharacterItem: UITableViewCell {
-    
+    private var cancellables = Set<AnyCancellable>()
     private var imageViewL: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleToFill
@@ -31,7 +32,6 @@ class CharacterItem: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setUpView()
@@ -40,10 +40,7 @@ class CharacterItem: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpView()
     }
-    
-    
-    func configure(charater: MarvelCharacter) {
-        
+    func configure(charater: Character) {
         tittleLabel.text = charater.name
         if charater.description.isEmpty {
             descriptionLabel.text = "Without description"
@@ -53,39 +50,39 @@ class CharacterItem: UITableViewCell {
         let base = charater.thumbnail!.path.replacingOccurrences(of: "http:", with: "https:")
         getImageView("\(base).\(charater.thumbnail!.extension)")
     }
-    
-    
 }
 private extension CharacterItem {
-    
     func setUpView() {
         addSubview(imageViewL)
         addSubview(tittleLabel)
         addSubview(descriptionLabel)
-        
         NSLayoutConstraint.activate([
             imageViewL.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             imageViewL.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             imageViewL.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             imageViewL.widthAnchor.constraint(equalToConstant: 90),
             imageViewL.heightAnchor.constraint(equalToConstant: 120),
-            
             tittleLabel.leadingAnchor.constraint(equalTo: imageViewL.trailingAnchor, constant: 10),
             tittleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            
             descriptionLabel.leadingAnchor.constraint(equalTo: imageViewL.trailingAnchor, constant: 10),
             descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             descriptionLabel.topAnchor.constraint(equalTo: tittleLabel.bottomAnchor, constant: 5),
             descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
     }
-    
     func getImageView(_ urlBase: String) {
-        
-        ApiClient().downloadImage(urlBase: urlBase) { image in
-            DispatchQueue.main.async { [weak self] in
-                self?.imageViewL.image = image
-            }
-        }
+        DownloadImageFromAPI().execute(urlBase: urlBase)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("--> \(error.localizedDescription)")
+                }
+            } receiveValue: { image in
+                DispatchQueue.main.async {
+                    self.imageViewL.image = image
+                }
+            }.store(in: &cancellables)
     }
 }

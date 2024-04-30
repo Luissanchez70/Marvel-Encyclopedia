@@ -15,7 +15,7 @@ class ComicModel : DetailableObject {
     var desc: String
     var thumbnail: Thumbnail?
     
-    var characters : [MarvelCharacter] = []
+    var characters : [Character] = []
     var creators: [Creator] = []
     var events : [Event] = []
     var stories: [Storie] = []
@@ -84,7 +84,7 @@ extension ComicModel {
     func getResources() -> [String:[Any]] {
         ["Characters" : characters, "Creators" : creators, "Stories" : stories, "Events" : events]
     }
-    
+    // FIXME: cambiar clausere por publisher de Combine
     func fetchResources(completionHandle: @escaping (Bool) -> Void) {
         getStories(complition: completionHandle)
         getCreators(complition: completionHandle)

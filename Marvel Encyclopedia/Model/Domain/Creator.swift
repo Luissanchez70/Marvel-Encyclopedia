@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct Creator : Decodable {
-    let id : Int?
-    let firstName : String?
-    let middleName : String?
-    let lastName : String?
+struct Creator: Decodable {
+    let id: Int?
+    let firstName: String?
+    let middleName: String?
+    let lastName: String?
     let thumbnail: Thumbnail?
 }
 
-struct ResponseCreator : Decodable {
-    let data : CreatorData
+struct ResponseCreator: Decodable {
+    let data: CreatorData
 }
 
 struct CreatorData: Decodable {
