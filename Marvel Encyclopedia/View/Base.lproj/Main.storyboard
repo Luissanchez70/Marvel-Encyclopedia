@@ -36,6 +36,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Hgy-u2-m0F"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="vSI-cR-QKT"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -59,8 +63,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="RjU-1b-iMF"/>
                     <connections>
-                        <outlet property="CharacterSearchBar" destination="dbb-tE-9Vh" id="aSI-3w-CLk"/>
-                        <outlet property="CharacterTable" destination="u0D-B6-znc" id="Aqh-sJ-1UW"/>
+                        <outlet property="characterSearchBar" destination="dbb-tE-9Vh" id="aSI-3w-CLk"/>
+                        <outlet property="characterTable" destination="u0D-B6-znc" id="Aqh-sJ-1UW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

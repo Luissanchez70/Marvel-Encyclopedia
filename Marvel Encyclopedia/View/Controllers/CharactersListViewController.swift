@@ -8,33 +8,29 @@
 import UIKit
 import Combine
 
-class CharactersListViewController: UIViewController, UITableViewDataSource {
+class CharactersListViewController: UIViewController {
     
-    @IBOutlet weak var CharacterSearchBar: UISearchBar!
-    @IBOutlet weak var CharacterTable: UITableView!
+    @IBOutlet weak var characterSearchBar: UISearchBar!
+    @IBOutlet weak var characterTable: UITableView!
     private let mainViewModel = MainViewModel()
-    private var marvelCharacter: Character? = nil
     private var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        CharacterTable.dataSource = self
-        CharacterTable.delegate = self
-        
-        dataSource()
-    }
-    
-    private func dataSource() {
-        mainViewModel.$characterList.sink { list in
-            DispatchQueue.main.async {
-                self.CharacterTable.reloadData()
-            }
-        }.store(in: &cancellables)
+        setBind()
         mainViewModel.getCharacters()
     }
+    
+    private func setBind() {
+        mainViewModel.$characterList.sink { list in
+            DispatchQueue.main.async {
+                self.characterTable.reloadData()
+            }
+        }.store(in: &cancellables)
+    }
 }
-// MARK: -  Table setup
-extension CharactersListViewController: UITableViewDelegate {
+
+extension CharactersListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         mainViewModel.characterList.count
@@ -46,27 +42,20 @@ extension CharactersListViewController: UITableViewDelegate {
         cell.configure(charater: character)
         return cell
     }
+}
+
+extension CharactersListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let character = mainViewModel.characterList[indexPath.row]
         let dvc = DetailsViewController(nibName: "DetailsViewController", bundle: nil)
         dvc.viewModel = DetailsViewModel(detailableObject: MarvelCharacterModel(character))
         self.navigationController?.pushViewController(dvc, animated: true)
-        
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowDetailSegue",
-           let dvc = segue.destination as? DetailsViewController {
-             guard let marvelCharacter else { return  }
-             dvc.viewModel = DetailsViewModel(detailableObject: MarvelCharacterModel(marvelCharacter))
-        }
-    }
 }
-// MARK: -  SearchBar setup
+
 extension CharactersListViewController: UISearchBarDelegate {
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             mainViewModel.getCharacters()
