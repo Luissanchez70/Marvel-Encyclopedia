@@ -17,11 +17,7 @@ class CharactersListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setBind()
-        loadChatacter()
-    }
-    private func loadChatacter() {
         mainViewModel.getCharacters()
     }
     
@@ -33,6 +29,7 @@ class CharactersListViewController: UIViewController {
         }.store(in: &cancellables)
     }
 }
+
 extension CharactersListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,6 +43,7 @@ extension CharactersListViewController: UITableViewDataSource {
         return cell
     }
 }
+
 extension CharactersListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
