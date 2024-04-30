@@ -33,6 +33,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         mainViewModel.getCharacters()
     }
 }
+// MARK: -  Table setup
 extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,7 +64,7 @@ extension ViewController: UITableViewDelegate {
         }
     }
 }
-
+// MARK: -  SearchBar setup
 extension ViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

@@ -84,7 +84,7 @@ extension ComicModel {
     func getResources() -> [String:[Any]] {
         ["Characters" : characters, "Creators" : creators, "Stories" : stories, "Events" : events]
     }
-    
+    // FIXME: cambiar clausere por publisher de Combine
     func fetchResources(completionHandle: @escaping (Bool) -> Void) {
         getStories(complition: completionHandle)
         getCreators(complition: completionHandle)
