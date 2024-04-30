@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct Event : Decodable, ResourceItem {
-    let id : Int?
-    var title : String?
-    var description : String?
+struct Event: Decodable, ResourceItem {
+    let id: Int?
+    var title: String?
+    var description: String?
     var thumbnail: Thumbnail?
 }
 
-struct ResponseEvent : Decodable {
-    let data : EventData
+struct ResponseEvent: Decodable {
+    let data: EventData
 }
 
 struct EventData: Decodable {

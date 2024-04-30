@@ -9,7 +9,6 @@ import Foundation
 import Combine
 
 class FetchComicsByCharacterID: ApiClient {
-    
     func execute(characterID: Int) -> AnyPublisher<[Comic], Error> {
         let endpoint = "\(getUrlBase())characters/\(characterID)/comics?\(getApiIdentification())"
         guard let url = URL(string: endpoint) else {
@@ -18,7 +17,7 @@ class FetchComicsByCharacterID: ApiClient {
         return getUrlSession().dataTaskPublisher(for: url)
             .map(\.data)
             .decode(type: ResponseComic.self, decoder: JSONDecoder())
-            .map{ $0.data.results}
+            .map { $0.data.results }
             .eraseToAnyPublisher()
     }
 }

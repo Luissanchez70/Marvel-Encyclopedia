@@ -36,17 +36,20 @@ extension ApiClient {
         
         guard let url = URL(string: endpoint) else { return }
         urlSession.dataTask(with: url) {data, response, error in
-            if (200...299).contains((response as! HTTPURLResponse).statusCode) {
-                guard let data = data else { return }
-                 complition(data)
-            }
+            guard let data = data else { return }
+             complition(data)
+            
         }.resume()
     }
     
     func getStories( endPoint : String , complition: @escaping (ResponseStorie?)  -> () ) throws {
         return connectionApi(endpoint: endPoint) { data in
-            let apiResponse: ResponseStorie = try! JSONDecoder().decode(ResponseStorie.self, from: data)
-            complition(apiResponse)
+            do {
+                let apiResponse: ResponseStorie = try JSONDecoder().decode(ResponseStorie.self, from: data)
+                complition(apiResponse)
+            } catch {
+                complition(nil)
+            }
         }
     }
     
@@ -64,8 +67,12 @@ extension ApiClient {
 
     func getComics( endPoint : String , complition: @escaping (ResponseComic?)  -> () ) throws {
         return connectionApi(endpoint: endPoint) { data in
-            let apiResponse: ResponseComic = try! JSONDecoder().decode(ResponseComic.self, from: data)
-            complition(apiResponse)
+            do {
+                let apiResponse: ResponseComic = try JSONDecoder().decode(ResponseComic.self, from: data)
+                complition(apiResponse)
+            } catch {
+                complition(nil)
+            }
         }
     }
     
@@ -78,8 +85,12 @@ extension ApiClient {
 
     func getSeries( endPoint : String , complition: @escaping (ResponseSeries?)  -> () ) throws {
         return connectionApi(endpoint: endPoint) { data in
-            let apiResponse: ResponseSeries = try! JSONDecoder().decode(ResponseSeries.self, from: data)
-            complition(apiResponse)
+            do {
+                let apiResponse: ResponseSeries = try JSONDecoder().decode(ResponseSeries.self, from: data)
+                complition(apiResponse)
+            } catch {
+                complition(nil)
+            }
         }
     }
     func getSeries(characterId: Int,limit : Int = 5, complition: @escaping (ResponseSeries?)  -> () ) throws {
@@ -91,8 +102,12 @@ extension ApiClient {
 
     func getEvents( endPoint : String , complition: @escaping (ResponseEvent?)  -> () ) throws {
         return connectionApi(endpoint: endPoint) { data in
-            let apiResponse: ResponseEvent = try! JSONDecoder().decode(ResponseEvent.self, from: data)
-            complition(apiResponse)
+            do {
+                let apiResponse: ResponseEvent = try JSONDecoder().decode(ResponseEvent.self, from: data)
+                complition(apiResponse)
+            } catch {
+                complition(nil)
+            }
         }
     }
     
@@ -110,8 +125,12 @@ extension ApiClient {
 
     func getCharacters( endPoint : String , complition: @escaping (ResponseCharacter?)  -> () ) throws {
         return connectionApi(endpoint: endPoint) { data in
-            let apiResponse: ResponseCharacter = try! JSONDecoder().decode(ResponseCharacter.self, from: data)
-            complition(apiResponse)
+            do {
+                let apiResponse: ResponseCharacter = try JSONDecoder().decode(ResponseCharacter.self, from: data)
+                complition(apiResponse)
+            } catch {
+                complition(nil)
+            }
         }
     }
     func getCharacters(comicId: Int,limit : Int = 5, complition: @escaping (ResponseCharacter?)  -> () ) throws {
@@ -128,8 +147,13 @@ extension ApiClient {
     
     func getCreators( endPoint : String , complition: @escaping (ResponseCreator?)  -> () ) throws {
         return connectionApi(endpoint: endPoint) { data in
-            let apiResponse: ResponseCreator = try! JSONDecoder().decode(ResponseCreator.self, from: data)
-            complition(apiResponse)
+            do {
+                let apiResponse: ResponseCreator = try JSONDecoder().decode(ResponseCreator.self, from: data)
+                complition(apiResponse)
+            } catch {
+                complition(nil)
+            }
+           
         }
     }
     func getCreators(comicId: Int, limit : Int = 5, complition: @escaping (ResponseCreator?)  -> () ) throws {

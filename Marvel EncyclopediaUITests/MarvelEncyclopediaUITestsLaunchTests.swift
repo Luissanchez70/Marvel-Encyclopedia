@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class Marvel_EncyclopediaUITestsLaunchTests: XCTestCase {
+final class MarvelEncyclopediaUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

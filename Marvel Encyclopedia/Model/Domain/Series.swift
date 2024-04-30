@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct Series : Decodable, ResourceItem {
-    let id : Int?
-    var title : String?
-    var description : String?
+struct Series: Decodable, ResourceItem {
+    let id: Int?
+    var title: String?
+    var description: String?
     var thumbnail: Thumbnail?
 }
 
-struct ResponseSeries : Decodable {
-    let data : SeriesData
+struct ResponseSeries: Decodable {
+    let data: SeriesData
 }
 
 struct SeriesData: Decodable {

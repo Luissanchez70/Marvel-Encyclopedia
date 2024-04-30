@@ -9,48 +9,50 @@ import UIKit
 import Combine
 
 class CharactersListViewController: UIViewController {
-    
+
     @IBOutlet weak var characterSearchBar: UISearchBar!
     @IBOutlet weak var characterTable: UITableView!
-    private let mainViewModel = MainViewModel()
-    private var cancellables = Set<AnyCancellable>()
-    
+    private let mainViewModel = CharactersListViewModel()
+    private var getCancellables: AnyCancellable?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setBind()
         mainViewModel.getCharacters()
     }
-    
     private func setBind() {
-        mainViewModel.$characterList.sink { list in
+        getCancellables = mainViewModel.$characterList.sink { list in
             DispatchQueue.main.async {
                 self.characterTable.reloadData()
             }
-        }.store(in: &cancellables)
+        }
     }
 }
-
+// MARK: -  Table setup
 extension CharactersListViewController: UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         mainViewModel.characterList.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterItem", for: indexPath) as! CharacterItem
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterItem", for: indexPath)
+                as? CharacterItem else {
+            let defaultCell = UITableViewCell(style: .default, reuseIdentifier: "DefaultCell")
+            defaultCell.textLabel?.text = "error"
+            return defaultCell
+        }
         let character = mainViewModel.characterList[indexPath.row]
         cell.configure(charater: character)
         return cell
     }
 }
 
+
 extension CharactersListViewController: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let character = mainViewModel.characterList[indexPath.row]
-        let dvc = DetailsViewController(nibName: "DetailsViewController", bundle: nil)
-        dvc.viewModel = DetailsViewModel(detailableObject: MarvelCharacterModel(character))
-        self.navigationController?.pushViewController(dvc, animated: true)
+        let detailsViewController = DetailsViewController(nibName: "DetailsViewController", bundle: nil)
+        detailsViewController.viewModel = DetailsViewModel(detailableObject: MarvelCharacterModel(character))
+        self.navigationController?.pushViewController(detailsViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

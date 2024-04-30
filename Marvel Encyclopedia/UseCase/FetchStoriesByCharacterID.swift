@@ -9,7 +9,6 @@ import Foundation
 import Combine
 
 class FetchStoriesByCharacterID: ApiClient {
-    
     func execute(characterID: Int) -> AnyPublisher<[Storie], Error> {
         let endpoint = "\(getUrlBase())characters/\(characterID)/stories?\(getApiIdentification())"
         guard let url = URL(string: endpoint) else {
@@ -17,8 +16,8 @@ class FetchStoriesByCharacterID: ApiClient {
         }
         return getUrlSession().dataTaskPublisher(for: url)
             .map(\.data)
-            .decode(type: ResponseStorie.self, decoder:JSONDecoder())
-            .map{ $0.data.results}
+            .decode(type: ResponseStorie.self, decoder: JSONDecoder())
+            .map { $0.data.results }
             .eraseToAnyPublisher()
     }
 }
