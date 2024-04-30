@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class ViewController: UIViewController, UITableViewDataSource {
+class CharactersListViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var CharacterSearchBar: UISearchBar!
     @IBOutlet weak var CharacterTable: UITableView!
@@ -34,7 +34,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
 }
 // MARK: -  Table setup
-extension ViewController: UITableViewDelegate {
+extension CharactersListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         mainViewModel.characterList.count
@@ -65,7 +65,7 @@ extension ViewController: UITableViewDelegate {
     }
 }
 // MARK: -  SearchBar setup
-extension ViewController: UISearchBarDelegate {
+extension CharactersListViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
