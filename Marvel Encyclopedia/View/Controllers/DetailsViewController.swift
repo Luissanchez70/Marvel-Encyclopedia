@@ -99,11 +99,9 @@ extension  DetailsViewController{ // trying with combine
             self.setSegmentedControl(resources : received)
         }).store(in: &cancelebles)
         
-        viewModel.thumbnail.sink { image in
-            DispatchQueue.main.async {
-                self.image.image = image
-            }
-        }.store(in: &cancelebles)
+        viewModel.thumbnail.sink(receiveValue: { image in
+            self.image.image = image
+        }).store(in: &cancelebles)
     }
     
     func setSegmentedControl(resources : [String:[Any]]) {

@@ -52,7 +52,7 @@ class ResourcesItemViewModel {
         let base = path.replacingOccurrences(of: "http:", with: "https:")
         
         
-        let g = DownloadImageFromAPI().execute(urlBase: base).sink {  completion in
+        DownloadImageFromAPI().execute(urlBase: base).sink {  completion in
             switch completion {
             case .finished:
                 break

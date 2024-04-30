@@ -33,7 +33,8 @@ class DetailsViewModel {
     
     func fetThumbnail() {
         guard let thumbnail = detailableObject.getThumbnail() else { return }
-        let base = thumbnail.path.replacingOccurrences(of: "http:", with: "https:")
+        var base = thumbnail.path.replacingOccurrences(of: "http:", with: "https:")
+        base = base + "." + thumbnail.extension
         print(base)
         DownloadImageFromAPI().execute(urlBase: base).sink { completion in
             switch completion {
@@ -45,6 +46,7 @@ class DetailsViewModel {
         } receiveValue: { image in
             DispatchQueue.main.sync {
                 self.thumbnail.send(image)
+                print("echo imagen descargada")
             }
         }.store(in: &cancellables)
 
@@ -53,9 +55,7 @@ class DetailsViewModel {
     func fetchResources() {
         detailableObject.fetchResources { success in
             if success {
-                DispatchQueue.main.sync {
-                    self.resources.send(self.detailableObject.getResources())
-                }
+                self.resources.send(self.detailableObject.getResources())
             }
         }
     }

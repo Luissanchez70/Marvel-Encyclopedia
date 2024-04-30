@@ -13,12 +13,12 @@ class MainViewModel {
     
     @Published var characterList: [Character] = []
     private var cancellables = Set<AnyCancellable>()
-    private let fetchMarvelCharacter: FetchMarvelCharacter
-    private let searchMarvelCharacterByName: SearchMarvelCharacterByName
+    private let fetchMarvelCharacter: FetchCharacter
+    private let searchMarvelCharacterByName: FetchCharacterByName
     
     init() {
-        fetchMarvelCharacter = FetchMarvelCharacter()
-        searchMarvelCharacterByName = SearchMarvelCharacterByName()
+        fetchMarvelCharacter = FetchCharacter()
+        searchMarvelCharacterByName = FetchCharacterByName()
     }
     
     func getCharacters() {
