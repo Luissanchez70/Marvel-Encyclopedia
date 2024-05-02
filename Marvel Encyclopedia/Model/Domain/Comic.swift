@@ -17,7 +17,7 @@ struct ComicData: Decodable {
 }
 
 struct Comic: Decodable, ResourceItem {
-    let id: Int?
+    var id: Int?
     var title: String?
     var description: String?
     var thumbnail: Thumbnail?

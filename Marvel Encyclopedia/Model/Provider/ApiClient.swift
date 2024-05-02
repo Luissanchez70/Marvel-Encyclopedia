@@ -62,6 +62,11 @@ extension ApiClient {
         let endPoint: String = "https://gateway.marvel.com/v1/public/comics/\(comicId)/stories?limit=\(limit)&ts=1&\(publicKey)&\(hash)"
         return try getStories(endPoint: endPoint, complition: complition)
     }
+    
+    func getStories(seriesId: Int,limit : Int = 5, complition: @escaping (ResponseStorie?)  -> () ) throws {
+        let endPoint: String = "https://gateway.marvel.com/v1/public/series/\(seriesId)/stories?limit=\(limit)&ts=1&\(publicKey)&\(hash)"
+        return try getStories(endPoint: endPoint, complition: complition)
+    }
 
 //MARK: - requests to comics
 
@@ -78,6 +83,11 @@ extension ApiClient {
     
     func getComics(characterId: Int, limit : Int = 5, complition: @escaping (ResponseComic?)  -> () ) throws {
         let endPoint: String = "https://gateway.marvel.com/v1/public/characters/\(characterId)/comics?limit=\(limit)&ts=1&\(publicKey)&\(hash)"
+        return try getComics(endPoint: endPoint, complition: complition)
+    }
+    
+    func getComics(seriesId: Int, limit : Int = 5, complition: @escaping (ResponseComic?)  -> () ) throws {
+        let endPoint: String = "https://gateway.marvel.com/v1/public/series/\(seriesId)/comics?limit=\(limit)&ts=1&\(publicKey)&\(hash)"
         return try getComics(endPoint: endPoint, complition: complition)
     }
 
@@ -97,6 +107,7 @@ extension ApiClient {
         let endPoint: String = "https://gateway.marvel.com/v1/public/characters/\(characterId)/series?limit=\(limit)&ts=1&\(publicKey)&\(hash)"
         return try getSeries(endPoint: endPoint, complition: complition)
     }
+    
 
 //MARK: - Request to events
 
@@ -121,6 +132,12 @@ extension ApiClient {
         return try getEvents(endPoint: endPoint, complition: complition)
     }
     
+    func getEvents(seriesId: Int,limit : Int = 5, complition: @escaping (ResponseEvent?)  -> () ) throws {
+        let endPoint: String = "https://gateway.marvel.com/v1/public/series/\(seriesId)/events?limit=\(limit)&ts=1&\(publicKey)&\(hash)"
+        return try getEvents(endPoint: endPoint, complition: complition)
+    }
+    
+    
 //MARK: - Request to characters
 
     func getCharacters( endPoint : String , complition: @escaping (ResponseCharacter?)  -> () ) throws {
@@ -133,8 +150,14 @@ extension ApiClient {
             }
         }
     }
+    
     func getCharacters(comicId: Int,limit : Int = 5, complition: @escaping (ResponseCharacter?)  -> () ) throws {
         let endPoint: String = "https://gateway.marvel.com/v1/public/comics/\(comicId)/characters?limit=\(limit)&ts=1&\(publicKey)&\(hash)"
+        return try getCharacters(endPoint: endPoint, complition: complition)
+    }
+    
+    func getCharacters(seriesId: Int,limit : Int = 5, complition: @escaping (ResponseCharacter?)  -> () ) throws {
+        let endPoint: String = "https://gateway.marvel.com/v1/public/series/\(seriesId)/characters?limit=\(limit)&ts=1&\(publicKey)&\(hash)"
         return try getCharacters(endPoint: endPoint, complition: complition)
     }
     
@@ -156,8 +179,14 @@ extension ApiClient {
            
         }
     }
+    
     func getCreators(comicId: Int, limit : Int = 5, complition: @escaping (ResponseCreator?)  -> () ) throws {
         let endPoint: String = "https://gateway.marvel.com/v1/public/comics/\(comicId)/creators?limit=\(limit)&ts=1&\(publicKey)&\(hash)"
+        return try getCreators(endPoint: endPoint, complition: complition)
+    }
+    
+    func getCreators(seriesId: Int, limit : Int = 5, complition: @escaping (ResponseCreator?)  -> () ) throws {
+        let endPoint: String = "https://gateway.marvel.com/v1/public/series/\(seriesId)/creators?limit=\(limit)&ts=1&\(publicKey)&\(hash)"
         return try getCreators(endPoint: endPoint, complition: complition)
     }
 }

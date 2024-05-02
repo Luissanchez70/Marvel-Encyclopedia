@@ -51,7 +51,7 @@ extension CharactersListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let character = mainViewModel.characterList[indexPath.row]
         let detailsViewController = DetailsViewController(nibName: "DetailsViewController", bundle: nil)
-        detailsViewController.viewModel = DetailsViewModel(detailableObject: MarvelCharacterModel(character))
+        detailsViewController.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: character, resourceTye: .character))
         self.navigationController?.pushViewController(detailsViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }

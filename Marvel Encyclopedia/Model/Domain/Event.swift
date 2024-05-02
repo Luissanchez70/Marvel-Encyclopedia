@@ -8,7 +8,7 @@
 import Foundation
 
 struct Event: Decodable, ResourceItem {
-    let id: Int?
+    var id: Int?
     var title: String?
     var description: String?
     var thumbnail: Thumbnail?
