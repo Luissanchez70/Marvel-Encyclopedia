@@ -14,10 +14,10 @@ struct Storie: Decodable, ResourceItem {
     var thumbnail: Thumbnail?
 }
 
-struct ResponseStorie: Decodable {
-    let data: StorieData
-}
-
 struct StorieData: Decodable {
     let results: [Storie]
+}
+
+struct ResponseStorie: Decodable {
+    let data: StorieData
 }

@@ -14,10 +14,10 @@ struct Event: Decodable, ResourceItem {
     var thumbnail: Thumbnail?
 }
 
-struct ResponseEvent: Decodable {
-    let data: EventData
-}
-
 struct EventData: Decodable {
     let results: [Event]
+}
+
+struct ResponseEvent: Decodable {
+    let data: EventData
 }

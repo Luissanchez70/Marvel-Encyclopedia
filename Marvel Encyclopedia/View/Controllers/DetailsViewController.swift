@@ -75,6 +75,7 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource  {
         selectedObject(selectedResource, indexPath, cell)
         return cell
     }
+    
     private func selectedObject(_ resource: [Any], _ indexPath: IndexPath, _ cell: ResourcesViewCell) {
         var item : ResourcesItemViewModel?
         if let resource = resource[indexPath.row] as? ResourceItem {
@@ -105,7 +106,7 @@ private extension DetailsViewController {
         viewModel.fetchResources()
     }
 }
-extension  DetailsViewController{ // trying with combine
+extension  DetailsViewController {
     func setBinds() {
         guard let viewModel  else { return }
         viewModel.resources.sink(receiveValue: { received in
@@ -119,9 +120,12 @@ extension  DetailsViewController{ // trying with combine
     func setSegmentedControl(resources : [String:[Any]]) {
         DispatchQueue.main.async {
             self.resourceSelector.removeAllSegments()
-            for (name , items) in resources {
-                if !(items.isEmpty) {
-                    self.resourceSelector.insertSegment(withTitle: name, at: 0, animated: false)
+            let sortedKeys = resources.keys.sorted(by: <)
+            for  key in sortedKeys {
+                if let items = resources[key] {
+                    if  !items.isEmpty {
+                        self.resourceSelector.insertSegment(withTitle: key, at: 0, animated: false)
+                    }
                 }
             }
         }

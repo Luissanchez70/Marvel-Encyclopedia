@@ -47,7 +47,7 @@ class DetailsModel{
     init( from creator : Creator, resourceTye : ResorceType ) {
         id = creator.id ?? 0
         name = "\(creator.firstName!) \(creator.lastName!)"
-        desc = ""
+        desc = "No description"
         thumbnail = creator.thumbnail
         type = resourceTye
     }

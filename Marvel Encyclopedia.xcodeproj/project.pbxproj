@@ -154,14 +154,6 @@
 			path = ResourcesItem;
 			sourceTree = "<group>";
 		};
-		1C74BFCF2BD94EC100CC694E /* DetailableModels */ = {
-			isa = PBXGroup;
-			children = (
-				1C3C22BE2BE39D1E003D1989 /* DetailsModel.swift */,
-			);
-			path = DetailableModels;
-			sourceTree = "<group>";
-		};
 		3233C01F2BE0FC7200FB20EB /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,7 +257,7 @@
 		D2D87FF12BD2A2E0008352FE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1C74BFCF2BD94EC100CC694E /* DetailableModels */,
+				1C3C22BE2BE39D1E003D1989 /* DetailsModel.swift */,
 				D2D87FF52BD2A313008352FE /* Domain */,
 				D2D87FF42BD2A30A008352FE /* Provider */,
 			);
