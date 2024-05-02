@@ -15,6 +15,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var resourceSelector: UISegmentedControl!
+    @IBOutlet weak var fullListButton: UIButton!
     
     var viewModel : DetailsViewModel?
     
@@ -24,7 +25,7 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fullListButton.isHidden = true
         setupView()
     }
     
@@ -33,6 +34,11 @@ class DetailsViewController: UIViewController {
         let index = sender.selectedSegmentIndex
         selectedKey = sender.titleForSegment(at: index) ?? "Title not found received nill "
         selectedResource = viewModel.resources.value[selectedKey] ?? []
+        if selectedResource.count == 5 {
+            fullListButton.isHidden = false
+        } else {
+            fullListButton.isHidden = true
+        }
         tableView.reloadData()
     }
 }

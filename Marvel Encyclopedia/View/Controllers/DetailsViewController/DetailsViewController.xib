@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailsViewController" customModule="Marvel_Encyclopedia" customModuleProvider="target">
             <connections>
                 <outlet property="desc" destination="SvP-y5-TcD" id="wQJ-4t-a4c"/>
+                <outlet property="fullListButton" destination="g4u-qu-COE" id="0ns-JJ-CPa"/>
                 <outlet property="image" destination="bV0-nE-pgD" id="26q-Dn-Wxq"/>
                 <outlet property="name" destination="Ogn-25-AWO" id="JWW-OM-7fh"/>
                 <outlet property="resourceSelector" destination="hng-B8-AFy" id="RcP-d9-wLw"/>
