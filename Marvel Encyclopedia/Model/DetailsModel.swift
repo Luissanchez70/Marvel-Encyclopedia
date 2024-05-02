@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-enum ResorceType{
+enum ResourceType{
     case character
     case comic
     case creator
@@ -23,12 +23,12 @@ class DetailsModel{
     var name: String
     var desc: String
     var thumbnail: Thumbnail?
-    var type : ResorceType
+    var type : ResourceType
     
     var resources : [String : [Any]] = [:]
     private var cancellables = Set<AnyCancellable>()
     
-    init( from resorceItem: ResourceItem, resourceTye : ResorceType ) {
+    init( from resorceItem: ResourceItem, resourceTye : ResourceType ) {
         id = resorceItem.id ?? 1
         name = resorceItem.title ?? "No title"
         desc = resorceItem.description ?? "No description"
@@ -36,7 +36,7 @@ class DetailsModel{
         type = resourceTye
     }
     
-    init( from character : Character, resourceTye : ResorceType ) {
+    init( from character : Character, resourceTye : ResourceType ) {
         id = character.id
         name = character.name
         desc = character.description
@@ -44,7 +44,7 @@ class DetailsModel{
         type = resourceTye
     }
     
-    init( from creator : Creator, resourceTye : ResorceType ) {
+    init( from creator : Creator, resourceTye : ResourceType ) {
         id = creator.id ?? 0
         name = "\(creator.firstName!) \(creator.lastName!)"
         desc = "No description"
@@ -59,9 +59,9 @@ class DetailsModel{
     func getResources(_ completionHandle: @escaping (Bool) -> (),
                  _ baseResource : String,
                  _ targetResource : String,
-                 _ targetType : ResorceType){
+                 _ targetType : ResourceType){
         
-        FetchAnyByAnyID().execute(baseResource: baseResource, baseID: id, targetResource: targetResource, targetType: targetType).sink { completion in
+        FetchAnyByAnyIDList().execute(baseResource: baseResource, baseID: id, targetResource: targetResource, targetType: targetType).sink { completion in
             switch completion {
             case .finished:
                 break

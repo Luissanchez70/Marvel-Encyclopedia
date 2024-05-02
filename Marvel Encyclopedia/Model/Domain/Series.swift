@@ -16,8 +16,13 @@ struct Series: Decodable, ResourceItem {
 
 struct SeriesData: Decodable {
     let results: [Series]
+    let offset : Int
+    let limit : Int
+    let total : Int
+    let count : Int
 }
 
 struct ResponseSeries: Decodable {
+
     let data: SeriesData
 }

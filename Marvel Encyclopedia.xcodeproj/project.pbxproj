@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C3C22BF2BE39D1E003D1989 /* DetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3C22BE2BE39D1E003D1989 /* DetailsModel.swift */; };
-		1C3C22C12BE3A1C3003D1989 /* FetchAnyByAnyID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3C22C02BE3A1C3003D1989 /* FetchAnyByAnyID.swift */; };
+		1C3C22C12BE3A1C3003D1989 /* FetchAnyByAnyIDList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3C22C02BE3A1C3003D1989 /* FetchAnyByAnyIDList.swift */; };
 		1C3C22CE2BE3D225003D1989 /* CharacterItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3C22CC2BE3D225003D1989 /* CharacterItem.swift */; };
 		1C3C22CF2BE3D225003D1989 /* CharacterItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C3C22CD2BE3D225003D1989 /* CharacterItem.xib */; };
 		1C5126552BD6889500EA45CA /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5126542BD6889500EA45CA /* DetailsViewModel.swift */; };
@@ -67,11 +67,11 @@
 
 /* Begin PBXFileReference section */
 		1C3C22BE2BE39D1E003D1989 /* DetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModel.swift; sourceTree = "<group>"; };
-		1C3C22C02BE3A1C3003D1989 /* FetchAnyByAnyID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAnyByAnyID.swift; sourceTree = "<group>"; };
+		1C3C22C02BE3A1C3003D1989 /* FetchAnyByAnyIDList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAnyByAnyIDList.swift; sourceTree = "<group>"; };
 		1C3C22CC2BE3D225003D1989 /* CharacterItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterItem.swift; sourceTree = "<group>"; };
 		1C3C22CD2BE3D225003D1989 /* CharacterItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterItem.xib; sourceTree = "<group>"; };
 		1C5126542BD6889500EA45CA /* DetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsViewModel.swift; path = "Marvel Encyclopedia/ViewModel/DetailsViewModel.swift"; sourceTree = SOURCE_ROOT; };
-		1C5126562BD688B200EA45CA /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsViewController.swift; path = "Marvel Encyclopedia/View/Controllers/DetailsViewController.swift"; sourceTree = SOURCE_ROOT; };
+		1C5126562BD688B200EA45CA /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsViewController.swift; path = "Marvel Encyclopedia/View/Controllers/DetailsViewController/DetailsViewController.swift"; sourceTree = SOURCE_ROOT; };
 		1C51265A2BD688D500EA45CA /* Series.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Series.swift; sourceTree = "<group>"; };
 		1C51265B2BD688D500EA45CA /* Storie .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Storie .swift"; sourceTree = "<group>"; };
 		1C51265C2BD688D500EA45CA /* Comic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
@@ -145,6 +145,15 @@
 			path = CharacterItem;
 			sourceTree = "<group>";
 		};
+		1C3C22D12BE3E5EF003D1989 /* DetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1C74BFD72BD960B700CC694E /* DetailsViewController.xib */,
+				1C5126562BD688B200EA45CA /* DetailsViewController.swift */,
+			);
+			path = DetailsViewController;
+			sourceTree = "<group>";
+		};
 		1C74BFC72BD9251100CC694E /* ResourcesItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,7 +193,7 @@
 				D2DEF5F72BE0C4EC00C6E12F /* FetchComicsByCharacterID.swift */,
 				D2DEF5F92BE0C72F00C6E12F /* FetchSeriesByCharacterID.swift */,
 				D2DEF5FB2BE0C7A000C6E12F /* FetchEventsByCharacterID.swift */,
-				1C3C22C02BE3A1C3003D1989 /* FetchAnyByAnyID.swift */,
+				1C3C22C02BE3A1C3003D1989 /* FetchAnyByAnyIDList.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -277,8 +286,7 @@
 		D2D87FF32BD2A2F7008352FE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1C74BFD72BD960B700CC694E /* DetailsViewController.xib */,
-				1C5126562BD688B200EA45CA /* DetailsViewController.swift */,
+				1C3C22D12BE3E5EF003D1989 /* DetailsViewController */,
 				D2D87FC42BD27FFB008352FE /* CharactersListViewController.swift */,
 			);
 			path = Controllers;
@@ -462,7 +470,7 @@
 			files = (
 				D2D87FC52BD27FFB008352FE /* CharactersListViewController.swift in Sources */,
 				1C74BFCA2BD9254D00CC694E /* ResourcesViewCell.swift in Sources */,
-				1C3C22C12BE3A1C3003D1989 /* FetchAnyByAnyID.swift in Sources */,
+				1C3C22C12BE3A1C3003D1989 /* FetchAnyByAnyIDList.swift in Sources */,
 				D2DEF5F42BDF9C5500C6E12F /* DownloadImageFromAPI.swift in Sources */,
 				3233C0212BE0FC8100FB20EB /* URLSession+Client.swift in Sources */,
 				1C3C22BF2BE39D1E003D1989 /* DetailsModel.swift in Sources */,

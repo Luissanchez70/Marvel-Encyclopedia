@@ -16,8 +16,13 @@ struct Storie: Decodable, ResourceItem {
 
 struct StorieData: Decodable {
     let results: [Storie]
+    let offset : Int
+    let limit : Int
+    let total : Int
+    let count : Int
 }
 
 struct ResponseStorie: Decodable {
+
     let data: StorieData
 }

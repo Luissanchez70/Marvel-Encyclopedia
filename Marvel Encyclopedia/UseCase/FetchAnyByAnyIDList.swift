@@ -8,8 +8,8 @@
 import Foundation
 import Combine
 
-class FetchAnyByAnyID: ApiClient {
-    func execute(baseResource : String, baseID: Int, targetResource : String, targetType : ResorceType, limit : Int = 5) -> AnyPublisher<[Any], Error> {
+class FetchAnyByAnyIDList: ApiClient {
+    func execute(baseResource : String, baseID: Int, targetResource : String, targetType : ResourceType, limit : Int = 5) -> AnyPublisher<[Any], Error> {
         let endpoint = "\(getUrlBase())\(baseResource)/\(baseID)/\(targetResource)?limit=\(limit)&\(getApiIdentification())"
         guard let url = URL(string: endpoint) else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()

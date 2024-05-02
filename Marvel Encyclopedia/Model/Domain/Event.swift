@@ -16,8 +16,13 @@ struct Event: Decodable, ResourceItem {
 
 struct EventData: Decodable {
     let results: [Event]
+    let offset : Int
+    let limit : Int
+    let total : Int
+    let count : Int
 }
 
 struct ResponseEvent: Decodable {
+
     let data: EventData
 }
