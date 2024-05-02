@@ -19,6 +19,7 @@ class CharactersListViewController: UIViewController {
         super.viewDidLoad()
         setBind()
         mainViewModel.getCharacters()
+        characterTable.register(UINib(nibName: "CharacterItem", bundle: nil), forCellReuseIdentifier: "CharacterItem")
     }
     private func setBind() {
         getCancellables = mainViewModel.$characterList.sink { list in
@@ -33,6 +34,7 @@ extension CharactersListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         mainViewModel.characterList.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterItem", for: indexPath)
                 as? CharacterItem else {
