@@ -24,6 +24,5 @@ struct CreatorData: Decodable {
 }
 
 struct ResponseCreator: Decodable {
-
     let data: CreatorData
 }

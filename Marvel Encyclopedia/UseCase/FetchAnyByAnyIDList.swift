@@ -9,8 +9,8 @@ import Foundation
 import Combine
 
 class FetchAnyByAnyIDList: ApiClient {
-    func execute(baseResource : String, baseID: Int, targetResource : String, limit : Int = 5) -> AnyPublisher<Data, URLError> {
-        let endpoint = "\(getUrlBase())\(baseResource)/\(baseID)/\(targetResource)?limit=\(limit)&\(getApiIdentification())"
+    func execute(baseResource : ResourceType, baseID: Int, targetResource : ResourceType, limit : Int = 5) -> AnyPublisher<Data, URLError> {
+        let endpoint = "\(getUrlBase())\(baseResource.rawValue)/\(baseID)/\(targetResource.rawValue)?limit=\(limit)&\(getApiIdentification())"
         guard let url = URL(string: endpoint) else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }

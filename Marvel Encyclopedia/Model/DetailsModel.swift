@@ -69,9 +69,8 @@ class DetailsModel{
     }
     
     func getResources(_ completionHandle: @escaping (Bool) -> (),
-                 _ baseResource : String,
-                 _ targetResource : String,
-                 _ targetType : ResourceType){
+                 _ baseResource : ResourceType,
+                 _ targetResource : ResourceType){
         
         FetchAnyByAnyIDList().execute(baseResource: baseResource, baseID: id, targetResource: targetResource).sink { completion in
             switch completion {
@@ -82,8 +81,8 @@ class DetailsModel{
             }
         } receiveValue: { data in
             DispatchQueue.main.async {
-                let list = self.decodeResponse(data: data, targetType: targetType)
-                self.resources[targetResource] = list
+                let list = self.decodeResponse(data: data, targetType: targetResource)
+                self.resources[targetResource.rawValue] = list
                 completionHandle(true)
             }
         }.store(in: &cancellables)
@@ -113,27 +112,23 @@ class DetailsModel{
     }
         
     func fetchResources(completionHandle: @escaping (Bool) -> Void) {
-        
         if type != .comic {
-            getResources(completionHandle,  type.rawValue , "comics", .comic)
+            getResources(completionHandle,  type , .comic)
         }
         if type != .character && type != .creator {
-            getResources(completionHandle,  type.rawValue , "characters", .character)
+            getResources(completionHandle,  type , .character)
         }
         if type != .creator && type != .character {
-            getResources(completionHandle,  type.rawValue , "creators", .creator)
+            getResources(completionHandle,  type , .creator)
         }
         if type != .event {
-            getResources(completionHandle,  type.rawValue , "events", .event)
+            getResources(completionHandle,  type ,.event)
         }
         if type != .comic && type != .serie {
-            getResources(completionHandle,  type.rawValue ,"series", .serie)
+            getResources(completionHandle,  type ,.serie)
         }
         if type != .story {
-            getResources(completionHandle,  type.rawValue , "stories", .story)
+            getResources(completionHandle,  type , .serie)
         }
-        
     }
-    
-
 }
