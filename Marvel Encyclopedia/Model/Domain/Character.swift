@@ -19,20 +19,13 @@ struct Character: Decodable {
 }
 
 struct ResponseCharacter: Decodable {
-<<<<<<< HEAD
-    let data: DataCharacter
-}
-struct DataCharacter: Decodable {
-=======
     let data: CharacterData
-    
 }
 
 struct CharacterData: Decodable {
-    let offset : Int
-    let limit : Int
-    let total : Int
-    let count : Int
->>>>>>> 19dc7e8209bd80ebf3487b24c3dd2091a89cdf0a
+    let offset: Int
+    let limit: Int
+    let total: Int
+    let count: Int
     let results: [Character]
 }
