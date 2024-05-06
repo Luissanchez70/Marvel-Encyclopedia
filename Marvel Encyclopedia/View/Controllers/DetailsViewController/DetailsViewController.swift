@@ -62,8 +62,6 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource  {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: event, resourceTye: .event))
         } else if let character = selectedResource[indexPath.row] as? Character {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: character, resourceTye: .character))
-        } else if let series = selectedResource[indexPath.row] as? Series {
-            nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: series, resourceTye: .serie))
         } else if let story = selectedResource[indexPath.row] as? Storie {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: story, resourceTye: .story))
         }
