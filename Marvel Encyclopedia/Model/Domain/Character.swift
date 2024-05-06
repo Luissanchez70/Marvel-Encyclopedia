@@ -19,9 +19,8 @@ struct Character: Decodable {
 }
 
 struct ResponseCharacter: Decodable {
-    let data: Data
-    
-    struct Data: Decodable {
-        let results: [Character]
-    }
+    let data: DataCharacter
+}
+struct DataCharacter: Decodable {
+    let results: [Character]
 }
