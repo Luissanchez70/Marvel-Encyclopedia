@@ -15,10 +15,14 @@ struct Creator: Decodable {
     let thumbnail: Thumbnail?
 }
 
-struct ResponseCreator: Decodable {
-    let data: CreatorData
-}
-
 struct CreatorData: Decodable {
     let results: [Creator]
+    let offset : Int
+    let limit : Int
+    let total : Int
+    let count : Int
+}
+
+struct ResponseCreator: Decodable {
+    let data: CreatorData
 }

@@ -12,6 +12,7 @@ protocol ResourceItem {
     var thumbnail: Thumbnail? {set get}
     var title : String? {set get}
     var description : String? {set get}
+    var id : Int? {set get}
 }
 class ResourcesItemViewModel {
     var thumbnail = PassthroughSubject<UIImage?, Never>()

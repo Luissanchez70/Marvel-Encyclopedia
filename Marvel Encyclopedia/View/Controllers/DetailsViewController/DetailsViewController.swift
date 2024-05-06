@@ -15,6 +15,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var resourceSelector: UISegmentedControl!
+    @IBOutlet weak var fullListButton: UIButton!
     
     var viewModel : DetailsViewModel?
     
@@ -24,7 +25,7 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fullListButton.isHidden = true
         setupView()
     }
     
@@ -33,6 +34,11 @@ class DetailsViewController: UIViewController {
         let index = sender.selectedSegmentIndex
         selectedKey = sender.titleForSegment(at: index) ?? "Title not found received nill "
         selectedResource = viewModel.resources.value[selectedKey] ?? []
+        if selectedResource.count == 5 {
+            fullListButton.isHidden = false
+        } else {
+            fullListButton.isHidden = true
+        }
         tableView.reloadData()
     }
 }
@@ -44,11 +50,25 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource  {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nvc = DetailsViewController()
+        
         if let comic = selectedResource[indexPath.row] as? Comic {
-            let nvc = DetailsViewController()
-            nvc.viewModel = DetailsViewModel(detailableObject: ComicModel(comic))
-            self.navigationController?.pushViewController(nvc, animated: true)
+            nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: comic, resourceTye: .comic))
+        } else if let series = selectedResource[indexPath.row] as? Series {
+            nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: series, resourceTye: .serie))
+        } else if let creator = selectedResource[indexPath.row] as? Creator {
+            nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: creator, resourceTye: .creator))
+        } else if let event = selectedResource[indexPath.row] as? Event {
+            nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: event, resourceTye: .event))
+        } else if let character = selectedResource[indexPath.row] as? Character {
+            nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: character, resourceTye: .character))
+        } else if let series = selectedResource[indexPath.row] as? Series {
+            nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: series, resourceTye: .serie))
+        } else if let story = selectedResource[indexPath.row] as? Storie {
+            nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: story, resourceTye: .story))
         }
+        
+        self.navigationController?.pushViewController(nvc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,6 +81,7 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource  {
         selectedObject(selectedResource, indexPath, cell)
         return cell
     }
+    
     private func selectedObject(_ resource: [Any], _ indexPath: IndexPath, _ cell: ResourcesViewCell) {
         var item : ResourcesItemViewModel?
         if let resource = resource[indexPath.row] as? ResourceItem {
@@ -70,7 +91,7 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource  {
         }else if let creator = resource[indexPath.row] as? Creator {
             item = ResourcesItemViewModel(from: creator)
         }
-        guard let item  else { return  }
+        guard let item  else { return }
         cell.configure(resorceItem: item)
     }
 }
@@ -91,7 +112,7 @@ private extension DetailsViewController {
         viewModel.fetchResources()
     }
 }
-extension  DetailsViewController{ // trying with combine
+extension  DetailsViewController {
     func setBinds() {
         guard let viewModel  else { return }
         viewModel.resources.sink(receiveValue: { received in
@@ -103,16 +124,17 @@ extension  DetailsViewController{ // trying with combine
         }).store(in: &cancelebles)
     }
     func setSegmentedControl(resources : [String:[Any]]) {
-        resourceSelector.removeAllSegments()
-        for (name , items) in resources {
-            if !items.isEmpty {
-                resourceSelector.insertSegment(withTitle: name, at: 0, animated: false)
+        DispatchQueue.main.async {
+            self.resourceSelector.removeAllSegments()
+            let sortedKeys = resources.keys.sorted(by: <)
+            for  key in sortedKeys {
+                if let items = resources[key] {
+                    if  !items.isEmpty {
+                        self.resourceSelector.insertSegment(withTitle: key, at: 0, animated: false)
+                    }
+                }
             }
         }
-        if !resources.isEmpty {
-            selectedKey = resourceSelector.titleForSegment(at: 0) ?? "Title not found received nill "
-            selectedResource = viewModel!.resources.value[selectedKey] ?? []
-            tableView.reloadData()
-        }
+        
     }
 }
