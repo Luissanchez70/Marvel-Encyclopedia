@@ -16,12 +16,10 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var resourceSelector: UISegmentedControl!
     @IBOutlet weak var fullListButton: UIButton!
-    
-    var viewModel : DetailsViewModel?
-    
+    var viewModel: DetailsViewModel?
     var cancelebles: Set<AnyCancellable> = []
     var selectedKey = "None"
-    var selectedResource : [Any] = []
+    var selectedResource: [Any] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,12 +40,7 @@ class DetailsViewController: UIViewController {
         tableView.reloadData()
     }
 }
-
-extension DetailsViewController: UITableViewDelegate, UITableViewDataSource  {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return selectedResource.count
-    }
+extension DetailsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nvc = DetailsViewController()
@@ -69,17 +62,6 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource  {
         self.navigationController?.pushViewController(nvc, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ResourcesViewCell", for: indexPath)
-                as? ResourcesViewCell else {
-            let defaultCell = UITableViewCell(style: .default, reuseIdentifier: "DefaultCell")
-            defaultCell.textLabel?.text = "error"
-            return defaultCell
-        }
-        selectedObject(selectedResource, indexPath, cell)
-        return cell
-    }
-    
     private func selectedObject(_ resource: [Any], _ indexPath: IndexPath, _ cell: ResourcesViewCell) {
         var item : ResourcesItemViewModel?
         if let resource = resource[indexPath.row] as? ResourceItem {
@@ -91,6 +73,25 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource  {
         }
         guard let item  else { return }
         cell.configure(resorceItem: item)
+    }
+    
+}
+
+extension DetailsViewController: UITableViewDataSource  {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return selectedResource.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ResourcesViewCell", for: indexPath)
+                as? ResourcesViewCell else {
+            let defaultCell = UITableViewCell(style: .default, reuseIdentifier: "DefaultCell")
+            defaultCell.textLabel?.text = "error"
+            return defaultCell
+        }
+        selectedObject(selectedResource, indexPath, cell)
+        return cell
     }
 }
 private extension DetailsViewController {

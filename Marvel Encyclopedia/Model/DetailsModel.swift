@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-enum ResourceType : String {
+enum ResourceType: String {
     case character = "characters"
     case comic = "comics"
     case creator = "creators"
@@ -17,18 +17,17 @@ enum ResourceType : String {
     case story = "stories"
 }
 
-class DetailsModel{
+class DetailsModel {
     
-    var id: Int
-    var name: String
-    var desc: String
-    var thumbnail: Thumbnail?
-    var type : ResourceType
-    
-    var resources : [String : [Any]] = [:]
+    private var id: Int
+    private var name: String
+    private var desc: String
+    private var thumbnail: Thumbnail?
+    private var type : ResourceType
+    private var resources: [String : [Any]] = [:]
     private var cancellables = Set<AnyCancellable>()
     
-    init( from resorceItem: ResourceItem, resourceTye : ResourceType ) {
+    init( from resorceItem: ResourceItem, resourceTye: ResourceType ) {
         id = resorceItem.id ?? 1
         name = resorceItem.title ?? "No title"
         desc = resorceItem.description ?? "No description"
@@ -36,7 +35,7 @@ class DetailsModel{
         type = resourceTye
     }
     
-    init( from character : Character, resourceTye : ResourceType ) {
+    init( from character: Character, resourceTye: ResourceType ) {
         id = character.id
         name = character.name
         desc = character.description
@@ -44,7 +43,7 @@ class DetailsModel{
         type = resourceTye
     }
     
-    init( from creator : Creator, resourceTye : ResourceType ) {
+    init( from creator: Creator, resourceTye: ResourceType ) {
         id = creator.id ?? 0
         name = "\(creator.firstName!) \(creator.lastName!)"
         desc = "No description"
@@ -56,7 +55,7 @@ class DetailsModel{
         return resources
     }
     
-    func getName() -> String{
+    func getName() -> String {
         name
     }
     
@@ -69,8 +68,8 @@ class DetailsModel{
     }
     
     func getResources(_ completionHandle: @escaping (Bool) -> (),
-                 _ baseResource : ResourceType,
-                 _ targetResource : ResourceType){
+                 _ baseResource: ResourceType,
+                 _ targetResource: ResourceType){
         
         FetchAnyByAnyIDList().execute(baseResource: baseResource, baseID: id, targetResource: targetResource).sink { completion in
             switch completion {
@@ -113,22 +112,22 @@ class DetailsModel{
         
     func fetchResources(completionHandle: @escaping (Bool) -> Void) {
         if type != .comic {
-            getResources(completionHandle,  type , .comic)
+            getResources(completionHandle, type, .comic)
         }
         if type != .character && type != .creator {
-            getResources(completionHandle,  type , .character)
+            getResources(completionHandle, type, .character)
         }
         if type != .creator && type != .character {
-            getResources(completionHandle,  type , .creator)
+            getResources(completionHandle, type, .creator)
         }
         if type != .event {
-            getResources(completionHandle,  type ,.event)
+            getResources(completionHandle, type, .event)
         }
         if type != .comic && type != .serie {
-            getResources(completionHandle,  type ,.serie)
+            getResources(completionHandle, type, .serie)
         }
         if type != .story {
-            getResources(completionHandle,  type , .serie)
+            getResources(completionHandle, type, .serie)
         }
     }
 }

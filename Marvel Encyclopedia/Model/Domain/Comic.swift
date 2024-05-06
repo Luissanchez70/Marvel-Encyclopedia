@@ -16,10 +16,10 @@ struct Comic: Decodable, ResourceItem {
 
 struct ComicData: Decodable {
     let results: [Comic]
-    let offset : Int
-    let limit : Int
-    let total : Int
-    let count : Int
+    let offset: Int
+    let limit: Int
+    let total: Int
+    let count: Int
 }
 
 struct ResponseComic: Decodable {

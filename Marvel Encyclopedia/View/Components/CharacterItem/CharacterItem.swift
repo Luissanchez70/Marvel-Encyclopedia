@@ -11,7 +11,6 @@ import Combine
 class CharacterItem: UITableViewCell {
 
     private var cancellables = Set<AnyCancellable>()
-    
     @IBOutlet weak var thumbnail: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
@@ -53,5 +52,4 @@ class CharacterItem: UITableViewCell {
                 }
             }.store(in: &cancellables)
     }
-    
 }

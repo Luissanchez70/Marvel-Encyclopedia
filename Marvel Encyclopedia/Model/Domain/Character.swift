@@ -24,9 +24,9 @@ struct ResponseCharacter: Decodable {
 }
 
 struct CharacterData: Decodable {
-    let offset : Int
-    let limit : Int
-    let total : Int
-    let count : Int
+    let offset: Int
+    let limit: Int
+    let total: Int
+    let count: Int
     let results: [Character]
 }

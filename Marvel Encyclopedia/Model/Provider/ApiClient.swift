@@ -28,29 +28,3 @@ class ApiClient {
     func getHash() -> String { self.hash }
     func getApiIdentification() -> String { self.apiIdentification }
 }
-
-//MARK: - Requests to stories
-extension ApiClient {
-    
-    func connectionApi(endpoint: String, complition: @escaping (Foundation.Data) -> ()) {
-        
-        guard let url = URL(string: endpoint) else { return }
-        urlSession.dataTask(with: url) {data, response, error in
-            guard let data = data else { return }
-             complition(data)
-            
-        }.resume()
-    }
-    
-    func getStories( endPoint : String , complition: @escaping (ResponseStorie?)  -> () ) throws {
-        return connectionApi(endpoint: endPoint) { data in
-            do {
-                let apiResponse: ResponseStorie = try JSONDecoder().decode(ResponseStorie.self, from: data)
-                complition(apiResponse)
-            } catch {
-                complition(nil)
-            }
-        }
-    }
-}
-

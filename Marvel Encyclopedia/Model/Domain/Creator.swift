@@ -17,10 +17,10 @@ struct Creator: Decodable {
 
 struct CreatorData: Decodable {
     let results: [Creator]
-    let offset : Int
-    let limit : Int
-    let total : Int
-    let count : Int
+    let offset: Int
+    let limit: Int
+    let total: Int
+    let count: Int
 }
 
 struct ResponseCreator: Decodable {

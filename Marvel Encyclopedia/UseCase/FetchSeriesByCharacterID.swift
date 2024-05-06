@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 class FetchSeriesByCharacterID: ApiClient {
+    
     func execute(characterID: Int) -> AnyPublisher<[Series], Error> {
         let endpoint = "\(getUrlBase())characters/\(characterID)/series?\(getApiIdentification())"
         guard let url = URL(string: endpoint) else {

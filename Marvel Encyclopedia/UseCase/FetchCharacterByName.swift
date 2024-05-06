@@ -9,12 +9,12 @@ import Foundation
 import Combine
 
 class FetchCharacterByName {
+    
     func execute(name: String) -> AnyPublisher<[Character], Error> {
         let urlRequest = URLRequest.fetchCharacter(name: name)
-        
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseCharacter.self)
-            .map{ $0.data.results }
+            .map { $0.data.results }
             .eraseToAnyPublisher()
     }
 }
