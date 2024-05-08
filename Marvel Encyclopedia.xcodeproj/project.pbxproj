@@ -23,6 +23,8 @@
 		1C74BFCE2BD92DAF00CC694E /* ResourcesItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74BFCD2BD92DAF00CC694E /* ResourcesItemViewModel.swift */; };
 		1C74BFD92BD960B700CC694E /* DetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C74BFD72BD960B700CC694E /* DetailsViewController.xib */; };
 		1C74BFE12BD96C5500CC694E /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74BFE02BD96C5500CC694E /* Creator.swift */; };
+		1C7665522BEB876300610A8D /* AllListadoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7665502BEB876300610A8D /* AllListadoViewController.swift */; };
+		1C7665532BEB876300610A8D /* AllListadoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C7665512BEB876300610A8D /* AllListadoViewController.xib */; };
 		3233C0212BE0FC8100FB20EB /* URLSession+Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3233C0202BE0FC8100FB20EB /* URLSession+Client.swift */; };
 		3233C0232BE0FE5400FB20EB /* URLComponents+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3233C0222BE0FE5400FB20EB /* URLComponents+Init.swift */; };
 		3233C0252BE0FF6C00FB20EB /* URLRequest+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3233C0242BE0FF6C00FB20EB /* URLRequest+Init.swift */; };
@@ -82,6 +84,8 @@
 		1C74BFCD2BD92DAF00CC694E /* ResourcesItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesItemViewModel.swift; sourceTree = "<group>"; };
 		1C74BFD72BD960B700CC694E /* DetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsViewController.xib; sourceTree = "<group>"; };
 		1C74BFE02BD96C5500CC694E /* Creator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
+		1C7665502BEB876300610A8D /* AllListadoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListadoViewController.swift; sourceTree = "<group>"; };
+		1C7665512BEB876300610A8D /* AllListadoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllListadoViewController.xib; sourceTree = "<group>"; };
 		3233C0202BE0FC8100FB20EB /* URLSession+Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Client.swift"; sourceTree = "<group>"; };
 		3233C0222BE0FE5400FB20EB /* URLComponents+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Init.swift"; sourceTree = "<group>"; };
 		3233C0242BE0FF6C00FB20EB /* URLRequest+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Init.swift"; sourceTree = "<group>"; };
@@ -161,6 +165,15 @@
 				1C74BFC92BD9254D00CC694E /* ResourcesViewCell.xib */,
 			);
 			path = ResourcesItem;
+			sourceTree = "<group>";
+		};
+		1C7665542BEB876A00610A8D /* AllListado */ = {
+			isa = PBXGroup;
+			children = (
+				1C7665502BEB876300610A8D /* AllListadoViewController.swift */,
+				1C7665512BEB876300610A8D /* AllListadoViewController.xib */,
+			);
+			path = AllListado;
 			sourceTree = "<group>";
 		};
 		3233C01F2BE0FC7200FB20EB /* Services */ = {
@@ -288,6 +301,7 @@
 			children = (
 				1C3C22D12BE3E5EF003D1989 /* DetailsViewController */,
 				D2D87FC42BD27FFB008352FE /* CharactersListViewController.swift */,
+				1C7665542BEB876A00610A8D /* AllListado */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -420,6 +434,7 @@
 			files = (
 				1C3C22CF2BE3D225003D1989 /* CharacterItem.xib in Resources */,
 				1C74BFCB2BD9254D00CC694E /* ResourcesViewCell.xib in Resources */,
+				1C7665532BEB876300610A8D /* AllListadoViewController.xib in Resources */,
 				1C5126652BD6B70700EA45CA /* Launch Screen.storyboard in Resources */,
 				1C74BFD92BD960B700CC694E /* DetailsViewController.xib in Resources */,
 				D2D87FCA2BD27FFD008352FE /* Assets.xcassets in Resources */,
@@ -479,6 +494,7 @@
 				3233C0252BE0FF6C00FB20EB /* URLRequest+Init.swift in Sources */,
 				1C74BFCE2BD92DAF00CC694E /* ResourcesItemViewModel.swift in Sources */,
 				D2D87FC12BD27FFB008352FE /* AppDelegate.swift in Sources */,
+				1C7665522BEB876300610A8D /* AllListadoViewController.swift in Sources */,
 				D2D87FC32BD27FFB008352FE /* SceneDelegate.swift in Sources */,
 				1C5126602BD688D500EA45CA /* Comic.swift in Sources */,
 				D2DEF5FA2BE0C72F00C6E12F /* FetchSeriesByCharacterID.swift in Sources */,
