@@ -20,7 +20,6 @@ struct Character: Decodable {
 
 struct ResponseCharacter: Decodable {
     let data: CharacterData
-    
 }
 
 struct CharacterData: Decodable {
