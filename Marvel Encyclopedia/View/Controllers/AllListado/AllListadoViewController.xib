@@ -35,6 +35,9 @@
                             </constraints>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="filled" title="More Results"/>
+                            <connections>
+                                <action selector="moreResultsPressed:" destination="-1" eventType="touchUpInside" id="pja-2M-J3y"/>
+                            </connections>
                         </button>
                     </subviews>
                     <constraints>
