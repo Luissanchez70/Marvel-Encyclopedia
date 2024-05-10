@@ -38,7 +38,8 @@ class AllListadoModel {
             DispatchQueue.main.async {
                 let response = self.decodeResponse(data: data)
                 self.resources.append(contentsOf: response)
-                completion(response, (self.offset + self.limit < self.total))
+                completion(self.resources, (self.offset + self.limit < self.total))
+                self.offset += self.limit
             }
         }.store(in: &cancellables)
         
@@ -52,31 +53,37 @@ class AllListadoModel {
                 offset = response.offset
                 limit = response.limit
                 total = response.total
+                return response.results
             case .comic:
                 let response = try JSONDecoder().decode(ResponseComic.self, from: data).data
                 offset = response.offset
                 limit = response.limit
                 total = response.total
+                return response.results
             case .creator:
                 let response = try JSONDecoder().decode(ResponseCreator.self, from: data).data
                 offset = response.offset
                 limit = response.limit
                 total = response.total
+                return response.results
             case .event:
                 let response = try JSONDecoder().decode(ResponseEvent.self, from: data).data
                 offset = response.offset
                 limit = response.limit
                 total = response.total
+                return response.results
             case .serie:
                 let response = try JSONDecoder().decode(ResponseSeries.self, from: data).data
                 offset = response.offset
                 limit = response.limit
                 total = response.total
+                return response.results
             case .story:
                 let response = try JSONDecoder().decode(ResponseStorie.self, from: data).data
                 offset = response.offset
                 limit = response.limit
                 total = response.total
+                return response.results
             }
         } catch {
             print(error.localizedDescription.localizedLowercase)
