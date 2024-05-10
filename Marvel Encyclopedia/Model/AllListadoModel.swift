@@ -27,7 +27,7 @@ class AllListadoModel {
     }
     
     func requestNextPage(completion : @escaping ([Any] ,Bool) -> Void) {
-        FetchAnyByAnyIDList().execute(baseResource: type, baseID: id, targetResource: targetTyoe, limit: limit, offset: offset+limit).sink { completion in
+        FetchAnyByAnyIDList().execute(baseResource: type, baseID: id, targetResource: targetTyoe, limit: limit, offset: offset).sink { completion in
             switch completion {
             case .finished:
                 break
@@ -38,7 +38,10 @@ class AllListadoModel {
             DispatchQueue.main.async {
                 let response = self.decodeResponse(data: data)
                 self.resources.append(contentsOf: response)
-                completion(self.resources, (self.offset + self.limit < self.total))
+                print(self.total)
+                print(self.offset)
+                print(self.resources.count)
+                completion(self.resources, (self.offset < self.total))
                 self.offset += self.limit
             }
         }.store(in: &cancellables)
@@ -50,38 +53,26 @@ class AllListadoModel {
             switch targetTyoe {
             case .character:
                 let response = try JSONDecoder().decode(ResponseCharacter.self, from: data).data
-                offset = response.offset
-                limit = response.limit
                 total = response.total
                 return response.results
             case .comic:
                 let response = try JSONDecoder().decode(ResponseComic.self, from: data).data
-                offset = response.offset
-                limit = response.limit
                 total = response.total
                 return response.results
             case .creator:
                 let response = try JSONDecoder().decode(ResponseCreator.self, from: data).data
-                offset = response.offset
-                limit = response.limit
                 total = response.total
                 return response.results
             case .event:
                 let response = try JSONDecoder().decode(ResponseEvent.self, from: data).data
-                offset = response.offset
-                limit = response.limit
                 total = response.total
                 return response.results
             case .serie:
                 let response = try JSONDecoder().decode(ResponseSeries.self, from: data).data
-                offset = response.offset
-                limit = response.limit
                 total = response.total
                 return response.results
             case .story:
                 let response = try JSONDecoder().decode(ResponseStorie.self, from: data).data
-                offset = response.offset
-                limit = response.limit
                 total = response.total
                 return response.results
             }

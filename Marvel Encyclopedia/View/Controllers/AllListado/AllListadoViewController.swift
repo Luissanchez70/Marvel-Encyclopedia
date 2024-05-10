@@ -21,7 +21,7 @@ class AllListadoViewController: UIViewController {
         super.viewDidLoad()
         
         // for testes purposes
-        viewModel = AllListadoViewModel(allListModel: AllListadoModel(id: 1009144, type: .character, targetTyoe: .comic))
+            //viewModel = AllListadoViewModel(allListModel: AllListadoModel(id: 1009144, type: .character, targetTyoe: .comic))
         
         setTableView()
         bind()
@@ -36,7 +36,6 @@ class AllListadoViewController: UIViewController {
     
     func bind() {
         viewModel?.resource.sink(receiveValue: { resource in
-            print(2)
             self.resource = resource
             DispatchQueue.main.async {
                 self.tableView.reloadData()

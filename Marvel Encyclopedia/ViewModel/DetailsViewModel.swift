@@ -31,6 +31,14 @@ class DetailsViewModel {
         desc
     }
     
+    func getID() -> Int {
+        detailsModel.getId()
+    }
+    
+    func getType() -> ResourceType {
+        detailsModel.getType()
+    }
+    
     func fetThumbnail() {
         guard let thumbnail = detailsModel.getThumbnail() else { return }
         var base = thumbnail.path.replacingOccurrences(of: "http:", with: "https:")

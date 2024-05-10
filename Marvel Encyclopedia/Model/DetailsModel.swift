@@ -51,8 +51,16 @@ class DetailsModel {
         type = resourceTye
     }
     
+    func getType() -> ResourceType {
+        type
+    }
+    
+    func getId() -> Int{
+        id
+    }
+    
     func getResources() -> [String : [Any]] {
-        return resources
+        resources
     }
     
     func getName() -> String {

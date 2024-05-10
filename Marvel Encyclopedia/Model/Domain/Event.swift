@@ -23,6 +23,5 @@ struct EventData: Decodable {
 }
 
 struct ResponseEvent: Decodable {
-
     let data: EventData
 }

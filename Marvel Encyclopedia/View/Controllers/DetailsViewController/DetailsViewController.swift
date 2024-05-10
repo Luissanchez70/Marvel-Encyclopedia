@@ -44,6 +44,18 @@ class DetailsViewController: UIViewController {
         }
         tableView.reloadData()
     }
+    
+    @IBAction func IrAllListadoPressed(_ sender: UIButton) {
+        let nvc = AllListadoViewController()
+        guard let viewModel else  { return }
+        let id = viewModel.getID()
+        let type = viewModel.getType()
+        guard let targetType = ResourceType(rawValue: selectedKey) else { return }
+                
+        let model = AllListadoViewModel(allListModel: AllListadoModel(id: id, type: type, targetTyoe: targetType))
+        nvc.viewModel = model
+        self.navigationController?.pushViewController(nvc, animated: true)
+    }
 }
 extension DetailsViewController: UITableViewDelegate {
     

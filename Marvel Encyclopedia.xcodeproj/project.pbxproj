@@ -160,6 +160,15 @@
 			path = DetailsViewController;
 			sourceTree = "<group>";
 		};
+		1C3C73A82BEE59700015876A /* CharacterList */ = {
+			isa = PBXGroup;
+			children = (
+				D2D87FC62BD27FFB008352FE /* Main.storyboard */,
+				D2D87FC42BD27FFB008352FE /* CharactersListViewController.swift */,
+			);
+			path = CharacterList;
+			sourceTree = "<group>";
+		};
 		1C74BFC72BD9251100CC694E /* ResourcesItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,7 +289,6 @@
 			children = (
 				D2AF2FBF2BD6361D0098AF75 /* Components */,
 				D2D87FF32BD2A2F7008352FE /* Controllers */,
-				D2D87FC62BD27FFB008352FE /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -310,8 +318,8 @@
 		D2D87FF32BD2A2F7008352FE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1C3C73A82BEE59700015876A /* CharacterList */,
 				1C3C22D12BE3E5EF003D1989 /* DetailsViewController */,
-				D2D87FC42BD27FFB008352FE /* CharactersListViewController.swift */,
 				1C7665542BEB876A00610A8D /* AllListado */,
 			);
 			path = Controllers;

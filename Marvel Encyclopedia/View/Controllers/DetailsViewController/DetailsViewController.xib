@@ -92,6 +92,9 @@
                                             <rect key="frame" x="120.66666666666666" y="-2" width="111.66666666666666" height="34.333333333333336"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="filled" title="Ir al Listado"/>
+                                            <connections>
+                                                <action selector="IrAllListadoPressed:" destination="-1" eventType="touchUpInside" id="GuA-jG-hvL"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -125,7 +128,7 @@
                 <constraint firstItem="M3E-HU-1ZA" firstAttribute="bottom" secondItem="jik-fD-xQk" secondAttribute="bottom" id="sj5-U2-O9T"/>
                 <constraint firstItem="M3E-HU-1ZA" firstAttribute="trailing" secondItem="jik-fD-xQk" secondAttribute="trailing" id="tKn-OU-wSf"/>
             </constraints>
-            <point key="canvasLocation" x="-761" y="28"/>
+            <point key="canvasLocation" x="-943" y="36"/>
         </view>
     </objects>
     <resources>
