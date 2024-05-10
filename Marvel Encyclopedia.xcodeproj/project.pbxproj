@@ -25,6 +25,8 @@
 		1C74BFE12BD96C5500CC694E /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74BFE02BD96C5500CC694E /* Creator.swift */; };
 		1C7665522BEB876300610A8D /* AllListadoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7665502BEB876300610A8D /* AllListadoViewController.swift */; };
 		1C7665532BEB876300610A8D /* AllListadoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C7665512BEB876300610A8D /* AllListadoViewController.xib */; };
+		1C8CFE982BEE2F6900169008 /* AllListadoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8CFE972BEE2F6900169008 /* AllListadoViewModel.swift */; };
+		1C8CFE9A2BEE2F8300169008 /* AllListadoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8CFE992BEE2F8300169008 /* AllListadoModel.swift */; };
 		3233C0212BE0FC8100FB20EB /* URLSession+Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3233C0202BE0FC8100FB20EB /* URLSession+Client.swift */; };
 		3233C0232BE0FE5400FB20EB /* URLComponents+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3233C0222BE0FE5400FB20EB /* URLComponents+Init.swift */; };
 		3233C0252BE0FF6C00FB20EB /* URLRequest+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3233C0242BE0FF6C00FB20EB /* URLRequest+Init.swift */; };
@@ -85,6 +87,8 @@
 		1C74BFE02BD96C5500CC694E /* Creator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
 		1C7665502BEB876300610A8D /* AllListadoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListadoViewController.swift; sourceTree = "<group>"; };
 		1C7665512BEB876300610A8D /* AllListadoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllListadoViewController.xib; sourceTree = "<group>"; };
+		1C8CFE972BEE2F6900169008 /* AllListadoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllListadoViewModel.swift; sourceTree = "<group>"; };
+		1C8CFE992BEE2F8300169008 /* AllListadoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllListadoModel.swift; sourceTree = "<group>"; };
 		3233C0202BE0FC8100FB20EB /* URLSession+Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Client.swift"; sourceTree = "<group>"; };
 		3233C0222BE0FE5400FB20EB /* URLComponents+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Init.swift"; sourceTree = "<group>"; };
 		3233C0242BE0FF6C00FB20EB /* URLRequest+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Init.swift"; sourceTree = "<group>"; };
@@ -284,7 +288,7 @@
 		D2D87FF12BD2A2E0008352FE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D2B498AF2BEE34E100EB60A0 /* Provider */,
+				1C8CFE992BEE2F8300169008 /* AllListadoModel.swift */,
 				1C3C22BE2BE39D1E003D1989 /* DetailsModel.swift */,
 				D2D87FF52BD2A313008352FE /* Domain */,
 			);
@@ -294,6 +298,7 @@
 		D2D87FF22BD2A2E6008352FE /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				1C8CFE972BEE2F6900169008 /* AllListadoViewModel.swift */,
 				1C5126542BD6889500EA45CA /* DetailsViewModel.swift */,
 				D2AF2FC22BD64CB00098AF75 /* CharactersListViewModel.swift */,
 				1C74BFCD2BD92DAF00CC694E /* ResourcesItemViewModel.swift */,
@@ -471,7 +476,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "
+";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -487,9 +493,10 @@
 				3233C0212BE0FC8100FB20EB /* URLSession+Client.swift in Sources */,
 				1C3C22BF2BE39D1E003D1989 /* DetailsModel.swift in Sources */,
 				1C3C22CE2BE3D225003D1989 /* CharacterItem.swift in Sources */,
-				D2B498B02BEE34E100EB60A0 /* ApiClient.swift in Sources */,
+				1C8CFE982BEE2F6900169008 /* AllListadoViewModel.swift in Sources */,
 				1C5126572BD688B200EA45CA /* DetailsViewController.swift in Sources */,
 				3233C0252BE0FF6C00FB20EB /* URLRequest+Init.swift in Sources */,
+				1C8CFE9A2BEE2F8300169008 /* AllListadoModel.swift in Sources */,
 				1C74BFCE2BD92DAF00CC694E /* ResourcesItemViewModel.swift in Sources */,
 				D2D87FC12BD27FFB008352FE /* AppDelegate.swift in Sources */,
 				1C7665522BEB876300610A8D /* AllListadoViewController.swift in Sources */,
