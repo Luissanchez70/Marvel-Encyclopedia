@@ -10,12 +10,12 @@ import Combine
 
 class FetchEvents {
     
-    func execute (_ characterID: Int) -> AnyPublisher<[Event], Error> {
+    func execute (_ characterID: Int) -> AnyPublisher<EventData, Error> {
         
         let urlRequest = URLRequest(components: URLComponents(path: "/characters/\(characterID)/events"))
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseEvent.self)
-            .map { $0.data.results }
+            .map { $0.data }
             .eraseToAnyPublisher()
     }
 }

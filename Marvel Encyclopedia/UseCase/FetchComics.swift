@@ -10,12 +10,12 @@ import Combine
 
 class FetchComics {
     
-    func execute (_ characterID: Int) -> AnyPublisher<[Comic], Error> {
+    func execute (_ characterID: Int) -> AnyPublisher<ComicData, Error> {
         
         let urlRequest = URLRequest(components: URLComponents(path: "/characters/\(characterID)/comics"))
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseComic.self)
-            .map { $0.data.results }
+            .map { $0.data }
             .eraseToAnyPublisher()
     }
 }

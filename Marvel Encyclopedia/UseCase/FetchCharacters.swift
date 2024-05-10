@@ -10,21 +10,21 @@ import Combine
 
 class FetchCharacters {
     
-    func execute() -> AnyPublisher<[Character], Error> {
+    func execute() -> AnyPublisher<CharacterData, Error> {
         
         let urlRequest = URLRequest(components: URLComponents(path: "/characters"))
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseCharacter.self)
-            .map { $0.data.results }
+            .map { $0.data }
             .eraseToAnyPublisher()
     }
     
-    func execute(_ characterName: String) -> AnyPublisher<[Character], Error> {
+    func execute(_ characterName: String) -> AnyPublisher<CharacterData, Error> {
         
         let urlRequest = URLRequest(components: URLComponents(path: "/characters").fetchCharactersByName(characterName))
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseCharacter.self)
-            .map { $0.data.results }
+            .map { $0.data }
             .eraseToAnyPublisher()
     }
 }

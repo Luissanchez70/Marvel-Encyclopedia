@@ -10,12 +10,12 @@ import Combine
 
 class FetchStories {
     
-    func execute (_ characterID: Int) -> AnyPublisher<[Storie], Error> {
+    func execute (_ characterID: Int) -> AnyPublisher<StorieData, Error> {
         
         let urlRequest = URLRequest(components: URLComponents(path: "/characters/\(characterID)/stories"))
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseStorie.self)
-            .map { $0.data.results }
+            .map { $0.data }
             .eraseToAnyPublisher()
     }
 }
