@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 class FetchEventsByCharacterID: ApiClient {
+    
     func execute(characterID: Int) -> AnyPublisher<[Event], Error> {
         let endpoint = "\(getUrlBase())characters/\(characterID)/events?\(getApiIdentification())"
         guard let url = URL(string: endpoint) else {

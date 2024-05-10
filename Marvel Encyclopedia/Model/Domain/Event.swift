@@ -8,16 +8,21 @@
 import Foundation
 
 struct Event: Decodable, ResourceItem {
-    let id: Int?
+    var id: Int?
     var title: String?
     var description: String?
     var thumbnail: Thumbnail?
 }
 
-struct ResponseEvent: Decodable {
-    let data: EventData
-}
-
 struct EventData: Decodable {
     let results: [Event]
+    let offset: Int
+    let limit: Int
+    let total: Int
+    let count: Int
+}
+
+struct ResponseEvent: Decodable {
+
+    let data: EventData
 }

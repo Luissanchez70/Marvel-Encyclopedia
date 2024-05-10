@@ -21,4 +21,3 @@ class FetchCharacter: ApiClient {
             .eraseToAnyPublisher()
     }
 }
-

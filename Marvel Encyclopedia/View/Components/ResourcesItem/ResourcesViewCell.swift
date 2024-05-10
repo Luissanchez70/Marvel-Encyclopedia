@@ -9,14 +9,12 @@ import UIKit
 import Combine
 class ResourcesViewCell: UITableViewCell {
 
-    
     @IBOutlet weak var thumbnail: UIImageView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tittleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    
-    var resorceItem : ResourcesItemViewModel?
-    var cancelables : Set<AnyCancellable> = []
+    var resorceItem: ResourcesItemViewModel?
+    var cancelables: Set<AnyCancellable> = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,18 +31,15 @@ class ResourcesViewCell: UITableViewCell {
         self.resorceItem = resorceItem
         bind()
         thumbnail.isHidden = true
-        
         loadingIndicator.style = UIActivityIndicatorView.Style.large
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.startAnimating()
-        
         tittleLabel.text = resorceItem.title
         if resorceItem.desc.isEmpty {
             descriptionLabel.text = "Without description"
         } else {
             descriptionLabel.text = resorceItem.desc
         }
-        
         resorceItem.getThumbnail()
     }
     

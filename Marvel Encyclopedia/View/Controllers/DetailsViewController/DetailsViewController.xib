@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailsViewController" customModule="Marvel_Encyclopedia" customModuleProvider="target">
             <connections>
                 <outlet property="desc" destination="SvP-y5-TcD" id="wQJ-4t-a4c"/>
+                <outlet property="fullListButton" destination="g4u-qu-COE" id="0ns-JJ-CPa"/>
                 <outlet property="image" destination="bV0-nE-pgD" id="26q-Dn-Wxq"/>
                 <outlet property="name" destination="Ogn-25-AWO" id="JWW-OM-7fh"/>
                 <outlet property="resourceSelector" destination="hng-B8-AFy" id="RcP-d9-wLw"/>
@@ -24,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pny-YX-Ufd" userLabel="DescriptionView">
-                    <rect key="frame" x="0.0" y="58.999999999999972" width="393" height="455.33333333333326"/>
+                    <rect key="frame" x="0.0" y="58.999999999999972" width="393" height="417.33333333333326"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personaje" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ogn-25-AWO">
                             <rect key="frame" x="0.0" y="185.33333333333334" width="393" height="43"/>
@@ -40,7 +41,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SvP-y5-TcD" userLabel="Description">
-                            <rect key="frame" x="20" y="236.33333333333331" width="353" height="199"/>
+                            <rect key="frame" x="20" y="236.33333333333331" width="353" height="161"/>
                             <string key="text">May Mayday Parker is the daughter of Spider-Man and Mary Jane Watson-Parker. Born with all her father powers-and the same silly sense of humor-shes grown up to become one of Earths most trusted heroes and a fitting tribute to her proud papa.</string>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
@@ -63,42 +64,60 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jik-fD-xQk" userLabel="ResourcesView">
-                    <rect key="frame" x="0.0" y="514.33333333333337" width="393" height="303.66666666666663"/>
+                    <rect key="frame" x="0.0" y="476.33333333333326" width="393" height="341.66666666666674"/>
                     <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="uwI-4R-AJj">
-                            <rect key="frame" x="20" y="58.999999999999986" width="353" height="224.66666666666663"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        </tableView>
-                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hng-B8-AFy">
-                            <rect key="frame" x="20" y="20" width="353" height="32"/>
-                            <segments>
-                                <segment title="Comics"/>
-                                <segment title="Series"/>
-                                <segment title="Events"/>
-                                <segment title="Stories"/>
-                            </segments>
-                            <connections>
-                                <action selector="segmentControlClicked:" destination="-1" eventType="valueChanged" id="35E-yR-ucB"/>
-                            </connections>
-                        </segmentedControl>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="xOF-w6-GFu">
+                            <rect key="frame" x="20" y="20" width="353" height="301.66666666666669"/>
+                            <subviews>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hng-B8-AFy">
+                                    <rect key="frame" x="0.0" y="0.0" width="353" height="130"/>
+                                    <segments>
+                                        <segment title="Comics"/>
+                                        <segment title="Series"/>
+                                        <segment title="Events"/>
+                                        <segment title="Stories"/>
+                                    </segments>
+                                    <connections>
+                                        <action selector="segmentControlClicked:" destination="-1" eventType="valueChanged" id="35E-yR-ucB"/>
+                                    </connections>
+                                </segmentedControl>
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="uwI-4R-AJj">
+                                    <rect key="frame" x="0.0" y="136.00000000000006" width="353" height="128.66666666666669"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </tableView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E0I-td-Woy">
+                                    <rect key="frame" x="0.0" y="271.66666666666669" width="353" height="30"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4u-qu-COE">
+                                            <rect key="frame" x="120.66666666666666" y="-2" width="111.66666666666666" height="34.333333333333336"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="filled" title="Ir al Listado"/>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="g4u-qu-COE" firstAttribute="centerY" secondItem="E0I-td-Woy" secondAttribute="centerY" id="CHg-8o-XPu"/>
+                                        <constraint firstAttribute="height" constant="30" id="RNf-pg-ZXZ"/>
+                                        <constraint firstItem="g4u-qu-COE" firstAttribute="centerX" secondItem="E0I-td-Woy" secondAttribute="centerX" id="ncP-H9-DGw"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstItem="uwI-4R-AJj" firstAttribute="leading" secondItem="jik-fD-xQk" secondAttribute="leading" constant="20" symbolic="YES" id="SYB-Fh-AnJ"/>
-                        <constraint firstItem="hng-B8-AFy" firstAttribute="leading" secondItem="jik-fD-xQk" secondAttribute="leading" constant="20" symbolic="YES" id="frw-uO-B4K"/>
-                        <constraint firstAttribute="bottom" secondItem="uwI-4R-AJj" secondAttribute="bottom" constant="20" symbolic="YES" id="mdb-qy-x20"/>
-                        <constraint firstAttribute="trailing" secondItem="hng-B8-AFy" secondAttribute="trailing" constant="20" symbolic="YES" id="tas-Vu-pn6"/>
-                        <constraint firstItem="hng-B8-AFy" firstAttribute="top" secondItem="jik-fD-xQk" secondAttribute="top" constant="20" symbolic="YES" id="ueg-Y9-Spn"/>
-                        <constraint firstItem="uwI-4R-AJj" firstAttribute="top" secondItem="hng-B8-AFy" secondAttribute="bottom" constant="8" symbolic="YES" id="vHR-1y-z5Q"/>
-                        <constraint firstAttribute="trailing" secondItem="uwI-4R-AJj" secondAttribute="trailing" constant="20" symbolic="YES" id="xNM-bY-Kqt"/>
+                        <constraint firstAttribute="trailing" secondItem="xOF-w6-GFu" secondAttribute="trailing" constant="20" symbolic="YES" id="057-pl-u5c"/>
+                        <constraint firstItem="xOF-w6-GFu" firstAttribute="leading" secondItem="jik-fD-xQk" secondAttribute="leading" constant="20" symbolic="YES" id="2r0-7t-Y8e"/>
+                        <constraint firstAttribute="bottom" secondItem="xOF-w6-GFu" secondAttribute="bottom" constant="20" symbolic="YES" id="Koq-hY-GT6"/>
+                        <constraint firstItem="xOF-w6-GFu" firstAttribute="top" secondItem="jik-fD-xQk" secondAttribute="top" constant="20" symbolic="YES" id="Pwu-pT-kJ1"/>
                     </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="M3E-HU-1ZA"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="Pny-YX-Ufd" firstAttribute="height" secondItem="M3E-HU-1ZA" secondAttribute="height" multiplier="0.6" id="AS2-MY-EJA"/>
-                <constraint firstItem="jik-fD-xQk" firstAttribute="height" secondItem="M3E-HU-1ZA" secondAttribute="height" multiplier="0.4" id="UyS-HX-FK7"/>
+                <constraint firstItem="Pny-YX-Ufd" firstAttribute="height" secondItem="M3E-HU-1ZA" secondAttribute="height" multiplier="0.55" id="AS2-MY-EJA"/>
+                <constraint firstItem="jik-fD-xQk" firstAttribute="height" secondItem="M3E-HU-1ZA" secondAttribute="height" multiplier="0.45" id="UyS-HX-FK7"/>
                 <constraint firstItem="Pny-YX-Ufd" firstAttribute="top" secondItem="M3E-HU-1ZA" secondAttribute="top" id="XML-Pc-bk0"/>
                 <constraint firstItem="Pny-YX-Ufd" firstAttribute="leading" secondItem="M3E-HU-1ZA" secondAttribute="leading" id="bW9-4L-iWD"/>
                 <constraint firstItem="Pny-YX-Ufd" firstAttribute="width" secondItem="fPO-Ew-sIG" secondAttribute="width" id="eGG-rd-0Hl"/>

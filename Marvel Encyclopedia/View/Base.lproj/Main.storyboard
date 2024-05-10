@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rmm-lQ-7Ck">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rmm-lQ-7Ck">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -61,7 +61,13 @@
                             <constraint firstItem="u0D-B6-znc" firstAttribute="top" secondItem="dbb-tE-9Vh" secondAttribute="bottom" id="pXh-ro-ScN"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="RjU-1b-iMF"/>
+                    <navigationItem key="navigationItem" id="RjU-1b-iMF">
+                        <barButtonItem key="rightBarButtonItem" title="Test" id="luy-2e-o9s">
+                            <connections>
+                                <action selector="testButtonPressed:" destination="BYZ-38-t0r" id="cr7-k3-Qsa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="characterSearchBar" destination="dbb-tE-9Vh" id="aSI-3w-CLk"/>
                         <outlet property="characterTable" destination="u0D-B6-znc" id="Aqh-sJ-1UW"/>
@@ -69,7 +75,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1118.320610687023" y="12.67605633802817"/>
+            <point key="canvasLocation" x="1248" y="13"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1Bq-tu-Fa9">

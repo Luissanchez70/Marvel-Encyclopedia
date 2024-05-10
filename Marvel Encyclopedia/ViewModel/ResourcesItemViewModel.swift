@@ -12,14 +12,15 @@ protocol ResourceItem {
     var thumbnail: Thumbnail? {set get}
     var title : String? {set get}
     var description : String? {set get}
+    var id : Int? {set get}
 }
 class ResourcesItemViewModel {
     var thumbnail = PassthroughSubject<UIImage?, Never>()
     private var cancellables = Set<AnyCancellable>()
-    var thumbnailLink : Thumbnail?
-    var title : String
-    var desc : String
-    var defaultImage : String
+    var thumbnailLink: Thumbnail?
+    var title: String
+    var desc: String
+    var defaultImage: String
     
     init( from resorceItem: ResourceItem) {
         title = resorceItem.title ?? "No title"
@@ -28,14 +29,14 @@ class ResourcesItemViewModel {
         defaultImage = "book.fill"
     }
     
-    init( from character : Character) {
+    init( from character: Character) {
         title = character.name
         desc = character.description
         thumbnailLink = character.thumbnail
         defaultImage = "person.fill"
     }
     
-    init( from creator : Creator) {
+    init( from creator: Creator) {
         title = "\(creator.firstName!) \(creator.lastName!)"
         desc = ""
         thumbnailLink = creator.thumbnail
@@ -47,11 +48,8 @@ class ResourcesItemViewModel {
             self.thumbnail.send(UIImage(systemName: defaultImage))
             return
         }
-        
         let path = "\(thumbnailLink.path).\(thumbnailLink.extension)"
         let base = path.replacingOccurrences(of: "http:", with: "https:")
-        
-        
         DownloadImageFromAPI().execute(urlBase: base).sink {  completion in
             switch completion {
             case .finished:

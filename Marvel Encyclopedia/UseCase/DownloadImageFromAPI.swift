@@ -10,6 +10,7 @@ import Combine
 import UIKit
 
 class DownloadImageFromAPI: ApiClient {
+    
     func execute(urlBase: String) -> AnyPublisher<UIImage?, Error> {
         let endPoint: String = "\(urlBase)?\(getApiIdentification())"
         guard let url = URL(string: endPoint) else {

@@ -9,30 +9,30 @@ import UIKit
 import Combine
 
 class DetailsViewModel {
-    private var cancellables = Set<AnyCancellable>()
-    var detailableObject : DetailableObject
     
-    var name : String
-    var desc : String
+    private var cancellables = Set<AnyCancellable>()
+    var detailsModel: DetailsModel
+    var name: String
+    var desc: String
     var thumbnail = PassthroughSubject<UIImage?, Never>()
     var resources = CurrentValueSubject<[String:[Any]], Never>([:])
 
-    init(detailableObject: DetailableObject) {
-        self.detailableObject = detailableObject
-        name = detailableObject.getName()
-        desc = detailableObject.getDesc()
+    init(detailsModel: DetailsModel) {
+        self.detailsModel = detailsModel
+        name = detailsModel.getName()
+        desc = detailsModel.getDesc()
     }
 
-    func getName() -> String{
+    func getName() -> String {
         name
     }
     
-    func getDesc() -> String{
+    func getDesc() -> String {
         desc
     }
     
     func fetThumbnail() {
-        guard let thumbnail = detailableObject.getThumbnail() else { return }
+        guard let thumbnail = detailsModel.getThumbnail() else { return }
         var base = thumbnail.path.replacingOccurrences(of: "http:", with: "https:")
         base = base + "." + thumbnail.extension
         print(base)
@@ -53,9 +53,9 @@ class DetailsViewModel {
     }
     
     func fetchResources() {
-        detailableObject.fetchResources { success in
+        detailsModel.fetchResources { success in
             if success {
-                self.resources.send(self.detailableObject.getResources())
+                self.resources.send(self.detailsModel.getResources())
             }
         }
     }
