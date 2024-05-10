@@ -13,22 +13,17 @@ class CharactersListViewModel {
 
     @Published var characterList: [Character] = []
     private var getCancellable: AnyCancellable?
-    private let fetchMarvelCharacter: FetchCharacter
-    private let searchMarvelCharacterByName: FetchCharacterByName
-
-    init() {
-        fetchMarvelCharacter = FetchCharacter()
-        searchMarvelCharacterByName = FetchCharacterByName()
-    }
 
     func getCharacters() {
-        getCancellable = fetchMarvelCharacter.execute()
+        getCancellable = FetchCharacters().execute()
+            .map { $0.results}
             .replaceError(with: [])
             .assign(to: \.characterList, on: self)
     }
 
     func getCharactersFilter(filter: String) {
-        getCancellable = searchMarvelCharacterByName.execute(name: filter)
+        getCancellable = FetchCharacters().execute(filter)
+            .map { $0.results}
             .replaceError(with: [])
             .assign(to: \.characterList, on: self)
     }
