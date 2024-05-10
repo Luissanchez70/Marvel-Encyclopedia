@@ -32,7 +32,7 @@ class DetailsViewController: UIViewController {
     @IBAction func segmentControlClicked(_ sender: UISegmentedControl) {
         
         let index = sender.selectedSegmentIndex
-        selectedKey = sender.titleForSegment(at: index) ?? "Title not found received nill "
+        selectedKey = sender.titleForSegment(at: index)?.lowercased() ?? "Title not found received nill "
         selectSegmentfor(key: selectedKey)
     }
     
@@ -148,7 +148,7 @@ extension  DetailsViewController {
             for  key in sortedKeys {
                 if let items = resources[key] {
                     if  !items.isEmpty {
-                        self.resourceSelector.insertSegment(withTitle: key, at: 0, animated: false)
+                        self.resourceSelector.insertSegment(withTitle: key.capitalized, at: 0, animated: false)
                         self.selectedKey = key
                         self.selectSegmentfor(key: key)
                     }
