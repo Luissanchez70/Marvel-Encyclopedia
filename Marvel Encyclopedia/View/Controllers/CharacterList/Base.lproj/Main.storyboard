@@ -61,13 +61,7 @@
                             <constraint firstItem="u0D-B6-znc" firstAttribute="top" secondItem="dbb-tE-9Vh" secondAttribute="bottom" id="pXh-ro-ScN"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="RjU-1b-iMF">
-                        <barButtonItem key="rightBarButtonItem" title="Test" id="luy-2e-o9s">
-                            <connections>
-                                <action selector="testButtonPressed:" destination="BYZ-38-t0r" id="cr7-k3-Qsa"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="RjU-1b-iMF"/>
                     <connections>
                         <outlet property="characterSearchBar" destination="dbb-tE-9Vh" id="aSI-3w-CLk"/>
                         <outlet property="characterTable" destination="u0D-B6-znc" id="Aqh-sJ-1UW"/>

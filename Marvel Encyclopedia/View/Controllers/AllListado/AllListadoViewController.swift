@@ -20,9 +20,6 @@ class AllListadoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // for testes purposes
-            //viewModel = AllListadoViewModel(allListModel: AllListadoModel(id: 1009144, type: .character, targetTyoe: .comic))
-        
         setTableView()
         bind()
         guard let viewModel  else { return  }
@@ -31,6 +28,7 @@ class AllListadoViewController: UIViewController {
     
     func setTableView(){
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(UINib(nibName: "ResourcesViewCell", bundle: nil), forCellReuseIdentifier: "ResourcesViewCell")
     }
     
@@ -61,7 +59,7 @@ class AllListadoViewController: UIViewController {
     
 }
 
-extension AllListadoViewController : UITableViewDataSource {
+extension AllListadoViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let index = indexPath.row
         let cell = tableView.dequeueReusableCell(withIdentifier: "ResourcesViewCell", for: indexPath) as! ResourcesViewCell
@@ -86,5 +84,25 @@ extension AllListadoViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         resource.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nvc = DetailsViewController()
+        
+        if let comic = resource[indexPath.row] as? Comic {
+            nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: comic, resourceTye: .comic))
+        } else if let series = resource[indexPath.row] as? Series {
+            nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: series, resourceTye: .serie))
+        } else if let creator = resource[indexPath.row] as? Creator {
+            nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: creator, resourceTye: .creator))
+        } else if let event = resource[indexPath.row] as? Event {
+            nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: event, resourceTye: .event))
+        } else if let character = resource[indexPath.row] as? Character {
+            nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: character, resourceTye: .character))
+        } else if let story = resource[indexPath.row] as? Storie {
+            nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: story, resourceTye: .story))
+        }
+        
+        self.navigationController?.pushViewController(nvc, animated: true)
     }
 }
