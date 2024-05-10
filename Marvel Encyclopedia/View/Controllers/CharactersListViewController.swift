@@ -28,6 +28,11 @@ class CharactersListViewController: UIViewController {
             }
         }
     }
+    @IBAction func testButtonPressed(_ sender: UIBarButtonItem) {
+        
+        let nvc = AllListadoViewController()
+        navigationController?.pushViewController(nvc, animated: true)
+    }
 }
 // MARK: -  Table setup
 extension CharactersListViewController: UITableViewDataSource {
@@ -67,3 +72,5 @@ extension CharactersListViewController: UISearchBarDelegate {
         }
     }
 }
+
+
