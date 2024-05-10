@@ -89,3 +89,4 @@ fastlane/test_output
 
 iOSInjectionProject/
 Marvel Encyclopedia.xcodeproj/project.xcworkspace/xcuserdata/diogo.rodrigues.xcuserdatad/UserInterfaceState.xcuserstate
+.DS_Store
