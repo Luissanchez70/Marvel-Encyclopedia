@@ -10,10 +10,11 @@ import Combine
 
 class DetailsViewModel {
     
-    private var cancellables = Set<AnyCancellable>()
     var detailsModel: DetailsModel
     var name: String
     var desc: String
+    
+    private var cancellables = Set<AnyCancellable>()
     var thumbnail = PassthroughSubject<UIImage?, Never>()
     var resources = CurrentValueSubject<[String:[Any]], Never>([:])
 

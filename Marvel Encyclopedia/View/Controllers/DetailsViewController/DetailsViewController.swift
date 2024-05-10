@@ -16,10 +16,12 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var resourceSelector: UISegmentedControl!
     @IBOutlet weak var fullListButton: UIButton!
-    var viewModel: DetailsViewModel?
+
     var cancelebles: Set<AnyCancellable> = []
     var selectedKey = "None"
     var selectedResource: [Any] = []
+    
+    var viewModel: DetailsViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()

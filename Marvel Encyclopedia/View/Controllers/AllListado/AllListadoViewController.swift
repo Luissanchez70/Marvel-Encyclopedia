@@ -40,7 +40,6 @@ class AllListadoViewController: UIViewController {
                 self.updateMoreResultsButton()
             }
         }).store(in: &cancelebles)
-        
     }
     
     func updateMoreResultsButton() {

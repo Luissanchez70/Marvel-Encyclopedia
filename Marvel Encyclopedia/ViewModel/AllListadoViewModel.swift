@@ -10,13 +10,17 @@ import Combine
 class AllListadoViewModel {
     var moreResults = true 
     var resource = PassthroughSubject<[Any], Never>()
+    
     var allListadoModel : AllListadoModel
+    
     init(allListModel: AllListadoModel) {
         allListadoModel = allListModel
     }
+    
     func getMoreResults() -> Bool {
         return moreResults
     }
+    
     func requestMoreResults() {
         allListadoModel.requestNextPage { resources,moreResulst in
             self.moreResults = moreResulst
