@@ -29,7 +29,7 @@ class MAllListadoViewModel {
                          Character(id: 5, name: "test4", description: "Test1", thumbnail: nil)]
             
             resource.send(mockarray)
-            mockCounter = mockCounter + 1
+            mockCounter += 1
             moreResults = true
         } else if mockCounter == 1 {
             mockarray.append(Character(id: 6, name: "Test6", description: "Test6", thumbnail: nil))
@@ -38,7 +38,7 @@ class MAllListadoViewModel {
             mockarray.append(Character(id: 9, name: "test9", description: "Test9", thumbnail: nil))
             mockarray.append(Character(id: 10, name: "test10", description: "Test10", thumbnail: nil))
             resource.send(mockarray)
-            mockCounter = mockCounter + 1
+            mockCounter += 1
             moreResults = true
         } else if mockCounter == 2 {
             mockarray.append(Character(id: 11, name: "Tes11", description: "Test11", thumbnail: nil))

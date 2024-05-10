@@ -279,7 +279,6 @@
 		D2D87FF12BD2A2E0008352FE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1CF27A692BEBC576008DA9DF /* AllListadoModel.swift */,
 				1C3C22BE2BE39D1E003D1989 /* DetailsModel.swift */,
 				D2D87FF52BD2A313008352FE /* Domain */,
 				D2D87FF42BD2A30A008352FE /* Provider */,
@@ -293,7 +292,6 @@
 				1C5126542BD6889500EA45CA /* DetailsViewModel.swift */,
 				D2AF2FC22BD64CB00098AF75 /* CharactersListViewModel.swift */,
 				1C74BFCD2BD92DAF00CC694E /* ResourcesItemViewModel.swift */,
-				1CF27A672BEBBADA008DA9DF /* AllListadoViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -339,7 +337,7 @@
 				D2D87FB92BD27FFB008352FE /* Sources */,
 				D2D87FBA2BD27FFB008352FE /* Frameworks */,
 				D2D87FBB2BD27FFB008352FE /* Resources */,
-				D2DEF6002BE10F2E00C6E12F /* ShellScript */,
+				D2B498AD2BEE2BFF00EB60A0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -461,7 +459,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D2DEF6002BE10F2E00C6E12F /* ShellScript */ = {
+		D2B498AD2BEE2BFF00EB60A0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -476,7 +474,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -487,7 +485,6 @@
 			files = (
 				D2D87FC52BD27FFB008352FE /* CharactersListViewController.swift in Sources */,
 				1C74BFCA2BD9254D00CC694E /* ResourcesViewCell.swift in Sources */,
-				1CF27A6A2BEBC576008DA9DF /* AllListadoModel.swift in Sources */,
 				1C3C22C12BE3A1C3003D1989 /* FetchAnyByAnyIDList.swift in Sources */,
 				D2DEF5F42BDF9C5500C6E12F /* DownloadImageFromAPI.swift in Sources */,
 				3233C0212BE0FC8100FB20EB /* URLSession+Client.swift in Sources */,
@@ -512,7 +509,6 @@
 				1C5126552BD6889500EA45CA /* DetailsViewModel.swift in Sources */,
 				1C51265F2BD688D500EA45CA /* Storie .swift in Sources */,
 				1C51265E2BD688D500EA45CA /* Series.swift in Sources */,
-				1CF27A682BEBBADA008DA9DF /* AllListadoViewModel.swift in Sources */,
 				D2C8315E2BDBC46900D77F24 /* FetchCharacter.swift in Sources */,
 				D2DEF5F82BE0C4EC00C6E12F /* FetchComicsByCharacterID.swift in Sources */,
 				D2DEF5FC2BE0C7A000C6E12F /* FetchEventsByCharacterID.swift in Sources */,
