@@ -36,7 +36,7 @@ class DetailsViewModel {
         var base = thumbnail.path.replacingOccurrences(of: "http:", with: "https:")
         base = base + "." + thumbnail.extension
         print(base)
-        DownloadImageFromAPI().execute(urlBase: base).sink { completion in
+        DownloadThumbnail().execute(path: thumbnail.path, exten: thumbnail.extension).sink { completion in
             switch completion {
             case .finished:
                 break

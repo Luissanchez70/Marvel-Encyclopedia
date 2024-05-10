@@ -1,15 +1,9 @@
-//
-//  CharacterItem.swift
-//  Marvel Encyclopedia
-//
-//  Created by Diogo Filipe Abreu Rodrigues on 02/05/2024.
-//
 
 import UIKit
 import Combine
 
 class CharacterItem: UITableViewCell {
-
+ 
     private var cancellables = Set<AnyCancellable>()
     @IBOutlet weak var thumbnail: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -19,10 +13,10 @@ class CharacterItem: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+ 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+ 
         // Configure the view for the selected state
     }
     
@@ -33,12 +27,11 @@ class CharacterItem: UITableViewCell {
         } else {
             descLabel.text = charater.description
         }
-        let base = charater.thumbnail!.path.replacingOccurrences(of: "http:", with: "https:")
-        getImageView("\(base).\(charater.thumbnail!.extension)")
+        getImageView(path: charater.thumbnail!.path, exten: charater.thumbnail!.extension)
     }
     
-    func getImageView(_ urlBase: String) {
-        DownloadImageFromAPI().execute(urlBase: urlBase)
+    func getImageView( path: String, exten: String) {
+        DownloadThumbnail().execute(path: path, exten: exten)
             .sink { completion in
                 switch completion {
                 case .finished:

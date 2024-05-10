@@ -28,10 +28,15 @@ class DetailsViewController: UIViewController {
     }
     
     @IBAction func segmentControlClicked(_ sender: UISegmentedControl) {
-        guard let viewModel  else { return  }
+        
         let index = sender.selectedSegmentIndex
         selectedKey = sender.titleForSegment(at: index) ?? "Title not found received nill "
-        selectedResource = viewModel.resources.value[selectedKey] ?? []
+        selectSegmentfor(key: selectedKey)
+    }
+    
+    func selectSegmentfor(key : String) {
+        guard let viewModel  else { return  }
+        selectedResource = viewModel.resources.value[key] ?? []
         if selectedResource.count == 5 {
             fullListButton.isHidden = false
         } else {
@@ -130,10 +135,11 @@ extension  DetailsViewController {
                 if let items = resources[key] {
                     if  !items.isEmpty {
                         self.resourceSelector.insertSegment(withTitle: key, at: 0, animated: false)
+                        self.selectedKey = key
+                        self.selectSegmentfor(key: key)
                     }
                 }
             }
         }
-        
     }
 }

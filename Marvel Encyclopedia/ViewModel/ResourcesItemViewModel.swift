@@ -50,7 +50,7 @@ class ResourcesItemViewModel {
         }
         let path = "\(thumbnailLink.path).\(thumbnailLink.extension)"
         let base = path.replacingOccurrences(of: "http:", with: "https:")
-        DownloadImageFromAPI().execute(urlBase: base).sink {  completion in
+        DownloadThumbnail().execute(path: thumbnailLink.path, exten: thumbnailLink.extension).sink {  completion in
             switch completion {
             case .finished:
                 break
