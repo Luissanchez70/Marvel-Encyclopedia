@@ -10,9 +10,12 @@ import Combine
 
 class FetchStories {
     
-    func execute (_ characterID: Int) -> AnyPublisher<StorieData, Error> {
+    func execute (baseResource: ResourceType, resourceId: Int, limit: Int, offset: Int) -> AnyPublisher<StorieData, Error> {
         
-        let urlRequest = URLRequest(components: URLComponents(path: "/characters/\(characterID)/stories"))
+        let urlComponents = URLComponents(path: "/\(baseResource)/\(resourceId)/events")
+            .addParams(name: "limit", value: "\(limit)")
+            .addParams(name: "offset", value: "\(offset)")
+        let urlRequest = URLRequest(components: urlComponents)
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseStorie.self)
             .map { $0.data }
