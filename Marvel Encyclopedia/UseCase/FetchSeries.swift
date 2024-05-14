@@ -12,7 +12,7 @@ class FetchSeries {
     
     func execute (baseResource: ResourceType, resourceId: Int, limit: Int, offset: Int) -> AnyPublisher<SeriesData, Error> {
         
-        let urlComponents = URLComponents(path: "/\(baseResource)/\(resourceId)/events")
+        let urlComponents = URLComponents(path: "/\(baseResource)/\(resourceId)/series")
             .addParams(name: "limit", value: "\(limit)")
             .addParams(name: "offset", value: "\(offset)")
         let urlRequest = URLRequest(components: urlComponents)

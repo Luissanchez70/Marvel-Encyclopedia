@@ -12,7 +12,7 @@ class FetchStories {
     
     func execute (baseResource: ResourceType, resourceId: Int, limit: Int, offset: Int) -> AnyPublisher<StorieData, Error> {
         
-        let urlComponents = URLComponents(path: "/\(baseResource)/\(resourceId)/events")
+        let urlComponents = URLComponents(path: "/\(baseResource)/\(resourceId)/stories")
             .addParams(name: "limit", value: "\(limit)")
             .addParams(name: "offset", value: "\(offset)")
         let urlRequest = URLRequest(components: urlComponents)
