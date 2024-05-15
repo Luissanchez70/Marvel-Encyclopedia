@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,10 +29,10 @@
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MnK-GZ-IFq">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="900"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="800"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MSH-Jz-Dlj">
-                                    <rect key="frame" x="12" y="0.0" width="369" height="900"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MSH-Jz-Dlj">
+                                    <rect key="frame" x="12" y="0.0" width="369" height="800"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tqV-iN-cY9">
                                             <rect key="frame" x="84.666666666666686" y="0.0" width="200" height="200"/>
@@ -41,20 +42,23 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVa-ro-7OY">
-                                            <rect key="frame" x="102.66666666666669" y="200" width="164" height="43"/>
+                                            <rect key="frame" x="102.66666666666669" y="208" width="164" height="43"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="43" id="q0b-w1-BA8"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QU8-TA-6bk" userLabel="Description">
-                                            <rect key="frame" x="0.0" y="243" width="369" height="252.66666666666663"/>
+                                            <rect key="frame" x="0.0" y="259" width="369" height="212.66666666666663"/>
                                             <string key="text">May Mayday Parker is the daughter of Spider-Man and Mary Jane Watson-Parker. Born with all her father powers-and the same silly sense of humor-shes grown up to become one of Earths most trusted heroes and a fitting tribute to her proud papa.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3kg-lT-5VS">
-                                            <rect key="frame" x="53" y="495.66666666666663" width="263" height="31"/>
+                                            <rect key="frame" x="20" y="479.66666666666663" width="329" height="31"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="12f-AD-G0B"/>
                                             </constraints>
@@ -69,7 +73,7 @@
                                             </connections>
                                         </segmentedControl>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hF6-02-Ujz">
-                                            <rect key="frame" x="0.0" y="525.66666666666663" width="369" height="300"/>
+                                            <rect key="frame" x="0.0" y="517.66666666666663" width="369" height="200"/>
                                             <subviews>
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tlj-2g-SGf">
                                                     <rect key="frame" x="20" y="0.0" width="329" height="300"/>
@@ -78,13 +82,13 @@
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="300" id="Mpn-eq-ITu"/>
+                                                <constraint firstAttribute="height" constant="200" id="Mpn-eq-ITu"/>
                                                 <constraint firstItem="tlj-2g-SGf" firstAttribute="height" secondItem="hF6-02-Ujz" secondAttribute="height" id="Uh9-4n-YUI"/>
                                                 <constraint firstItem="tlj-2g-SGf" firstAttribute="width" secondItem="hF6-02-Ujz" secondAttribute="width" multiplier="0.891599" id="ZpB-iF-BH7"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EAM-wj-420">
-                                            <rect key="frame" x="0.0" y="825.66666666666663" width="369" height="74.333333333333371"/>
+                                            <rect key="frame" x="0.0" y="725.66666666666663" width="369" height="74.333333333333371"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Y5-VC-wpR">
                                                     <rect key="frame" x="128.66666666666666" y="20.000000000000004" width="111.66666666666666" height="34.333333333333343"/>
@@ -107,7 +111,10 @@
                                         <constraint firstAttribute="trailing" secondItem="EAM-wj-420" secondAttribute="trailing" id="0Ya-Lk-cJw"/>
                                         <constraint firstItem="EAM-wj-420" firstAttribute="leading" secondItem="MSH-Jz-Dlj" secondAttribute="leading" id="O2h-N3-3j1"/>
                                         <constraint firstItem="EAM-wj-420" firstAttribute="centerX" secondItem="MSH-Jz-Dlj" secondAttribute="centerX" id="cJP-LR-RkA"/>
+                                        <constraint firstItem="3kg-lT-5VS" firstAttribute="leading" secondItem="MSH-Jz-Dlj" secondAttribute="leading" constant="20" symbolic="YES" id="dAG-km-LJE"/>
                                         <constraint firstAttribute="trailing" secondItem="hF6-02-Ujz" secondAttribute="trailing" id="oEc-2F-40Y"/>
+                                        <constraint firstAttribute="trailing" secondItem="3kg-lT-5VS" secondAttribute="trailing" constant="20" symbolic="YES" id="omz-8k-0UA"/>
+                                        <constraint firstAttribute="bottom" secondItem="EAM-wj-420" secondAttribute="bottom" id="w92-73-xKA"/>
                                         <constraint firstItem="hF6-02-Ujz" firstAttribute="leading" secondItem="MSH-Jz-Dlj" secondAttribute="leading" id="xp7-TK-k7O"/>
                                     </constraints>
                                 </stackView>
@@ -116,7 +123,7 @@
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="MSH-Jz-Dlj" secondAttribute="bottom" id="44u-GI-6FB"/>
                                 <constraint firstItem="MSH-Jz-Dlj" firstAttribute="top" secondItem="MnK-GZ-IFq" secondAttribute="top" id="Eta-uV-BbB"/>
-                                <constraint firstAttribute="height" constant="900" id="KFO-CT-NdY"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="800" id="KFO-CT-NdY"/>
                                 <constraint firstAttribute="trailing" secondItem="MSH-Jz-Dlj" secondAttribute="trailing" constant="12" id="Lbz-e3-ISW"/>
                                 <constraint firstItem="MSH-Jz-Dlj" firstAttribute="leading" secondItem="MnK-GZ-IFq" secondAttribute="leading" constant="12" id="bqw-rX-8HO"/>
                             </constraints>
@@ -125,6 +132,7 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="MnK-GZ-IFq" secondAttribute="bottom" id="5JQ-nL-CoR"/>
                         <constraint firstItem="MnK-GZ-IFq" firstAttribute="leading" secondItem="LD2-qP-GTR" secondAttribute="leading" id="NU3-dW-z28"/>
+                        <constraint firstAttribute="bottom" secondItem="MnK-GZ-IFq" secondAttribute="bottom" id="WCa-s9-bXs"/>
                         <constraint firstItem="MnK-GZ-IFq" firstAttribute="top" secondItem="LD2-qP-GTR" secondAttribute="top" id="Yu0-BC-Ykl"/>
                         <constraint firstAttribute="trailing" secondItem="MnK-GZ-IFq" secondAttribute="trailing" id="aPc-MQ-JsL"/>
                     </constraints>
