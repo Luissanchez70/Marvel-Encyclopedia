@@ -12,11 +12,15 @@ import Combine
 class CharactersListViewModel {
 
     @Published var characterList: [Character] = []
+    @Published var numberPage = 0
     private var getCancellable: AnyCancellable?
-
-    func getCharacters() {
-        getCancellable = FetchCharacters().execute()
-            .map { $0.results}
+ 
+    func getCharacters(currentPage: Int) {
+        getCancellable = FetchCharacters().execute(limit: 20, offset: currentPage * 20)
+            .map { response in
+                self.numberPage = response.total / 20
+                return response.results
+            }
             .replaceError(with: [])
             .assign(to: \.characterList, on: self)
     }

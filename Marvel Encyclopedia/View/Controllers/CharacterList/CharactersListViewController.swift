@@ -12,19 +12,28 @@ class CharactersListViewController: UIViewController {
 
     @IBOutlet weak var characterSearchBar: UISearchBar!
     @IBOutlet weak var characterTable: UITableView!
+    @IBOutlet weak var pageControl: UIPageControl!
     private let mainViewModel = CharactersListViewModel()
-    private var getCancellables: AnyCancellable?
+    private var getCancellable: AnyCancellable?
+    private var getCancellablePage: AnyCancellable?
 
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         setBind()
-        mainViewModel.getCharacters()
+        mainViewModel.getCharacters(currentPage: pageControl.currentPage)
+        pageControllerSetUp()
         characterTable.register(UINib(nibName: "CharacterItem", bundle: nil), forCellReuseIdentifier: "CharacterItem")
     }
     private func setBind() {
-        getCancellables = mainViewModel.$characterList.sink { list in
+        getCancellable = mainViewModel.$characterList.sink { list in
             DispatchQueue.main.async {
                 self.characterTable.reloadData()
+            }
+        }
+        getCancellablePage = mainViewModel.$numberPage.sink { num in
+            DispatchQueue.main.async {
+                self.pageControl.numberOfPages = num
             }
         }
     }
@@ -61,11 +70,25 @@ extension CharactersListViewController: UITableViewDelegate {
 extension CharactersListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            mainViewModel.getCharacters()
+            mainViewModel.getCharacters(currentPage: pageControl.currentPage)
         } else {
             mainViewModel.getCharactersFilter(filter: searchText)
         }
     }
 }
-
+// MARK: - UIPageControl
+extension CharactersListViewController {
+    
+    func pageControllerSetUp(){
+        pageControl.numberOfPages = 10
+        pageControl.currentPage = 0
+        
+    }
+    
+    @IBAction func onclickPage(_ sender: UIPageControl) {
+        
+        let page = sender.currentPage
+        mainViewModel.getCharacters(currentPage: page)
+    }
+}
 

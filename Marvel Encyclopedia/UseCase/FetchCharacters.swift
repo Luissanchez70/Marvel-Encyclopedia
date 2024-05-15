@@ -10,9 +10,13 @@ import Combine
 
 class FetchCharacters {
     
-    func execute() -> AnyPublisher<CharacterData, Error> {
+    func execute(limit:Int, offset:Int) -> AnyPublisher<CharacterData, Error> {
         
-        let urlRequest = URLRequest(components: URLComponents(path: "/characters"))
+        let urlComponents = URLComponents(path: "/characters")
+            .addParams(name: "limit", value: "\(limit)")
+            .addParams(name: "offset", value: "\(offset)")
+        
+        let urlRequest = URLRequest(components: urlComponents)
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseCharacter.self)
             .map { $0.data }
@@ -21,12 +25,14 @@ class FetchCharacters {
     
     func execute(_ characterName: String) -> AnyPublisher<CharacterData, Error> {
         
-        let urlRequest = URLRequest(components: URLComponents(path: "/characters").fetchCharactersByName(characterName))
+        let urlRequest = URLRequest(components: URLComponents(path: "/characters")
+            .fetchCharactersByName(characterName))
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseCharacter.self)
             .map { $0.data }
             .eraseToAnyPublisher()
     }
+    
 }
 
 extension URLComponents {

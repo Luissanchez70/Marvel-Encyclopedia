@@ -31,7 +31,7 @@ extension URLComponents: Mapeable {
                            URLQueryItem(name: "apikey", value: URLComponents.apikey),
                            URLQueryItem(name: "hash", value: URLComponents.hash)]
     }
-    
+        
     func addParams(name: String, value: String) -> Self {
         map {
             $0.queryItems?.append(URLQueryItem(name: name, value: value))
