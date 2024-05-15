@@ -12,7 +12,7 @@ class DetailsViewModel {
     
     var detailsModel: DetailsModel
     var name: String
-    var desc: String
+    var desc: String?
     
     private var cancellables = Set<AnyCancellable>()
     var thumbnail = PassthroughSubject<UIImage?, Never>()
@@ -28,7 +28,7 @@ class DetailsViewModel {
         name
     }
     
-    func getDesc() -> String {
+    func getDesc() -> String? {
         desc
     }
     

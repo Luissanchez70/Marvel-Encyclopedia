@@ -22,10 +22,11 @@ class CharacterItem: UITableViewCell {
     
     func configure(charater: Character) {
         nameLabel.text = charater.name
-        if charater.description.isEmpty {
-            descLabel.text = "Without description"
-        } else {
-            descLabel.text = charater.description
+        if let desc = charater.description  {
+            descLabel.isHidden = false
+            descLabel.text = desc
+        }  else {
+            descLabel.isHidden = true
         }
         getImageView(path: charater.thumbnail!.path, exten: charater.thumbnail!.extension)
     }

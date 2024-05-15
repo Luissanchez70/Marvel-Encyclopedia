@@ -21,7 +21,7 @@ class DetailsModel {
     
     private var id: Int
     private var name: String
-    private var desc: String
+    private var desc: String?
     private var thumbnail: Thumbnail?
     private var type : ResourceType
     private var resources: [String : [Any]] = [:]
@@ -30,7 +30,7 @@ class DetailsModel {
     init( from resorceItem: ResourceItem, resourceTye: ResourceType ) {
         id = resorceItem.id ?? 1
         name = resorceItem.title ?? "No title"
-        desc = resorceItem.description ?? "No description"
+        desc = resorceItem.description
         thumbnail = resorceItem.thumbnail
         type = resourceTye
     }
@@ -46,7 +46,7 @@ class DetailsModel {
     init( from creator: Creator, resourceTye: ResourceType ) {
         id = creator.id ?? 0
         name = "\(creator.firstName!) \(creator.lastName!)"
-        desc = "No description"
+        desc = nil
         thumbnail = creator.thumbnail
         type = resourceTye
     }
@@ -67,7 +67,7 @@ class DetailsModel {
         name
     }
     
-    func getDesc() -> String {
+    func getDesc() -> String? {
         desc
     }
     

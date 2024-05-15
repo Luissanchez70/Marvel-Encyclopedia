@@ -32,7 +32,7 @@ class DetailsViewController: UIViewController {
     @IBAction func segmentControlClicked(_ sender: UISegmentedControl) {
         
         let index = sender.selectedSegmentIndex
-        selectedKey = sender.titleForSegment(at: index)?.lowercased() ?? "Title not found received nill "
+        selectedKey = sender.titleForSegment(at: index) ?? "Title not found received nill "
         selectSegmentfor(key: selectedKey)
     }
     
@@ -125,9 +125,24 @@ private extension DetailsViewController {
     func loadDetails() {
         guard let viewModel  else { return }
         name.text = viewModel.getName()
+        setDesc()
         desc.text = viewModel.getDesc()
         viewModel.fetThumbnail()
         viewModel.fetchResources()
+    }
+    
+    func setDesc() {
+        guard let viewModel else { return }
+        guard let descText = viewModel.getDesc() else {
+            return
+        }
+        
+        if descText.isEmpty {
+            desc.isHidden = true
+        } else {
+            desc.isHidden = false
+            desc.text = descText
+        }
     }
 }
 extension  DetailsViewController {
@@ -148,7 +163,7 @@ extension  DetailsViewController {
             for  key in sortedKeys {
                 if let items = resources[key] {
                     if  !items.isEmpty {
-                        self.resourceSelector.insertSegment(withTitle: key.capitalized, at: 0, animated: false)
+                        self.resourceSelector.insertSegment(withTitle: key, at: 0, animated: false)
                         self.selectedKey = key
                         self.selectSegmentfor(key: key)
                     }

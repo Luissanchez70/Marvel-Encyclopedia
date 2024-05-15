@@ -31,7 +31,7 @@ class ResourcesItemViewModel {
     
     init( from character: Character) {
         title = character.name
-        desc = character.description
+        desc = character.description ??  "No description"
         thumbnailLink = character.thumbnail
         defaultImage = "person.fill"
     }
