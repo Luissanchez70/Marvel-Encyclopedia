@@ -10,9 +10,6 @@ import Combine
 
 class FetchCharacters {
     
-    
-    
-    
     func execute(limit:Int, offset:Int) -> AnyPublisher<CharacterData, Error> {
         
         let urlComponents = URLComponents(path: "/characters")
