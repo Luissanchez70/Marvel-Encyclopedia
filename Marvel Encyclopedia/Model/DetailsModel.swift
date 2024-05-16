@@ -27,7 +27,6 @@ class DetailsModel {
     private var resources: [String : [Any]] = [:]
     private var cancellables = Set<AnyCancellable>()
     private var requests: [Any] = [FetchComics(), FetchEvents(), FetchSeries(), FetchCreator(), FetchStories()]
-    private var listAux: [Comic] = []
     
     init( from resorceItem: ResourceItem, resourceTye: ResourceType ) {
         id = resorceItem.id ?? 1
@@ -126,44 +125,86 @@ class DetailsModel {
             
             if let request = request as? FetchComics {
                 
-                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0)
+                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0).sink { completion in
+                    switch completion {
+                    case .finished:
+                        break
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                } receiveValue: { data in
+                    DispatchQueue.main.async {
+                        self.resources["Comics"] = data.results
+                        completionHandle(true)
+                    }
+                }.store(in: &cancellables)
 
                 
             } else  if let request = request as? FetchEvents {
                 
-                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0)
-                    .map { $0.results }
-                    .replaceError(with: [])
-                    .assign(to: \.resources[type.rawValue] , on: self)
-                    .store(in: &cancellables)
-                
+                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0).sink { completion in
+                    switch completion {
+                    case .finished:
+                        break
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                } receiveValue: { data in
+                    DispatchQueue.main.async {
+                        self.resources["Events"] = data.results
+                        completionHandle(true)
+                    }
+                }.store(in: &cancellables)
             } else  if let request = request as? FetchSeries {
                 
-                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0)
-                    .map { $0.results }
-                    .replaceError(with: [])
-                    .assign(to: \.resources[type.rawValue] , on: self)
-                    .store(in: &cancellables)
+                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0).sink { completion in
+                    switch completion {
+                    case .finished:
+                        break
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                } receiveValue: { data in
+                    DispatchQueue.main.async {
+                        self.resources["Series"] = data.results
+                        completionHandle(true)
+                    }
+                }.store(in: &cancellables)
                 
             } else  if let request = request as? FetchStories {
                 
-                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0)
-                    .map { $0.results }
-                    .replaceError(with: [])
-                    .assign(to: \.resources[type.rawValue] , on: self)
-                    .store(in: &cancellables)
+                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0).sink { completion in
+                    switch completion {
+                    case .finished:
+                        break
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                } receiveValue: { data in
+                    DispatchQueue.main.async {
+                        self.resources["Stories"] = data.results
+                        completionHandle(true)
+                    }
+                }.store(in: &cancellables)
                 
             } else  if let request = request as? FetchCreator {
                 
-                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0)
-                    .map { $0.results }
-                    .replaceError(with: [])
-                    .assign(to: \.resources[type.rawValue] , on: self)
-                    .store(in: &cancellables)
+                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0).sink { completion in
+                    switch completion {
+                    case .finished:
+                        break
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                } receiveValue: { data in
+                    DispatchQueue.main.async {
+                        self.resources["Creators"] = data.results
+                        completionHandle(true)
+                    }
+                }.store(in: &cancellables)
                 
             }
         }
-        completionHandle(true)
 
     }
 }
