@@ -32,6 +32,7 @@
 		3233C0232BE0FE5400FB20EB /* URLComponents+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3233C0222BE0FE5400FB20EB /* URLComponents+Init.swift */; };
 		3233C0252BE0FF6C00FB20EB /* URLRequest+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3233C0242BE0FF6C00FB20EB /* URLRequest+Init.swift */; };
 		3233C0272BE10D8300FB20EB /* Mapeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3233C0262BE10D8300FB20EB /* Mapeable.swift */; };
+		D22DCFD22BF6276400B13A7A /* FetchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22DCFD12BF6276400B13A7A /* FetchRequest.swift */; };
 		D24337E62BF3AF78008898FD /* FetchCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24337E52BF3AF78008898FD /* FetchCreator.swift */; };
 		D2AF2FC32BD64CB00098AF75 /* CharactersListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AF2FC22BD64CB00098AF75 /* CharactersListViewModel.swift */; };
 		D2C8315E2BDBC46900D77F24 /* FetchCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C8315D2BDBC46900D77F24 /* FetchCharacters.swift */; };
@@ -95,6 +96,7 @@
 		3233C0222BE0FE5400FB20EB /* URLComponents+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Init.swift"; sourceTree = "<group>"; };
 		3233C0242BE0FF6C00FB20EB /* URLRequest+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Init.swift"; sourceTree = "<group>"; };
 		3233C0262BE10D8300FB20EB /* Mapeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapeable.swift; sourceTree = "<group>"; };
+		D22DCFD12BF6276400B13A7A /* FetchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequest.swift; sourceTree = "<group>"; };
 		D24337E52BF3AF78008898FD /* FetchCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCreator.swift; sourceTree = "<group>"; };
 		D2AF2FC22BD64CB00098AF75 /* CharactersListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListViewModel.swift; sourceTree = "<group>"; };
 		D2C8315D2BDBC46900D77F24 /* FetchCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCharacters.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				D2DEF5FB2BE0C7A000C6E12F /* FetchEvents.swift */,
 				1C3C22C02BE3A1C3003D1989 /* FetchAnyByAnyIDList.swift */,
 				D24337E52BF3AF78008898FD /* FetchCreator.swift */,
+				D22DCFD12BF6276400B13A7A /* FetchRequest.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D22DCFD22BF6276400B13A7A /* FetchRequest.swift in Sources */,
 				D2D87FC52BD27FFB008352FE /* CharactersListViewController.swift in Sources */,
 				1C74BFCA2BD9254D00CC694E /* ResourcesViewCell.swift in Sources */,
 				1C3C22C12BE3A1C3003D1989 /* FetchAnyByAnyIDList.swift in Sources */,

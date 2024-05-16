@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class FetchEvents {
+class FetchEvents: FetchRequest{
     
     func execute (baseResource: ResourceType, resourceId: Int, limit: Int, offset: Int) -> AnyPublisher<EventData, Error> {
         

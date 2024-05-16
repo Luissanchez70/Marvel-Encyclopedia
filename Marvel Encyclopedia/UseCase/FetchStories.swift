@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class FetchStories {
+class FetchStories: FetchRequest {
     
     func execute (baseResource: ResourceType, resourceId: Int, limit: Int, offset: Int) -> AnyPublisher<StorieData, Error> {
         

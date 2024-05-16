@@ -76,11 +76,25 @@ class DetailsModel {
         thumbnail
     }
     
-    func getResources(_ completionHandle: @escaping (Bool) -> (),
-                 _ baseResource: ResourceType,
-                 _ targetResource: ResourceType){
+    func fetchResources(completionHandle: @escaping (Bool) -> Void) {
+    
+        for request in requests {
+            
+            if let comicRequest = request as? FetchComics {
+                addToDiccionary(request: comicRequest, key: "Comics", completion: completionHandle)
+            } else  if let eventRequest = request as? FetchEvents {
+                addToDiccionary(request: eventRequest, key: "Events", completion: completionHandle)
+            } else  if let seriesRequest = request as? FetchSeries {
+                addToDiccionary(request: seriesRequest, key: "Series", completion: completionHandle)
+            } else  if let storieRequest = request as? FetchStories {
+                addToDiccionary(request: storieRequest, key: "Stories", completion: completionHandle)
+            }
+        }
+
+    }
+    func addToDiccionary<Request: FetchRequest>( request: Request, key: String, completion: @escaping (Bool) -> Void){
         
-        FetchAnyByAnyIDList().execute(baseResource: baseResource, baseID: id, targetResource: targetResource).sink { completion in
+        request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0).sink { completion in
             switch completion {
             case .finished:
                 break
@@ -88,123 +102,20 @@ class DetailsModel {
                 print(error.localizedDescription)
             }
         } receiveValue: { data in
+            
             DispatchQueue.main.async {
-                let list = self.decodeResponse(data: data, targetType: targetResource)
-                self.resources[targetResource.rawValue] = list
-                completionHandle(true)
+                
+                if let data = data as? ComicData {
+                    self.resources[key] = data.results
+                } else  if let data = data as? EventData {
+                    self.resources[key] = data.results
+                } else  if let data = data as? SeriesData {
+                    self.resources[key] = data.results
+                } else  if let data = data as? StorieData {
+                    self.resources[key] = data.results
+                }
+                completion(true)
             }
         }.store(in: &cancellables)
-        
-    }
-    
-    func decodeResponse(data: Data, targetType : ResourceType) -> [Any] {
-        do {
-            switch targetType {
-            case .character:
-                return try JSONDecoder().decode(ResponseCharacter.self, from: data).data.results
-            case .comic:
-                return try JSONDecoder().decode(ResponseComic.self, from: data).data.results
-            case .creator:
-                return try JSONDecoder().decode(ResponseCreator.self, from: data).data.results
-            case .event:
-                return try JSONDecoder().decode(ResponseEvent.self, from: data).data.results
-            case .serie:
-                return try JSONDecoder().decode(ResponseSeries.self, from: data).data.results
-            case .story:
-                return try JSONDecoder().decode(ResponseStorie.self, from: data).data.results
-            }
-        } catch {
-            print(error.localizedDescription.localizedLowercase)
-        }
-        return []
-    }
-        
-    func fetchResources(completionHandle: @escaping (Bool) -> Void) {
-    
-        for request in requests {
-            
-            if let request = request as? FetchComics {
-                
-                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0).sink { completion in
-                    switch completion {
-                    case .finished:
-                        break
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    }
-                } receiveValue: { data in
-                    DispatchQueue.main.async {
-                        self.resources["Comics"] = data.results
-                        completionHandle(true)
-                    }
-                }.store(in: &cancellables)
-
-                
-            } else  if let request = request as? FetchEvents {
-                
-                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0).sink { completion in
-                    switch completion {
-                    case .finished:
-                        break
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    }
-                } receiveValue: { data in
-                    DispatchQueue.main.async {
-                        self.resources["Events"] = data.results
-                        completionHandle(true)
-                    }
-                }.store(in: &cancellables)
-            } else  if let request = request as? FetchSeries {
-                
-                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0).sink { completion in
-                    switch completion {
-                    case .finished:
-                        break
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    }
-                } receiveValue: { data in
-                    DispatchQueue.main.async {
-                        self.resources["Series"] = data.results
-                        completionHandle(true)
-                    }
-                }.store(in: &cancellables)
-                
-            } else  if let request = request as? FetchStories {
-                
-                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0).sink { completion in
-                    switch completion {
-                    case .finished:
-                        break
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    }
-                } receiveValue: { data in
-                    DispatchQueue.main.async {
-                        self.resources["Stories"] = data.results
-                        completionHandle(true)
-                    }
-                }.store(in: &cancellables)
-                
-            } else  if let request = request as? FetchCreator {
-                
-                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0).sink { completion in
-                    switch completion {
-                    case .finished:
-                        break
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    }
-                } receiveValue: { data in
-                    DispatchQueue.main.async {
-                        self.resources["Creators"] = data.results
-                        completionHandle(true)
-                    }
-                }.store(in: &cancellables)
-                
-            }
-        }
-
     }
 }
