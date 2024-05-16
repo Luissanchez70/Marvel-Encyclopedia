@@ -51,8 +51,11 @@ extension CharactersListViewController: UITableViewDataSource {
             defaultCell.textLabel?.text = "error"
             return defaultCell
         }
-        let character = mainViewModel.characterList[indexPath.row]
-        cell.configure(charater: character)
+        if indexPath.row < mainViewModel.characterList.count {
+            let character = mainViewModel.characterList[indexPath.row]
+            cell.configure(charater: character)
+        }
+        
         return cell
     }
 }

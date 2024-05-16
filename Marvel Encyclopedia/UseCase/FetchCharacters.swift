@@ -16,6 +16,8 @@ class FetchCharacters {
             .addParams(name: "limit", value: "\(limit)")
             .addParams(name: "offset", value: "\(offset)")
         
+        print(urlComponents)
+        
         let urlRequest = URLRequest(components: urlComponents)
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseCharacter.self)
