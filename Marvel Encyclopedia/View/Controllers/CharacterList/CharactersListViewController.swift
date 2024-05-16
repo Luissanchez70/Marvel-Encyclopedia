@@ -88,7 +88,10 @@ extension CharactersListViewController {
     @IBAction func onclickPage(_ sender: UIPageControl) {
         
         let page = sender.currentPage
+        
         mainViewModel.getCharacters(currentPage: page)
+        mainViewModel.getCharactersFilter(filter: characterSearchBar.text!)
+        
     }
 }
 
