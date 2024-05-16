@@ -15,6 +15,8 @@ class FetchSeries {
         let urlComponents = URLComponents(path: "/\(baseResource)/\(resourceId)/series")
             .addParams(name: "limit", value: "\(limit)")
             .addParams(name: "offset", value: "\(offset)")
+        
+        
         let urlRequest = URLRequest(components: urlComponents)
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseSeries.self)

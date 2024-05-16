@@ -15,6 +15,8 @@ class FetchStories {
         let urlComponents = URLComponents(path: "/\(baseResource)/\(resourceId)/stories")
             .addParams(name: "limit", value: "\(limit)")
             .addParams(name: "offset", value: "\(offset)")
+        
+        print("Stories --> \(urlComponents.url)")
         let urlRequest = URLRequest(components: urlComponents)
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseStorie.self)

@@ -26,6 +26,8 @@ class DetailsModel {
     private var type : ResourceType
     private var resources: [String : [Any]] = [:]
     private var cancellables = Set<AnyCancellable>()
+    private var requests: [Any] = [FetchComics(), FetchEvents(), FetchSeries(), FetchCreator(), FetchStories()]
+    private var listAux: [Comic] = []
     
     init( from resorceItem: ResourceItem, resourceTye: ResourceType ) {
         id = resorceItem.id ?? 1
@@ -119,23 +121,49 @@ class DetailsModel {
     }
         
     func fetchResources(completionHandle: @escaping (Bool) -> Void) {
-        if type != .comic {
-            getResources(completionHandle, type, .comic)
+    
+        for request in requests {
+            
+            if let request = request as? FetchComics {
+                
+                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0)
+
+                
+            } else  if let request = request as? FetchEvents {
+                
+                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0)
+                    .map { $0.results }
+                    .replaceError(with: [])
+                    .assign(to: \.resources[type.rawValue] , on: self)
+                    .store(in: &cancellables)
+                
+            } else  if let request = request as? FetchSeries {
+                
+                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0)
+                    .map { $0.results }
+                    .replaceError(with: [])
+                    .assign(to: \.resources[type.rawValue] , on: self)
+                    .store(in: &cancellables)
+                
+            } else  if let request = request as? FetchStories {
+                
+                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0)
+                    .map { $0.results }
+                    .replaceError(with: [])
+                    .assign(to: \.resources[type.rawValue] , on: self)
+                    .store(in: &cancellables)
+                
+            } else  if let request = request as? FetchCreator {
+                
+                request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0)
+                    .map { $0.results }
+                    .replaceError(with: [])
+                    .assign(to: \.resources[type.rawValue] , on: self)
+                    .store(in: &cancellables)
+                
+            }
         }
-        if type != .character && type != .creator {
-            getResources(completionHandle, type, .character)
-        }
-        if type != .creator && type != .character {
-            getResources(completionHandle, type, .creator)
-        }
-        if type != .event {
-            getResources(completionHandle, type, .event)
-        }
-        if type != .comic && type != .serie {
-            getResources(completionHandle, type, .serie)
-        }
-        if type != .story {
-            getResources(completionHandle, type, .serie)
-        }
+        completionHandle(true)
+
     }
 }
