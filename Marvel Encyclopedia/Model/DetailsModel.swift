@@ -90,7 +90,7 @@ class DetailsModel {
                 addToDiccionary(request: storieRequest, key: "Stories", completion: completionHandle)
             } else  if let cretorRequest = request as? FetchCreator {
                 addToDiccionary(request: cretorRequest, key: "Creators", completion: completionHandle)
-            } else  if let characterRequest = request as? FetchCreator {
+            } else  if let characterRequest = request as? FetchCharacters {
                 addToDiccionary(request: characterRequest, key: "Characters", completion: completionHandle)
             }
         }
