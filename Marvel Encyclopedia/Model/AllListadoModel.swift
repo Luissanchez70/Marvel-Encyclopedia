@@ -46,7 +46,7 @@ class AllListadoModel {
 
     func addToDiccionary<Request: FetchRequest>( request: Request, completion: @escaping (Bool) -> Void){
         
-        request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0).sink { completion in
+        request.execute(baseResource: type, resourceId: id, limit: limit, offset: offset).sink { completion in
             switch completion {
             case .finished:
                 break
@@ -59,22 +59,33 @@ class AllListadoModel {
             DispatchQueue.main.async {
                 
                 if let data = data as? ComicData {
-                    self.resources = data.results
+                    self.resources.append(contentsOf: data.results)
+                    self.total = data.total
                 } else  if let data = data as? EventData {
-                    self.resources = data.results
+                    self.resources.append(contentsOf: data.results)
+                    self.total = data.total
                 } else  if let data = data as? SeriesData {
-                    self.resources = data.results
+                    self.resources.append(contentsOf: data.results)
+                    self.total = data.total
                 } else  if let data = data as? StorieData {
-                    self.resources = data.results
+                    self.resources.append(contentsOf: data.results)
+                    self.total = data.total
                 } else  if let data = data as? CreatorData {
-                    self.resources = data.results
+                    self.resources.append(contentsOf: data.results)
+                    self.total = data.total
                 } else  if let data = data as? CharacterData {
-                    self.resources = data.results
+                    self.resources.append(contentsOf: data.results)
+                    self.total = data.total
                 }
+                self.offset += self.limit
                 completion(true)
             }
         }.store(in: &cancellables)
     }
     
     func getResources() -> [Any] { resources }
+    
+    func moreResults() -> Bool {
+        offset <= total
+    }
 }

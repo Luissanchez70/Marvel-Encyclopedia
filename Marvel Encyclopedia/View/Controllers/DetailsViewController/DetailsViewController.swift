@@ -54,7 +54,7 @@ class DetailsViewController: UIViewController {
         guard let viewModel else  { return }
         let id = viewModel.getID()
         let type = viewModel.getType()
-        guard let targetType = ResourceType(rawValue: selectedKey) else { return }
+        guard let targetType = ResourceType(rawValue: selectedKey.lowercased()) else { return }
                 
         let model = AllListadoViewModel(allListModel: AllListadoModel(id: id, type: type, targetTyoe: targetType))
         nvc.viewModel = model

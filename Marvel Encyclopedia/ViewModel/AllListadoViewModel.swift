@@ -24,6 +24,7 @@ class AllListadoViewModel {
     func requestMoreResults() {
         allListadoModel.requestNextPage { result in
             self.resource.send(self.allListadoModel.getResources())
+            self.moreResults = self.allListadoModel.moreResults()
         }
     }
 }
