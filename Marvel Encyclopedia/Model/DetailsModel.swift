@@ -88,10 +88,6 @@ class DetailsModel {
                 addToDiccionary(request: seriesRequest, key: "Series", completion: completionHandle)
             } else  if let storieRequest = request as? FetchStories {
                 addToDiccionary(request: storieRequest, key: "Stories", completion: completionHandle)
-            } else  if let cretorRequest = request as? FetchCreator {
-                addToDiccionary(request: cretorRequest, key: "Creators", completion: completionHandle)
-            } else  if let characterRequest = request as? FetchCharacters {
-                addToDiccionary(request: characterRequest, key: "Characters", completion: completionHandle)
             }
         }
     }
@@ -102,7 +98,7 @@ class DetailsModel {
             case .finished:
                 break
             case .failure(let error):
-                print(error.localizedDescription)
+                print("\(self.type.rawValue)-_-> \(error.localizedDescription)")
             }
         } receiveValue: { data in
             
@@ -116,11 +112,8 @@ class DetailsModel {
                     self.resources[key] = data.results
                 } else  if let data = data as? StorieData {
                     self.resources[key] = data.results
-                } else  if let data = data as? CreatorData {
-                    self.resources[key] = data.results
-                } else  if let data = data as? CharacterData {
-                    self.resources[key] = data.results
                 }
+            
                 completion(true)
             }
         }.store(in: &cancellables)

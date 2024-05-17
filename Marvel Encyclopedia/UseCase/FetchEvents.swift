@@ -15,6 +15,8 @@ class FetchEvents: FetchRequest{
         let urlComponents = URLComponents(path: "/\(baseResource.rawValue)/\(resourceId)/events")
             .addParams(name: "limit", value: "\(limit)")
             .addParams(name: "offset", value: "\(offset)")
+        print("-----> \(urlComponents.url)")
+
         let urlRequest = URLRequest(components: urlComponents)
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseEvent.self)

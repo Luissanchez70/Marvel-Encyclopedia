@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1C3C22BF2BE39D1E003D1989 /* DetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3C22BE2BE39D1E003D1989 /* DetailsModel.swift */; };
-		1C3C22C12BE3A1C3003D1989 /* FetchAnyByAnyIDList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3C22C02BE3A1C3003D1989 /* FetchAnyByAnyIDList.swift */; };
 		1C3C22CE2BE3D225003D1989 /* CharacterItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3C22CC2BE3D225003D1989 /* CharacterItem.swift */; };
 		1C3C22CF2BE3D225003D1989 /* CharacterItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C3C22CD2BE3D225003D1989 /* CharacterItem.xib */; };
 		1C5126552BD6889500EA45CA /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5126542BD6889500EA45CA /* DetailsViewModel.swift */; };
@@ -27,7 +26,6 @@
 		1C7665532BEB876300610A8D /* AllListadoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C7665512BEB876300610A8D /* AllListadoViewController.xib */; };
 		1C8CFE982BEE2F6900169008 /* AllListadoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8CFE972BEE2F6900169008 /* AllListadoViewModel.swift */; };
 		1C8CFE9A2BEE2F8300169008 /* AllListadoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8CFE992BEE2F8300169008 /* AllListadoModel.swift */; };
-		1C8CFE9D2BEE4FB500169008 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8CFE9C2BEE4FB500169008 /* ApiClient.swift */; };
 		3233C0212BE0FC8100FB20EB /* URLSession+Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3233C0202BE0FC8100FB20EB /* URLSession+Client.swift */; };
 		3233C0232BE0FE5400FB20EB /* URLComponents+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3233C0222BE0FE5400FB20EB /* URLComponents+Init.swift */; };
 		3233C0252BE0FF6C00FB20EB /* URLRequest+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3233C0242BE0FF6C00FB20EB /* URLRequest+Init.swift */; };
@@ -72,7 +70,6 @@
 
 /* Begin PBXFileReference section */
 		1C3C22BE2BE39D1E003D1989 /* DetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModel.swift; sourceTree = "<group>"; };
-		1C3C22C02BE3A1C3003D1989 /* FetchAnyByAnyIDList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAnyByAnyIDList.swift; sourceTree = "<group>"; };
 		1C3C22CC2BE3D225003D1989 /* CharacterItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterItem.swift; sourceTree = "<group>"; };
 		1C3C22CD2BE3D225003D1989 /* CharacterItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterItem.xib; sourceTree = "<group>"; };
 		1C5126542BD6889500EA45CA /* DetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsViewModel.swift; path = "Marvel Encyclopedia/ViewModel/DetailsViewModel.swift"; sourceTree = SOURCE_ROOT; };
@@ -91,7 +88,6 @@
 		1C7665512BEB876300610A8D /* AllListadoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllListadoViewController.xib; sourceTree = "<group>"; };
 		1C8CFE972BEE2F6900169008 /* AllListadoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllListadoViewModel.swift; sourceTree = "<group>"; };
 		1C8CFE992BEE2F8300169008 /* AllListadoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllListadoModel.swift; sourceTree = "<group>"; };
-		1C8CFE9C2BEE4FB500169008 /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		3233C0202BE0FC8100FB20EB /* URLSession+Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Client.swift"; sourceTree = "<group>"; };
 		3233C0222BE0FE5400FB20EB /* URLComponents+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Init.swift"; sourceTree = "<group>"; };
 		3233C0242BE0FF6C00FB20EB /* URLRequest+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Init.swift"; sourceTree = "<group>"; };
@@ -191,14 +187,6 @@
 			path = AllListado;
 			sourceTree = "<group>";
 		};
-		1C8CFE9B2BEE4FB500169008 /* Provider */ = {
-			isa = PBXGroup;
-			children = (
-				1C8CFE9C2BEE4FB500169008 /* ApiClient.swift */,
-			);
-			path = Provider;
-			sourceTree = "<group>";
-		};
 		3233C01F2BE0FC7200FB20EB /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,7 +216,6 @@
 				D2DEF5F72BE0C4EC00C6E12F /* FetchComics.swift */,
 				D2DEF5F92BE0C72F00C6E12F /* FetchSeries.swift */,
 				D2DEF5FB2BE0C7A000C6E12F /* FetchEvents.swift */,
-				1C3C22C02BE3A1C3003D1989 /* FetchAnyByAnyIDList.swift */,
 				D24337E52BF3AF78008898FD /* FetchCreator.swift */,
 				D22DCFD12BF6276400B13A7A /* FetchRequest.swift */,
 			);
@@ -302,7 +289,6 @@
 		D2D87FF12BD2A2E0008352FE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1C8CFE9B2BEE4FB500169008 /* Provider */,
 				1C8CFE992BEE2F8300169008 /* AllListadoModel.swift */,
 				1C3C22BE2BE39D1E003D1989 /* DetailsModel.swift */,
 				D2D87FF52BD2A313008352FE /* Domain */,
@@ -504,7 +490,6 @@
 				D22DCFD22BF6276400B13A7A /* FetchRequest.swift in Sources */,
 				D2D87FC52BD27FFB008352FE /* CharactersListViewController.swift in Sources */,
 				1C74BFCA2BD9254D00CC694E /* ResourcesViewCell.swift in Sources */,
-				1C3C22C12BE3A1C3003D1989 /* FetchAnyByAnyIDList.swift in Sources */,
 				D2DEF5F42BDF9C5500C6E12F /* DownloadThumbnail.swift in Sources */,
 				3233C0212BE0FC8100FB20EB /* URLSession+Client.swift in Sources */,
 				1C3C22BF2BE39D1E003D1989 /* DetailsModel.swift in Sources */,
@@ -518,7 +503,6 @@
 				D2D87FC12BD27FFB008352FE /* AppDelegate.swift in Sources */,
 				1C7665522BEB876300610A8D /* AllListadoViewController.swift in Sources */,
 				D2D87FC32BD27FFB008352FE /* SceneDelegate.swift in Sources */,
-				1C8CFE9D2BEE4FB500169008 /* ApiClient.swift in Sources */,
 				1C5126602BD688D500EA45CA /* Comic.swift in Sources */,
 				D2DEF5FA2BE0C72F00C6E12F /* FetchSeries.swift in Sources */,
 				3233C0272BE10D8300FB20EB /* Mapeable.swift in Sources */,

@@ -26,59 +26,55 @@ class AllListadoModel {
         self.targetTyoe = targetTyoe
     }
     
-    func requestNextPage(completion : @escaping ([Any] ,Bool) -> Void) {
-        FetchAnyByAnyIDList().execute(baseResource: type, baseID: id, targetResource: targetTyoe, limit: limit, offset: offset).sink { completion in
+    func requestNextPage(completion : @escaping (Bool) -> Void) {
+        
+        switch targetTyoe {
+        case .comic:
+            addToDiccionary(request: FetchComics(), completion: completion)
+        case .event:
+            addToDiccionary(request: FetchEvents(), completion: completion)
+        case .serie:
+            addToDiccionary(request: FetchSeries(), completion: completion)
+        case .story:
+            addToDiccionary(request: FetchStories(),completion: completion)
+        case .creator:
+            addToDiccionary(request: FetchCreator(), completion: completion)
+        case .character:
+            addToDiccionary(request: FetchCharacters(), completion: completion)
+        }
+    }
+
+    func addToDiccionary<Request: FetchRequest>( request: Request, completion: @escaping (Bool) -> Void){
+        
+        request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0).sink { completion in
             switch completion {
             case .finished:
                 break
             case .failure(let error):
-                print(error.localizedDescription)
+                print("\(self.type.rawValue)--> \(error.localizedDescription)")
+
             }
         } receiveValue: { data in
+            
             DispatchQueue.main.async {
-                let response = self.decodeResponse(data: data)
-                self.resources.append(contentsOf: response)
-                print(self.total)
-                print(self.offset)
-                print(self.resources.count)
-                completion(self.resources, (self.offset < self.total))
-                self.offset += self.limit
+                
+                if let data = data as? ComicData {
+                    self.resources = data.results
+                } else  if let data = data as? EventData {
+                    self.resources = data.results
+                } else  if let data = data as? SeriesData {
+                    self.resources = data.results
+                } else  if let data = data as? StorieData {
+                    self.resources = data.results
+                } else  if let data = data as? CreatorData {
+                    self.resources = data.results
+                } else  if let data = data as? CharacterData {
+                    self.resources = data.results
+                }
+                completion(true)
             }
         }.store(in: &cancellables)
-        
     }
-
-    func decodeResponse(data: Data) -> [Any] {
-        do {
-            switch targetTyoe {
-            case .character:
-                let response = try JSONDecoder().decode(ResponseCharacter.self, from: data).data
-                total = response.total
-                return response.results
-            case .comic:
-                let response = try JSONDecoder().decode(ResponseComic.self, from: data).data
-                total = response.total
-                return response.results
-            case .creator:
-                let response = try JSONDecoder().decode(ResponseCreator.self, from: data).data
-                total = response.total
-                return response.results
-            case .event:
-                let response = try JSONDecoder().decode(ResponseEvent.self, from: data).data
-                total = response.total
-                return response.results
-            case .serie:
-                let response = try JSONDecoder().decode(ResponseSeries.self, from: data).data
-                total = response.total
-                return response.results
-            case .story:
-                let response = try JSONDecoder().decode(ResponseStorie.self, from: data).data
-                total = response.total
-                return response.results
-            }
-        } catch {
-            print(error.localizedDescription.localizedLowercase)
-        }
-        return []
-    }
+    
+    func getResources() -> [Any] { resources }
 }

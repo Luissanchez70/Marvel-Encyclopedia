@@ -47,7 +47,7 @@ extension FetchCharacters: FetchRequest{
         let urlComponents = URLComponents(path: "/\(baseResource.rawValue)/\(resourceId)/characters")
             .addParams(name: "limit", value: "\(limit)")
             .addParams(name: "offset", value: "\(offset)")
-        
+        print("-----> \(urlComponents.url)")
         let urlRequest = URLRequest(components: urlComponents)
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseCharacter.self)
