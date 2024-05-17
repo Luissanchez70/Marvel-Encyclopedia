@@ -17,61 +17,59 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dbb-tE-9Vh">
-                                <rect key="frame" x="0.0" y="103" width="393" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="GS3-St-yZI"/>
-                                </connections>
-                            </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="u0D-B6-znc">
-                                <rect key="frame" x="8" y="159" width="377" height="614"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="w14-aa-mpO">
-                                    <rect key="frame" x="0.0" y="0.0" width="377" height="128"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sin Resustados" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhl-tV-5XP">
-                                            <rect key="frame" x="99" y="48" width="179" height="32.333333333333343"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                            <color key="textColor" systemColor="opaqueSeparatorColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    <constraints>
-                                        <constraint firstItem="Zhl-tV-5XP" firstAttribute="centerY" secondItem="w14-aa-mpO" secondAttribute="centerY" id="FX9-eR-JKe"/>
-                                        <constraint firstItem="Zhl-tV-5XP" firstAttribute="centerX" secondItem="w14-aa-mpO" secondAttribute="centerX" id="JcE-wR-yZH"/>
-                                    </constraints>
-                                </view>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Hgy-u2-m0F"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="vSI-cR-QKT"/>
-                                </connections>
-                            </tableView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="Hfo-xq-KUV">
-                                <rect key="frame" x="87" y="781" width="219" height="26"/>
-                                <color key="pageIndicatorTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="currentPageIndicatorTintColor" name="AccentColor"/>
-                                <connections>
-                                    <action selector="onclickPage:" destination="BYZ-38-t0r" eventType="valueChanged" id="AkI-ZM-4rg"/>
-                                </connections>
-                            </pageControl>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IOc-N9-bLw">
+                                <rect key="frame" x="0.0" y="103" width="393" height="695.66666666666663"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dbb-tE-9Vh">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="GS3-St-yZI"/>
+                                        </connections>
+                                    </searchBar>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="u0D-B6-znc">
+                                        <rect key="frame" x="0.0" y="56" width="393" height="614"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <view key="tableFooterView" contentMode="scaleToFill" id="w14-aa-mpO">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="128"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sin Resustados" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhl-tV-5XP">
+                                                    <rect key="frame" x="107" y="48" width="179" height="32.333333333333343"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                                    <color key="textColor" systemColor="opaqueSeparatorColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstItem="Zhl-tV-5XP" firstAttribute="centerY" secondItem="w14-aa-mpO" secondAttribute="centerY" id="FX9-eR-JKe"/>
+                                                <constraint firstItem="Zhl-tV-5XP" firstAttribute="centerX" secondItem="w14-aa-mpO" secondAttribute="centerX" id="JcE-wR-yZH"/>
+                                            </constraints>
+                                        </view>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="Hgy-u2-m0F"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="vSI-cR-QKT"/>
+                                        </connections>
+                                    </tableView>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="Hfo-xq-KUV">
+                                        <rect key="frame" x="0.0" y="670" width="393" height="25.666666666666629"/>
+                                        <color key="pageIndicatorTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="currentPageIndicatorTintColor" name="AccentColor"/>
+                                        <connections>
+                                            <action selector="onclickPage:" destination="BYZ-38-t0r" eventType="valueChanged" id="AkI-ZM-4rg"/>
+                                        </connections>
+                                    </pageControl>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Hfo-xq-KUV" firstAttribute="top" secondItem="u0D-B6-znc" secondAttribute="bottom" constant="8" symbolic="YES" id="3v8-QU-FOi"/>
-                            <constraint firstAttribute="trailing" secondItem="dbb-tE-9Vh" secondAttribute="trailing" id="741-0B-uaz"/>
-                            <constraint firstItem="Hfo-xq-KUV" firstAttribute="top" secondItem="dbb-tE-9Vh" secondAttribute="bottom" constant="622" id="Avz-I6-4gf"/>
-                            <constraint firstItem="u0D-B6-znc" firstAttribute="top" secondItem="dbb-tE-9Vh" secondAttribute="bottom" id="E35-mH-mdz"/>
-                            <constraint firstItem="u0D-B6-znc" firstAttribute="centerX" secondItem="Hfo-xq-KUV" secondAttribute="centerX" id="HTc-od-DzV"/>
-                            <constraint firstItem="Hfo-xq-KUV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="87" id="Joc-ct-E6L"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Hfo-xq-KUV" secondAttribute="bottom" constant="11" id="Zie-F6-YT1"/>
-                            <constraint firstItem="dbb-tE-9Vh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ael-sv-vYh"/>
-                            <constraint firstItem="dbb-tE-9Vh" firstAttribute="centerX" secondItem="u0D-B6-znc" secondAttribute="centerX" id="iTZ-7h-nCK"/>
-                            <constraint firstItem="u0D-B6-znc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="qRh-x6-Yrd"/>
-                            <constraint firstItem="dbb-tE-9Vh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="yuW-kj-Rfb"/>
+                            <constraint firstItem="IOc-N9-bLw" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="DYc-Wr-4oQ"/>
+                            <constraint firstItem="IOc-N9-bLw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="JZV-g3-D9Q"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="IOc-N9-bLw" secondAttribute="bottom" constant="19.329999999999998" id="bCc-PQ-wa7"/>
+                            <constraint firstItem="IOc-N9-bLw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xrc-BK-uv0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="RjU-1b-iMF"/>
