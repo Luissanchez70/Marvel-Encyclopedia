@@ -13,6 +13,7 @@ class CharactersListViewController: UIViewController {
     @IBOutlet weak var characterSearchBar: UISearchBar!
     @IBOutlet weak var characterTable: UITableView!
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var noResustsWarning: UIView!
     private let mainViewModel = CharactersListViewModel()
     private var getCancellable: AnyCancellable?
     private var getCancellablePage: AnyCancellable?
@@ -41,7 +42,12 @@ class CharactersListViewController: UIViewController {
 // MARK: -  Table setup
 extension CharactersListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        mainViewModel.characterList.count
+        if mainViewModel.characterList.isEmpty {
+            noResustsWarning.isHidden = false
+        } else {
+            noResustsWarning.isHidden = true
+        }
+        return mainViewModel.characterList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -86,7 +92,6 @@ extension CharactersListViewController {
     func pageControllerSetUp(){
         pageControl.numberOfPages = 10
         pageControl.currentPage = 0
-        
     }
     
     @IBAction func onclickPage(_ sender: UIPageControl) {
@@ -97,4 +102,6 @@ extension CharactersListViewController {
         }
     }
 }
+
+
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rmm-lQ-7Ck">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rmm-lQ-7Ck">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -27,16 +27,23 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="u0D-B6-znc">
                                 <rect key="frame" x="8" y="159" width="377" height="614"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CharacterItem" id="LFc-Lh-GSr" customClass="CharacterItem" customModule="Marvel_Encyclopedia" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="377" height="43.666667938232422"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LFc-Lh-GSr" id="hTn-gy-zbj">
-                                            <rect key="frame" x="0.0" y="0.0" width="377" height="43.666667938232422"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="w14-aa-mpO">
+                                    <rect key="frame" x="0.0" y="0.0" width="377" height="128"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sin Resustados" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhl-tV-5XP">
+                                            <rect key="frame" x="99" y="48" width="179" height="32.333333333333343"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                            <color key="textColor" systemColor="opaqueSeparatorColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="Zhl-tV-5XP" firstAttribute="centerY" secondItem="w14-aa-mpO" secondAttribute="centerY" id="FX9-eR-JKe"/>
+                                        <constraint firstItem="Zhl-tV-5XP" firstAttribute="centerX" secondItem="w14-aa-mpO" secondAttribute="centerX" id="JcE-wR-yZH"/>
+                                    </constraints>
+                                </view>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="Hgy-u2-m0F"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="vSI-cR-QKT"/>
@@ -56,6 +63,7 @@
                         <constraints>
                             <constraint firstItem="Hfo-xq-KUV" firstAttribute="top" secondItem="u0D-B6-znc" secondAttribute="bottom" constant="8" symbolic="YES" id="3v8-QU-FOi"/>
                             <constraint firstAttribute="trailing" secondItem="dbb-tE-9Vh" secondAttribute="trailing" id="741-0B-uaz"/>
+                            <constraint firstItem="Hfo-xq-KUV" firstAttribute="top" secondItem="dbb-tE-9Vh" secondAttribute="bottom" constant="622" id="Avz-I6-4gf"/>
                             <constraint firstItem="u0D-B6-znc" firstAttribute="top" secondItem="dbb-tE-9Vh" secondAttribute="bottom" id="E35-mH-mdz"/>
                             <constraint firstItem="u0D-B6-znc" firstAttribute="centerX" secondItem="Hfo-xq-KUV" secondAttribute="centerX" id="HTc-od-DzV"/>
                             <constraint firstItem="Hfo-xq-KUV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="87" id="Joc-ct-E6L"/>
@@ -70,6 +78,7 @@
                     <connections>
                         <outlet property="characterSearchBar" destination="dbb-tE-9Vh" id="aSI-3w-CLk"/>
                         <outlet property="characterTable" destination="u0D-B6-znc" id="Aqh-sJ-1UW"/>
+                        <outlet property="noResustsWarning" destination="w14-aa-mpO" id="eRZ-2d-scy"/>
                         <outlet property="pageControl" destination="Hfo-xq-KUV" id="Rgc-Kr-3Xj"/>
                     </connections>
                 </viewController>
@@ -100,6 +109,9 @@
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
