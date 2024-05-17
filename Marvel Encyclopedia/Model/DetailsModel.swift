@@ -26,7 +26,7 @@ class DetailsModel {
     private var type : ResourceType
     private var resources: [String : [Any]] = [:]
     private var cancellables = Set<AnyCancellable>()
-    private var requests: [Any] = [FetchComics(), FetchEvents(), FetchSeries(), FetchCreator(), FetchStories()]
+    private var requests: [Any] = [FetchComics(), FetchEvents(), FetchSeries(), FetchCreator(), FetchStories(),FetchCreator(), FetchCharacters()]
     
     init( from resorceItem: ResourceItem, resourceTye: ResourceType ) {
         id = resorceItem.id ?? 1
@@ -88,9 +88,12 @@ class DetailsModel {
                 addToDiccionary(request: seriesRequest, key: "Series", completion: completionHandle)
             } else  if let storieRequest = request as? FetchStories {
                 addToDiccionary(request: storieRequest, key: "Stories", completion: completionHandle)
+            } else  if let cretorRequest = request as? FetchCreator {
+                addToDiccionary(request: cretorRequest, key: "Creators", completion: completionHandle)
+            } else  if let characterRequest = request as? FetchCreator {
+                addToDiccionary(request: characterRequest, key: "Characters", completion: completionHandle)
             }
         }
-
     }
     func addToDiccionary<Request: FetchRequest>( request: Request, key: String, completion: @escaping (Bool) -> Void){
         
@@ -112,6 +115,10 @@ class DetailsModel {
                 } else  if let data = data as? SeriesData {
                     self.resources[key] = data.results
                 } else  if let data = data as? StorieData {
+                    self.resources[key] = data.results
+                } else  if let data = data as? CreatorData {
+                    self.resources[key] = data.results
+                } else  if let data = data as? CharacterData {
                     self.resources[key] = data.results
                 }
                 completion(true)

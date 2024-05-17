@@ -35,6 +35,22 @@ class FetchCharacters {
     
 }
 
+extension FetchCharacters: FetchRequest{
+    
+    func execute (baseResource: ResourceType, resourceId: Int, limit: Int, offset: Int) -> AnyPublisher<CharacterData, Error> {
+        
+        let urlComponents = URLComponents(path: "/\(baseResource.rawValue)/\(resourceId)/characters")
+            .addParams(name: "limit", value: "\(limit)")
+            .addParams(name: "offset", value: "\(offset)")
+        
+        let urlRequest = URLRequest(components: urlComponents)
+        return URLSession.shared
+            .fetch(for: urlRequest, with: ResponseCharacter.self)
+            .map { $0.data }
+            .eraseToAnyPublisher()
+    }
+}
+
 extension URLComponents {
     func fetchCharactersByName(_ characterName: String) -> Self {
         addParams(name: "nameStartsWith", value: characterName)

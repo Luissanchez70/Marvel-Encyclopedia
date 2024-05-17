@@ -30,8 +30,8 @@
             filePath = "Marvel Encyclopedia/Model/DetailsModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "fetchResources(completionHandle:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "Marvel Encyclopedia/Model/DetailsModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "addToDiccionary(request:key:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,40 +62,10 @@
             filePath = "Marvel Encyclopedia/Model/DetailsModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "addToDiccionary(request:key:completion:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "DF9C996D-5D71-4A60-B4CE-82584C6788B0 - 1fc84e05d10b26c1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #2 (&#x3c4;_0_0.DataType) -&gt; () in Marvel_Encyclopedia.DetailsModel.addToDiccionary&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Marvel_Encyclopedia.FetchRequest&gt;(request: &#x3c4;_0_0, key: Swift.String, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
-                  moduleName = "Marvel Encyclopedia"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luis.fernandomunoz/Desktop/Proyectos/Marvel%20Encyclopedia/Marvel%20Encyclopedia/Model/DetailsModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "108"
-                  endingLineNumber = "108">
-               </Location>
-               <Location
-                  uuid = "DF9C996D-5D71-4A60-B4CE-82584C6788B0 - 1fc84e05d10b26c1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #2 (&#x3c4;_0_0.DataType) -&gt; () in Marvel_Encyclopedia.DetailsModel.addToDiccionary&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Marvel_Encyclopedia.FetchRequest&gt;(request: &#x3c4;_0_0, key: Swift.String, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
-                  moduleName = "Marvel Encyclopedia"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luis.fernandomunoz/Desktop/Proyectos/Marvel%20Encyclopedia/Marvel%20Encyclopedia/Model/DetailsModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "108"
-                  endingLineNumber = "108">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -108,8 +78,8 @@
             filePath = "Marvel Encyclopedia/Model/DetailsModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "addToDiccionary(request:key:completion:)"
             landmarkType = "7">
          </BreakpointContent>
