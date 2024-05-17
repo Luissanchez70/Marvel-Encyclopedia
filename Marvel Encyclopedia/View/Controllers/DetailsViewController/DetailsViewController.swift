@@ -48,6 +48,8 @@ class DetailsViewController: UIViewController {
     }
     
     @IBAction func IrAllListadoPressed(_ sender: UIButton) {
+        print("entro")
+        
         let nvc = AllListadoViewController()
         guard let viewModel else  { return }
         let id = viewModel.getID()
