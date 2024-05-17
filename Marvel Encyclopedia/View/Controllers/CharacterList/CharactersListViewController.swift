@@ -51,8 +51,11 @@ extension CharactersListViewController: UITableViewDataSource {
             defaultCell.textLabel?.text = "error"
             return defaultCell
         }
-        let character = mainViewModel.characterList[indexPath.row]
-        cell.configure(charater: character)
+        if indexPath.row < mainViewModel.characterList.count {
+            let character = mainViewModel.characterList[indexPath.row]
+            cell.configure(charater: character)
+        }
+        
         return cell
     }
 }
@@ -69,10 +72,11 @@ extension CharactersListViewController: UITableViewDelegate {
 
 extension CharactersListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        pageControl.currentPage = 0
         if searchText.isEmpty {
             mainViewModel.getCharacters(currentPage: pageControl.currentPage)
         } else {
-            mainViewModel.getCharactersFilter(filter: searchText)
+            mainViewModel.getCharactersFilter(filter: searchText, currentPage: pageControl.currentPage)
         }
     }
 }
@@ -86,9 +90,11 @@ extension CharactersListViewController {
     }
     
     @IBAction func onclickPage(_ sender: UIPageControl) {
-        
-        let page = sender.currentPage
-        mainViewModel.getCharacters(currentPage: page)
+        if let searchText = characterSearchBar.text, !searchText.isEmpty {
+            mainViewModel.getCharactersFilter(filter: searchText, currentPage: sender.currentPage)
+        } else {
+            mainViewModel.getCharacters(currentPage: sender.currentPage)
+        }
     }
 }
 

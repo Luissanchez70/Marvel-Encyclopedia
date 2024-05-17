@@ -25,9 +25,12 @@ class CharactersListViewModel {
             .assign(to: \.characterList, on: self)
     }
 
-    func getCharactersFilter(filter: String) {
-        getCancellable = FetchCharacters().execute(filter)
-            .map { $0.results}
+    func getCharactersFilter(filter: String, currentPage: Int) {
+        getCancellable = FetchCharacters().execute(filter, limit: 20, offset: currentPage * 20)
+            .map { response in
+                self.numberPage = (response.total / 20)
+                return response.results
+            }
             .replaceError(with: [])
             .assign(to: \.characterList, on: self)
     }
