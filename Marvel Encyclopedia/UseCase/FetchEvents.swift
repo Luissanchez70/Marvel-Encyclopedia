@@ -8,11 +8,11 @@
 import Foundation
 import Combine
 
-class FetchEvents {
+class FetchEvents: FetchRequest{
     
     func execute (baseResource: ResourceType, resourceId: Int, limit: Int, offset: Int) -> AnyPublisher<EventData, Error> {
         
-        let urlComponents = URLComponents(path: "/\(baseResource)/\(resourceId)/events")
+        let urlComponents = URLComponents(path: "/\(baseResource.rawValue)/\(resourceId)/events")
             .addParams(name: "limit", value: "\(limit)")
             .addParams(name: "offset", value: "\(offset)")
         let urlRequest = URLRequest(components: urlComponents)

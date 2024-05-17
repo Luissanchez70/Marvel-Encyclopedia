@@ -8,13 +8,15 @@
 import Foundation
 import Combine
 
-class FetchSeries {
+class FetchSeries: FetchRequest {
     
     func execute (baseResource: ResourceType, resourceId: Int, limit: Int, offset: Int) -> AnyPublisher<SeriesData, Error> {
         
-        let urlComponents = URLComponents(path: "/\(baseResource)/\(resourceId)/series")
+        let urlComponents = URLComponents(path: "/\(baseResource.rawValue)/\(resourceId)/series")
             .addParams(name: "limit", value: "\(limit)")
             .addParams(name: "offset", value: "\(offset)")
+        
+        
         let urlRequest = URLRequest(components: urlComponents)
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseSeries.self)
