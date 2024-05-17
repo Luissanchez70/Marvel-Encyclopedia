@@ -8,6 +8,7 @@ class CharacterItem: UITableViewCell {
     @IBOutlet weak var thumbnail: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +29,10 @@ class CharacterItem: UITableViewCell {
         }  else {
             descLabel.isHidden = true
         }
+        thumbnail.isHidden = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.large
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.startAnimating()
         getImageView(path: charater.thumbnail!.path, exten: charater.thumbnail!.extension)
     }
     
@@ -42,6 +47,8 @@ class CharacterItem: UITableViewCell {
                 }
             } receiveValue: { image in
                 DispatchQueue.main.async {
+                    self.loadingIndicator.stopAnimating()
+                    self.thumbnail.isHidden = false
                     self.thumbnail.image = image
                 }
             }.store(in: &cancellables)
