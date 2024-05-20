@@ -44,6 +44,12 @@
 		D2D87FE22BD27FFD008352FE /* MarvelEncyclopediaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D87FE12BD27FFD008352FE /* MarvelEncyclopediaUITests.swift */; };
 		D2D87FE42BD27FFD008352FE /* MarvelEncyclopediaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D87FE32BD27FFD008352FE /* MarvelEncyclopediaUITestsLaunchTests.swift */; };
 		D2D87FFD2BD2A404008352FE /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D87FFC2BD2A404008352FE /* Character.swift */; };
+		D2D9FF182BFB40390014646C /* FetchComicsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9FF172BFB40390014646C /* FetchComicsTests.swift */; };
+		D2D9FF1A2BFB48580014646C /* FetchStoriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9FF192BFB48580014646C /* FetchStoriesTests.swift */; };
+		D2D9FF1C2BFB4EE70014646C /* FetchEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9FF1B2BFB4EE70014646C /* FetchEventsTests.swift */; };
+		D2D9FF1E2BFB55B80014646C /* FetchCreatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9FF1D2BFB55B80014646C /* FetchCreatorTests.swift */; };
+		D2D9FF202BFB5C670014646C /* FetchSeriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9FF1F2BFB5C670014646C /* FetchSeriesTests.swift */; };
+		D2D9FF222BFB5EC00014646C /* FetchCharacterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9FF212BFB5EC00014646C /* FetchCharacterTests.swift */; };
 		D2DEF5F42BDF9C5500C6E12F /* DownloadThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DEF5F32BDF9C5400C6E12F /* DownloadThumbnail.swift */; };
 		D2DEF5F62BE0C34200C6E12F /* FetchStories.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DEF5F52BE0C34200C6E12F /* FetchStories.swift */; };
 		D2DEF5F82BE0C4EC00C6E12F /* FetchComics.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DEF5F72BE0C4EC00C6E12F /* FetchComics.swift */; };
@@ -110,6 +116,12 @@
 		D2D87FE12BD27FFD008352FE /* MarvelEncyclopediaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelEncyclopediaUITests.swift; sourceTree = "<group>"; };
 		D2D87FE32BD27FFD008352FE /* MarvelEncyclopediaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelEncyclopediaUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D2D87FFC2BD2A404008352FE /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		D2D9FF172BFB40390014646C /* FetchComicsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchComicsTests.swift; sourceTree = "<group>"; };
+		D2D9FF192BFB48580014646C /* FetchStoriesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchStoriesTests.swift; sourceTree = "<group>"; };
+		D2D9FF1B2BFB4EE70014646C /* FetchEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchEventsTests.swift; sourceTree = "<group>"; };
+		D2D9FF1D2BFB55B80014646C /* FetchCreatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCreatorTests.swift; sourceTree = "<group>"; };
+		D2D9FF1F2BFB5C670014646C /* FetchSeriesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchSeriesTests.swift; sourceTree = "<group>"; };
+		D2D9FF212BFB5EC00014646C /* FetchCharacterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCharacterTests.swift; sourceTree = "<group>"; };
 		D2DEF5F32BDF9C5400C6E12F /* DownloadThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadThumbnail.swift; sourceTree = "<group>"; };
 		D2DEF5F52BE0C34200C6E12F /* FetchStories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchStories.swift; sourceTree = "<group>"; };
 		D2DEF5F72BE0C4EC00C6E12F /* FetchComics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchComics.swift; sourceTree = "<group>"; };
@@ -262,6 +274,7 @@
 		D2D87FD62BD27FFD008352FE /* Marvel EncyclopediaTests */ = {
 			isa = PBXGroup;
 			children = (
+				D2D9FF162BFB3F0C0014646C /* TestUseCase */,
 				D2D87FD72BD27FFD008352FE /* MarvelEncyclopediaTests.swift */,
 				D2C8315F2BDBC96600D77F24 /* MarvelCharacterUseCase.swift */,
 			);
@@ -328,6 +341,19 @@
 				1C51265C2BD688D500EA45CA /* Comic.swift */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		D2D9FF162BFB3F0C0014646C /* TestUseCase */ = {
+			isa = PBXGroup;
+			children = (
+				D2D9FF172BFB40390014646C /* FetchComicsTests.swift */,
+				D2D9FF192BFB48580014646C /* FetchStoriesTests.swift */,
+				D2D9FF1B2BFB4EE70014646C /* FetchEventsTests.swift */,
+				D2D9FF1D2BFB55B80014646C /* FetchCreatorTests.swift */,
+				D2D9FF1F2BFB5C670014646C /* FetchSeriesTests.swift */,
+				D2D9FF212BFB5EC00014646C /* FetchCharacterTests.swift */,
+			);
+			path = TestUseCase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -525,7 +551,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2D9FF1C2BFB4EE70014646C /* FetchEventsTests.swift in Sources */,
+				D2D9FF1E2BFB55B80014646C /* FetchCreatorTests.swift in Sources */,
+				D2D9FF202BFB5C670014646C /* FetchSeriesTests.swift in Sources */,
+				D2D9FF1A2BFB48580014646C /* FetchStoriesTests.swift in Sources */,
+				D2D9FF182BFB40390014646C /* FetchComicsTests.swift in Sources */,
 				D2C831602BDBC96600D77F24 /* MarvelCharacterUseCase.swift in Sources */,
+				D2D9FF222BFB5EC00014646C /* FetchCharacterTests.swift in Sources */,
 				D2D87FD82BD27FFD008352FE /* MarvelEncyclopediaTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
