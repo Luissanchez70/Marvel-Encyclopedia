@@ -25,7 +25,12 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        name.font = UIFont(name: "Marvel-Bold", size: 35)
+        desc.font = UIFont(name: "marvel-Regular", size: 20)
+        self.title = "Character"
+        
         fullListButton.isHidden = true
+        fullListButton.titleLabel?.font = UIFont(name: "Acme-Regular", size: 19)
         setupView()
     }
     
@@ -184,3 +189,4 @@ extension  DetailsViewController {
         }
     }
 }
+

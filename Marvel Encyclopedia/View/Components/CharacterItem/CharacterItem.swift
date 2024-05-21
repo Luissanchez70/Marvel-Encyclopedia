@@ -12,7 +12,9 @@ class CharacterItem: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        nameLabel.font = UIFont(name: "Marvel-Bold", size: 30)
+        descLabel.font = UIFont(name: "Marvel-Regular", size: 15)
     }
  
     override func setSelected(_ selected: Bool, animated: Bool) {

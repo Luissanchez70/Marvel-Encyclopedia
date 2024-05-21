@@ -21,6 +21,8 @@ class CharactersListViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        customTitle()
+        self.title = "Characters List"
         setBind()
         mainViewModel.getCharacters(currentPage: pageControl.currentPage)
         pageControllerSetUp()
@@ -39,6 +41,7 @@ class CharactersListViewController: UIViewController {
         }
     }
 }
+
 // MARK: -  Table setup
 extension CharactersListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -102,6 +105,21 @@ extension CharactersListViewController {
         }
     }
 }
+
+// MARK: UINavigationBar
+// Configurar fuente personalizada para UINavigationBar
+extension CharactersListViewController {
+    func customTitle() {
+        if let customFont = UIFont(name: "Acme-Regular", size: 20) {
+            let attributes: [NSAttributedString.Key: Any] = [
+                .font: customFont
+            ]
+            self.navigationController?.navigationBar.titleTextAttributes = attributes
+        }
+    }
+}
+
+
 
 
 

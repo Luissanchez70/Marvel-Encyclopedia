@@ -19,7 +19,8 @@ class AllListadoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = "List"
+        moreResultsButton.titleLabel?.font = UIFont(name: "Acme-Regular", size: 20)
         setTableView()
         bind()
         guard let viewModel  else { return  }
