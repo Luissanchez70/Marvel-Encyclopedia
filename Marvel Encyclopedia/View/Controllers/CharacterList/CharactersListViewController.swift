@@ -22,7 +22,7 @@ class CharactersListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         customTitle()
-        self.title = "Characters List"
+        self.title = "Lista Personajes"
         setBind()
         mainViewModel.getCharacters(currentPage: pageControl.currentPage)
         pageControllerSetUp()
