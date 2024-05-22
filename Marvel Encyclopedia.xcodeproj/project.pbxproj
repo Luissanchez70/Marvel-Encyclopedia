@@ -26,6 +26,8 @@
 		1C7665532BEB876300610A8D /* AllListadoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C7665512BEB876300610A8D /* AllListadoViewController.xib */; };
 		1C8CFE982BEE2F6900169008 /* AllListadoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8CFE972BEE2F6900169008 /* AllListadoViewModel.swift */; };
 		1C8CFE9A2BEE2F8300169008 /* AllListadoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8CFE992BEE2F8300169008 /* AllListadoModel.swift */; };
+		1CB9B5982BFDE94F00129E1F /* DetailsModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB9B5972BFDE94F00129E1F /* DetailsModelTests.swift */; };
+		1CB9B59A2BFE1D2600129E1F /* AllListadoModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB9B5992BFE1D2600129E1F /* AllListadoModelTests.swift */; };
 		3233C0212BE0FC8100FB20EB /* URLSession+Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3233C0202BE0FC8100FB20EB /* URLSession+Client.swift */; };
 		3233C0232BE0FE5400FB20EB /* URLComponents+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3233C0222BE0FE5400FB20EB /* URLComponents+Init.swift */; };
 		3233C0252BE0FF6C00FB20EB /* URLRequest+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3233C0242BE0FF6C00FB20EB /* URLRequest+Init.swift */; };
@@ -88,6 +90,8 @@
 		1C7665512BEB876300610A8D /* AllListadoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllListadoViewController.xib; sourceTree = "<group>"; };
 		1C8CFE972BEE2F6900169008 /* AllListadoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllListadoViewModel.swift; sourceTree = "<group>"; };
 		1C8CFE992BEE2F8300169008 /* AllListadoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllListadoModel.swift; sourceTree = "<group>"; };
+		1CB9B5972BFDE94F00129E1F /* DetailsModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModelTests.swift; sourceTree = "<group>"; };
+		1CB9B5992BFE1D2600129E1F /* AllListadoModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListadoModelTests.swift; sourceTree = "<group>"; };
 		3233C0202BE0FC8100FB20EB /* URLSession+Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Client.swift"; sourceTree = "<group>"; };
 		3233C0222BE0FE5400FB20EB /* URLComponents+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Init.swift"; sourceTree = "<group>"; };
 		3233C0242BE0FF6C00FB20EB /* URLRequest+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Init.swift"; sourceTree = "<group>"; };
@@ -262,6 +266,8 @@
 		D2D87FD62BD27FFD008352FE /* Marvel EncyclopediaTests */ = {
 			isa = PBXGroup;
 			children = (
+				1CB9B5992BFE1D2600129E1F /* AllListadoModelTests.swift */,
+				1CB9B5972BFDE94F00129E1F /* DetailsModelTests.swift */,
 				D2D87FD72BD27FFD008352FE /* MarvelEncyclopediaTests.swift */,
 				D2C8315F2BDBC96600D77F24 /* MarvelCharacterUseCase.swift */,
 			);
@@ -525,7 +531,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CB9B5982BFDE94F00129E1F /* DetailsModelTests.swift in Sources */,
 				D2C831602BDBC96600D77F24 /* MarvelCharacterUseCase.swift in Sources */,
+				1CB9B59A2BFE1D2600129E1F /* AllListadoModelTests.swift in Sources */,
 				D2D87FD82BD27FFD008352FE /* MarvelEncyclopediaTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -751,7 +759,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.plexus.luis.Marvel-EncyclopediaTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -770,7 +778,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.plexus.luis.Marvel-EncyclopediaTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
