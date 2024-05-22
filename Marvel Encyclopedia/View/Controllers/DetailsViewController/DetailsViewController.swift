@@ -80,7 +80,17 @@ extension DetailsViewController: UITableViewDelegate {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: story, resourceTye: .story))
         }
         
-        self.navigationController?.pushViewController(nvc, animated: true)
+        //self.navigationController?.pushViewController(nvc, animated: true)
+        //Remplazamos el stack de navegación con el nuevo view controller
+        //Solo queda el root viewController y el nuevo viewControler
+        if var viewController = self.navigationController?.viewControllers {
+            if viewController.count > 1 {
+                viewController = viewController.prefix(2) + [nvc]
+            } else {
+                viewController = viewController.prefix(1) + [nvc]
+            }
+            self.navigationController?.setViewControllers(viewController, animated: true)
+        }
     }
     
     private func selectedObject(_ resource: [Any], _ indexPath: IndexPath, _ cell: ResourcesViewCell) {
