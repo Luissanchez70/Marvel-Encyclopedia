@@ -7,11 +7,13 @@
 
 import XCTest
 import Foundation
+import Combine
 @testable import Marvel_Encyclopedia
 
 final class FetchComicsTests: XCTestCase {
     
     private var sut: FetchComics?
+    private var cancellable: Set<AnyCancellable> = []
 
     override func setUpWithError() throws {
         sut = FetchComics()
@@ -19,6 +21,7 @@ final class FetchComicsTests: XCTestCase {
 
     override func tearDownWithError() throws {
         sut = nil
+        cancellable = []
     }
     // ID existente
     func test_response_success() throws {
@@ -31,11 +34,11 @@ final class FetchComicsTests: XCTestCase {
             }
         }, receiveValue: { comicData in
             XCTAssertNotNil(comicData)
-        })
+        }).store(in: &cancellable)
     }
     
     func test_comparate_response_with_mock() {
-       
+        let expectation = self.expectation(description: "Llamada asincrona")
         let mock: ResponseComic? = FetchMockResources().execute(for: "ComicsMock", with: ResponseComic.self)
         
         if let comicDataMock = mock?.data{
@@ -46,12 +49,18 @@ final class FetchComicsTests: XCTestCase {
                 case .failure(let error):
                     XCTFail(error.localizedDescription)
                 }
+                expectation.fulfill()
+
             }, receiveValue: { comicData in
+                print("holi")
                 XCTAssertEqual(comicDataMock, comicData)
-            })
+                expectation.fulfill()
+            }).store(in: &cancellable)
         } else {
-            XCTAssertTrue(false)
+            XCTFail("Mock no es valido")
         }
+        
+        waitForExpectations(timeout: 5, handler: nil)
     }
 }
 

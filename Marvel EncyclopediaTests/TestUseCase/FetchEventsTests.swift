@@ -6,11 +6,13 @@
 //
 
 import XCTest
+import Combine
 @testable import Marvel_Encyclopedia
 
 final class FetchEventsTests: XCTestCase {
     
     private var sut: FetchEvents?
+    private var cancellable: Set<AnyCancellable> = []
 
     override func setUpWithError() throws {
         sut = FetchEvents()
@@ -18,6 +20,7 @@ final class FetchEventsTests: XCTestCase {
 
     override func tearDownWithError() throws {
         sut = nil
+        cancellable = []
     }
     // ID existente
     func test_execute1() throws {
@@ -33,45 +36,42 @@ final class FetchEventsTests: XCTestCase {
         })
     }
     
-    func test_execute2() throws {
-        let _ = sut?.execute(baseResource: .character, resourceId: 1017100, limit: 5, offset: 0).sink(receiveCompletion: { completion in
-            switch completion {
-            case .finished:
-                XCTAssertTrue(true)
-            case .failure(_):
-                XCTAssertTrue(false)
-            }
-        }, receiveValue: { eventData in
-            XCTAssertNotNil(eventData)
-        })
-    }
-    // ID no existente
-    func test_execute3() throws {
-        let _ = sut?.execute(baseResource: .character, resourceId: 5554432, limit: 5, offset:0)
-            .sink(receiveCompletion: { completion in
+    func test_comparate_response_with_mock() {
+        let expectation = self.expectation(description: "Llamada asincrona")
+        let mock: ResponseEvent? = FetchMockResources().execute(for: "EventsMock", with: ResponseEvent.self)
+        
+        if let eventDataMock = mock?.data{
+            let _ = sut?.execute(baseResource: .character, resourceId: 1011334, limit: 5, offset: 0).sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
                     XCTAssertTrue(true)
-                case .failure(_):
-                    XCTAssertTrue(false)
+                case .failure(let error):
+                    XCTFail(error.localizedDescription)
                 }
+                expectation.fulfill()
+
             }, receiveValue: { eventData in
-                XCTAssertNotNil(eventData)
-            })
+                XCTAssertEqual(eventDataMock, eventData)
+                expectation.fulfill()
+            }).store(in: &cancellable)
+        } else {
+            XCTFail("Mock no es valido")
+        }
+        
+        waitForExpectations(timeout: 5, handler: nil)
     }
-    
-    func test_execute4() throws {
-        let _ = sut?.execute(baseResource: .character, resourceId: 642314, limit: 5, offset:0)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    XCTAssertTrue(true)
-                case .failure(_):
-                    XCTAssertTrue(false)
-                }
-            }, receiveValue: { eventData in
-                XCTAssertNotNil(eventData)
-            })
+}
+
+extension EventData: Equatable {
+    public static func == (lhs: EventData, rhs: EventData) -> Bool {
+        return lhs.total == rhs.total &&
+        lhs.results == rhs.results
     }
-    
+}
+extension Event: Equatable {
+    public static func == (lhs: Event, rhs: Event) -> Bool {
+        return lhs.id == rhs.id &&
+        lhs.title == rhs.title &&
+        lhs.description == rhs.description
+    }
 }
