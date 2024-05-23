@@ -8,6 +8,14 @@
 import UIKit
 import Combine
 
+// Vista conoce a ViewModel
+// ViewModel conoce a Model
+// V -> VM -> M
+
+//Modelo no conoce a el ViewModel ni a la vista
+//ViewModel no conoce a la vista
+// M X VM X V
+
 class DetailsViewModel {
     
     var detailsModel: DetailsModel
@@ -22,6 +30,23 @@ class DetailsViewModel {
         self.detailsModel = detailsModel
         name = detailsModel.getName()
         desc = detailsModel.getDesc()
+    }
+    
+    func getNavigationTitle() -> String {
+        switch detailsModel.getType() {
+        case .character:
+            return "Characters: \(name)"
+        case .comic:
+            return "Comics: \(name)"
+        case .creator:
+            return "Creators: \(name)"
+        case .event:
+            return "Events: \(name)"
+        case .serie:
+            return "Series: \(name)"
+        case .story:
+            return "Stories: \(name)"
+        }
     }
 
     func getName() -> String {

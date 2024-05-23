@@ -21,13 +21,16 @@ class DetailsViewController: UIViewController {
     var selectedKey = "None"
     var selectedResource: [Any] = []
     var selectedTitle = ""
-    
     var viewModel: DetailsViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fullListButton.isHidden = true
         setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.title = viewModel?.getNavigationTitle()
     }
     
     @IBAction func segmentControlClicked(_ sender: UISegmentedControl) {
@@ -68,31 +71,16 @@ extension DetailsViewController: UITableViewDelegate {
         
         if let comic = selectedResource[indexPath.row] as? Comic {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: comic, resourceTye: .comic))
-            if  let name = comic.title {
-                nvc.title = "Comics: \(name)"
-            }
         } else if let series = selectedResource[indexPath.row] as? Series {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: series, resourceTye: .serie))
-            if  let name = series.title {
-                nvc.title = "Series: \(name)"
-            }
         } else if let creator = selectedResource[indexPath.row] as? Creator {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: creator, resourceTye: .creator))
-            if  let name = creator.firstName {
-                nvc.title = "Creators: \(name)"
-            }
         } else if let event = selectedResource[indexPath.row] as? Event {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: event, resourceTye: .event))
-            if  let name = event.title {
-                nvc.title = "Events: \(name)"
-            }
         } else if let character = selectedResource[indexPath.row] as? Character {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: character, resourceTye: .character))
         } else if let story = selectedResource[indexPath.row] as? Storie {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: story, resourceTye: .story))
-            if  let name = story.title {
-                nvc.title = "Stories: \(name)"
-            }
         }
         
         //self.navigationController?.pushViewController(nvc, animated: true)
