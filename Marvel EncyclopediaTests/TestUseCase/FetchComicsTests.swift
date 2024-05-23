@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Foundation
 @testable import Marvel_Encyclopedia
 
 final class FetchComicsTests: XCTestCase {
@@ -20,7 +21,7 @@ final class FetchComicsTests: XCTestCase {
         sut = nil
     }
     // ID existente
-    func test_execute1() throws {
+    func test_response_success() throws {
         let _ = sut?.execute(baseResource: .character, resourceId: 1011334, limit: 5, offset: 0).sink(receiveCompletion: { completion in
             switch completion {
             case .finished:
@@ -33,47 +34,39 @@ final class FetchComicsTests: XCTestCase {
         })
     }
     
-    func test_execute2() throws {
-        let _ = sut?.execute(baseResource: .character, resourceId: 1017100, limit: 5, offset: 0).sink(receiveCompletion: { completion in
-            switch completion {
-            case .finished:
-                XCTAssertTrue(true)
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-            }
-        }, receiveValue: { comicData in
-            
-            
-            XCTAssertNotNil(comicData)
-        })
-    }
-    // ID no existente
-    func test_execute3() throws {
-        let _ = sut?.execute(baseResource: .character, resourceId: 5554432, limit: 5, offset:0)
-            .sink(receiveCompletion: { completion in
+    func test_comparate_response_with_mock() {
+       
+        let mock: ResponseComic? = FetchMockResources().execute(for: "ComicsMock", with: ResponseComic.self)
+        
+        if let comicDataMock = mock?.data{
+            let _ = sut?.execute(baseResource: .character, resourceId: 1011334, limit: 5, offset: 0).sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
                     XCTAssertTrue(true)
-                case .failure(_):
-                    XCTAssertTrue(false)
+                case .failure(let error):
+                    XCTFail(error.localizedDescription)
                 }
             }, receiveValue: { comicData in
-                XCTAssertNotNil(comicData)
+                XCTAssertEqual(comicDataMock, comicData)
             })
+        } else {
+            XCTAssertTrue(false)
+        }
     }
-    
-    func test_execute4() throws {
-        let _ = sut?.execute(baseResource: .character, resourceId: 642314, limit: 5, offset:0)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    XCTAssertTrue(true)
-                case .failure(_):
-                    XCTAssertTrue(false)
-                }
-            }, receiveValue: { comicData in
-                XCTAssertNotNil(comicData)
-            })
+}
+
+extension ComicData: Equatable {
+    public static func == (lhs: ComicData, rhs: ComicData) -> Bool {
+        
+        return lhs.total == rhs.total &&
+        lhs.results == rhs.results
     }
-    
+}
+extension Comic: Equatable {
+    public static func == (lhs: Comic, rhs: Comic) -> Bool {
+        
+        return lhs.id == rhs.id &&
+        lhs.title == rhs.title &&
+        lhs.description == rhs.description
+    }
 }
