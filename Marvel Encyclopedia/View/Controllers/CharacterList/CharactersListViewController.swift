@@ -74,6 +74,7 @@ extension CharactersListViewController: UITableViewDelegate {
         let character = mainViewModel.characterList[indexPath.row]
         let detailsViewC = DetailsViewController(nibName: "DetailsViewController", bundle: nil)
         detailsViewC.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: character, resourceTye: .character))
+        detailsViewC.title = "Character: \(character.name)"
         self.navigationController?.pushViewController(detailsViewC, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }

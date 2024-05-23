@@ -20,22 +20,17 @@ class DetailsViewController: UIViewController {
     var cancelebles: Set<AnyCancellable> = []
     var selectedKey = "None"
     var selectedResource: [Any] = []
+    var selectedTitle = ""
     
     var viewModel: DetailsViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        name.font = UIFont(name: "Marvel-Bold", size: 35)
-        desc.font = UIFont(name: "marvel-Regular", size: 20)
-        self.title = "Personaje"
-        
         fullListButton.isHidden = true
-        fullListButton.titleLabel?.font = UIFont(name: "Acme-Regular", size: 19)
         setupView()
     }
     
     @IBAction func segmentControlClicked(_ sender: UISegmentedControl) {
-        
         let index = sender.selectedSegmentIndex
         selectedKey = sender.titleForSegment(at: index) ?? "Title not found received nill "
         selectSegmentfor(key: selectedKey)
@@ -73,16 +68,31 @@ extension DetailsViewController: UITableViewDelegate {
         
         if let comic = selectedResource[indexPath.row] as? Comic {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: comic, resourceTye: .comic))
+            if  let name = comic.title {
+                nvc.title = "Comics: \(name)"
+            }
         } else if let series = selectedResource[indexPath.row] as? Series {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: series, resourceTye: .serie))
+            if  let name = series.title {
+                nvc.title = "Series: \(name)"
+            }
         } else if let creator = selectedResource[indexPath.row] as? Creator {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: creator, resourceTye: .creator))
+            if  let name = creator.firstName {
+                nvc.title = "Creators: \(name)"
+            }
         } else if let event = selectedResource[indexPath.row] as? Event {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: event, resourceTye: .event))
+            if  let name = event.title {
+                nvc.title = "Events: \(name)"
+            }
         } else if let character = selectedResource[indexPath.row] as? Character {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: character, resourceTye: .character))
         } else if let story = selectedResource[indexPath.row] as? Storie {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: story, resourceTye: .story))
+            if  let name = story.title {
+                nvc.title = "Stories: \(name)"
+            }
         }
         
         //self.navigationController?.pushViewController(nvc, animated: true)
@@ -110,7 +120,6 @@ extension DetailsViewController: UITableViewDelegate {
         guard let item  else { return }
         cell.configure(resorceItem: item)
     }
-    
 }
 
 extension DetailsViewController: UITableViewDataSource  {
@@ -132,6 +141,8 @@ extension DetailsViewController: UITableViewDataSource  {
 }
 private extension DetailsViewController {
     func setupView() {
+        setStyle()
+        //setNavigationBar()
         name.text = ""
         tableView.delegate = self
         tableView.dataSource = self
@@ -139,6 +150,18 @@ private extension DetailsViewController {
         loadDetails()
         setBinds()
     }
+    
+    func setNavigationBar() {
+        guard let viewModel  else { return }
+        self.title = "Character: \(viewModel.getName())"
+    }
+    
+    func setStyle() {
+        name.font = UIFont(name: "Marvel-Bold", size: 35)
+        desc.font = UIFont(name: "marvel-Regular", size: 20)
+        fullListButton.titleLabel?.font = UIFont(name: "Acme-Regular", size: 19)
+    }
+    
     func loadDetails() {
         guard let viewModel  else { return }
         name.text = viewModel.getName()
