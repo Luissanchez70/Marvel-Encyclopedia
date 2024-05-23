@@ -38,10 +38,12 @@ final class FetchComicsTests: XCTestCase {
             switch completion {
             case .finished:
                 XCTAssertTrue(true)
-            case .failure(_):
-                XCTAssertTrue(false)
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
             }
         }, receiveValue: { comicData in
+            
+            
             XCTAssertNotNil(comicData)
         })
     }
