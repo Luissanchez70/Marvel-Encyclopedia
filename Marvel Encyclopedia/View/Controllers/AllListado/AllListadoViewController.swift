@@ -20,7 +20,7 @@ class AllListadoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "List"
-        moreResultsButton.titleLabel?.font = UIFont(name: "Acme-Regular", size: 20)
+        customNavigationBar()
         setTableView()
         bind()
         guard let viewModel  else { return  }
@@ -31,6 +31,12 @@ class AllListadoViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: "ResourcesViewCell", bundle: nil), forCellReuseIdentifier: "ResourcesViewCell")
+    }
+    
+    func customNavigationBar() {
+        self.navigationItem.largeTitleDisplayMode = .never
+        moreResultsButton.titleLabel?.font = UIFont(name: "Acme-Regular", size: 20)
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     func bind() {

@@ -175,6 +175,7 @@ private extension DetailsViewController {
     func setupNavigationBarAppearance() {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationController?.navigationBar.tintColor = .white
         self.navigationItem.largeTitleDisplayMode = .always
         
         let appearance = UINavigationBarAppearance()
