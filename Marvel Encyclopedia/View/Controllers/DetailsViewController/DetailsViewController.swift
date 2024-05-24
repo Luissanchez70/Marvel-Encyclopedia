@@ -133,7 +133,9 @@ private extension DetailsViewController {
     func setupView() {
         setStyle()
         setupNavigationBarAppearance()
+        customSegmentedControl()
         name.text = ""
+        image.layer.cornerRadius = 15
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "ResourcesViewCell", bundle: nil), forCellReuseIdentifier: "ResourcesViewCell")
@@ -181,10 +183,12 @@ private extension DetailsViewController {
         
         if let customFont = UIFont(name: "Acme-Regular", size: 25) {
             appearance.largeTitleTextAttributes = [
-                .font: customFont
+                .font: customFont,
+                .foregroundColor: UIColor.white
             ]
             appearance.titleTextAttributes = [
-                .font: customFont
+                .font: customFont,
+                .foregroundColor: UIColor.white
             ]
         }
         
@@ -202,6 +206,13 @@ private extension DetailsViewController {
         imageView.contentMode = .scaleAspectFit
         titleView.addSubview(imageView)
         navigationItem.titleView = titleView
+    }
+    
+    func customSegmentedControl() {
+        let titleTextColorWhite = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        let tiileTextColorBlack = [NSAttributedString.Key.foregroundColor:UIColor.black]
+        resourceSelector.setTitleTextAttributes(titleTextColorWhite, for: .normal)
+        resourceSelector.setTitleTextAttributes(tiileTextColorBlack, for: .selected)
     }
 }
 
