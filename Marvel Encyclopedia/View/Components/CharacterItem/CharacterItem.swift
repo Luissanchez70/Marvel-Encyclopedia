@@ -12,15 +12,20 @@ class CharacterItem: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        nameLabel.font = UIFont(name: "Marvel-Bold", size: 30)
-        descLabel.font = UIFont(name: "Marvel-Regular", size: 15)
+        customCell()
+      
     }
  
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
  
         // Configure the view for the selected state
+    }
+    
+    func customCell() {
+        nameLabel.font = UIFont(name: "Marvel-Bold", size: 30)
+        descLabel.font = UIFont(name: "Marvel-Regular", size: 15)
+        thumbnail.layer.cornerRadius = 15
     }
     
     func configure(charater: Character) {

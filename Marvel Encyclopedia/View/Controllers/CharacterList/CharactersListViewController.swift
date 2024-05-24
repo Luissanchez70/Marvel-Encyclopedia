@@ -48,7 +48,11 @@ class CharactersListViewController: UIViewController {
     }
     
     @IBAction func searchNavigationBar(_ sender: Any) {
-        characterSearchBar.isHidden = false
+        if characterSearchBar.isHidden {
+                    characterSearchBar.isHidden = false
+                } else {
+                    characterSearchBar.isHidden = true
+                }
     }
 }
 
@@ -131,7 +135,8 @@ extension CharactersListViewController {
         
         if let customFont = UIFont(name: "Acme-Regular", size: 25) {
             let attributes: [NSAttributedString.Key: Any] = [
-                .font: customFont
+                .font: customFont,
+                .foregroundColor: UIColor.white
             ]
             self.navigationController?.navigationBar.titleTextAttributes = attributes
         }
