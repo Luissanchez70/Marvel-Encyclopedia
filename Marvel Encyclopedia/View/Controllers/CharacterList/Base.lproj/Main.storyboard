@@ -20,7 +20,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IOc-N9-bLw">
                                 <rect key="frame" x="0.0" y="103" width="393" height="695.66666666666663"/>
                                 <subviews>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dbb-tE-9Vh">
+                                    <searchBar contentMode="redraw" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="dbb-tE-9Vh">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
@@ -29,7 +29,8 @@
                                     </searchBar>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="u0D-B6-znc">
                                         <rect key="frame" x="0.0" y="56" width="393" height="614"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" red="0.20784312490000001" green="0.20784312490000001" blue="0.18823529780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="sectionIndexBackgroundColor" red="0.20784312490000001" green="0.20784312490000001" blue="0.18823529780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <view key="tableFooterView" contentMode="scaleToFill" id="w14-aa-mpO">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="128"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -41,7 +42,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <color key="backgroundColor" red="0.20784312490000001" green="0.20784312490000001" blue="0.18823529780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstItem="Zhl-tV-5XP" firstAttribute="centerY" secondItem="w14-aa-mpO" secondAttribute="centerY" id="FX9-eR-JKe"/>
                                                 <constraint firstItem="Zhl-tV-5XP" firstAttribute="centerX" secondItem="w14-aa-mpO" secondAttribute="centerX" id="JcE-wR-yZH"/>
@@ -61,10 +62,11 @@
                                         </connections>
                                     </pageControl>
                                 </subviews>
+                                <color key="backgroundColor" red="0.20784312490000001" green="0.20784312490000001" blue="0.18823529780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.20784312490000001" green="0.20784312490000001" blue="0.18823529780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="IOc-N9-bLw" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="DYc-Wr-4oQ"/>
                             <constraint firstItem="IOc-N9-bLw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="JZV-g3-D9Q"/>
@@ -117,9 +119,6 @@
         </namedColor>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
