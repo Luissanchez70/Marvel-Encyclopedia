@@ -30,6 +30,7 @@ class DetailsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.title = viewModel?.getNavigationTitle()
     }
     
@@ -130,18 +131,13 @@ extension DetailsViewController: UITableViewDataSource  {
 private extension DetailsViewController {
     func setupView() {
         setStyle()
-        //setNavigationBar()
+        setupNavigationBarAppearance()
         name.text = ""
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "ResourcesViewCell", bundle: nil), forCellReuseIdentifier: "ResourcesViewCell")
         loadDetails()
         setBinds()
-    }
-    
-    func setNavigationBar() {
-        guard let viewModel  else { return }
-        self.title = "Character: \(viewModel.getName())"
     }
     
     func setStyle() {
@@ -172,7 +168,44 @@ private extension DetailsViewController {
             desc.text = descText
         }
     }
+    
+    func setupNavigationBarAppearance() {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.largeTitleDisplayMode = .always
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.shadowColor = .clear
+        
+        
+        
+        if let customFont = UIFont(name: "Acme-Regular", size: 25) {
+            appearance.largeTitleTextAttributes = [
+                .font: customFont
+            ]
+            appearance.titleTextAttributes = [
+                .font: customFont
+            ]
+        }
+        
+        setupImageTitle()
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
+    func setupImageTitle() {
+        let titleView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+        let imageView = UIImageView(frame: CGRect(x: 55, y: 0, width: 80, height: 40))
+        imageView.image = UIImage(named: "marvelTitulo")
+        imageView.contentMode = .scaleAspectFit
+        titleView.addSubview(imageView)
+        navigationItem.titleView = titleView
+    }
 }
+
 extension  DetailsViewController {
     func setBinds() {
         guard let viewModel  else { return }

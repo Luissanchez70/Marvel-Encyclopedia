@@ -35,7 +35,7 @@ class DetailsViewModel {
     func getNavigationTitle() -> String {
         switch detailsModel.getType() {
         case .character:
-            return "Characters: \(name)"
+            return "Character: \(name)"
         case .comic:
             return "Comics: \(name)"
         case .creator:

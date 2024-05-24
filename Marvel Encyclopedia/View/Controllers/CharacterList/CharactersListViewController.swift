@@ -22,12 +22,18 @@ class CharactersListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         customTitle()
-        self.title = "Lista Personajes"
         setBind()
         mainViewModel.getCharacters(currentPage: pageControl.currentPage)
         pageControllerSetUp()
+        characterSearchBar.isHidden = true
         characterTable.register(UINib(nibName: "CharacterItem", bundle: nil), forCellReuseIdentifier: "CharacterItem")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        characterSearchBar.isHidden = true
+    }
+    
     private func setBind() {
         getCancellable = mainViewModel.$characterList.sink { list in
             DispatchQueue.main.async {
@@ -39,6 +45,10 @@ class CharactersListViewController: UIViewController {
                 self.pageControl.numberOfPages = num
             }
         }
+    }
+    
+    @IBAction func searchNavigationBar(_ sender: Any) {
+        characterSearchBar.isHidden = false
     }
 }
 
@@ -111,13 +121,22 @@ extension CharactersListViewController {
 // Configurar fuente personalizada para UINavigationBar
 extension CharactersListViewController {
     func customTitle() {
-        if let customFont = UIFont(name: "Acme-Regular", size: 20) {
+        self.navigationItem.largeTitleDisplayMode = .never
+        self.title = "Characters List"
+        
+        if let navigationBar = navigationController?.navigationBar {
+            navigationBar.shadowImage = UIImage()
+            navigationBar.setBackgroundImage(UIImage(), for: .default)
+        }
+        
+        if let customFont = UIFont(name: "Acme-Regular", size: 25) {
             let attributes: [NSAttributedString.Key: Any] = [
                 .font: customFont
             ]
             self.navigationController?.navigationBar.titleTextAttributes = attributes
         }
     }
+    
 }
 
 
