@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -47,18 +46,19 @@
                                                 <constraint firstAttribute="height" constant="43" id="q0b-w1-BA8"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QU8-TA-6bk" userLabel="Description">
                                             <rect key="frame" x="0.0" y="259" width="369" height="212.66666666666663"/>
                                             <string key="text">May Mayday Parker is the daughter of Spider-Man and Mary Jane Watson-Parker. Born with all her father powers-and the same silly sense of humor-shes grown up to become one of Earths most trusted heroes and a fitting tribute to her proud papa.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3kg-lT-5VS">
                                             <rect key="frame" x="20" y="479.66666666666663" width="329" height="31"/>
+                                            <color key="backgroundColor" red="0.1647058874" green="0.1647058874" blue="0.14901961389999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="12f-AD-G0B"/>
                                             </constraints>
@@ -68,6 +68,7 @@
                                                 <segment title="Events"/>
                                                 <segment title="Stories"/>
                                             </segments>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <action selector="segmentControlClicked:" destination="-1" eventType="valueChanged" id="pml-gg-KbE"/>
                                             </connections>
@@ -75,16 +76,19 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hF6-02-Ujz">
                                             <rect key="frame" x="0.0" y="517.66666666666663" width="369" height="200"/>
                                             <subviews>
-                                                <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tlj-2g-SGf">
-                                                    <rect key="frame" x="20" y="0.0" width="329" height="300"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tlj-2g-SGf">
+                                                    <rect key="frame" x="20" y="0.0" width="329" height="200"/>
+                                                    <color key="backgroundColor" red="0.1647058874" green="0.1647058874" blue="0.14901961389999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="sectionIndexBackgroundColor" red="0.1647058874" green="0.1647058874" blue="0.14901961389999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </tableView>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <color key="backgroundColor" red="0.1647058874" green="0.1647058874" blue="0.14901961389999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
+                                                <constraint firstItem="tlj-2g-SGf" firstAttribute="top" secondItem="hF6-02-Ujz" secondAttribute="top" id="0tC-NL-eQw"/>
                                                 <constraint firstAttribute="height" constant="200" id="Mpn-eq-ITu"/>
                                                 <constraint firstItem="tlj-2g-SGf" firstAttribute="height" secondItem="hF6-02-Ujz" secondAttribute="height" id="Uh9-4n-YUI"/>
                                                 <constraint firstItem="tlj-2g-SGf" firstAttribute="width" secondItem="hF6-02-Ujz" secondAttribute="width" multiplier="0.891599" id="ZpB-iF-BH7"/>
+                                                <constraint firstItem="tlj-2g-SGf" firstAttribute="centerX" secondItem="hF6-02-Ujz" secondAttribute="centerX" id="tyS-hO-BF4"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EAM-wj-420">
@@ -93,13 +97,15 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Y5-VC-wpR">
                                                     <rect key="frame" x="128.66666666666666" y="20.000000000000004" width="111.66666666666666" height="34.333333333333343"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="filled" title="Ir al Listado"/>
+                                                    <buttonConfiguration key="configuration" style="filled" title="Ir al Listado">
+                                                        <color key="baseBackgroundColor" red="0.44730508209999997" green="0.44730508209999997" blue="0.44730508209999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    </buttonConfiguration>
                                                     <connections>
                                                         <action selector="IrAllListadoPressed:" destination="-1" eventType="touchUpInside" id="nU4-JW-hZX"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <color key="backgroundColor" red="0.1647058874" green="0.1647058874" blue="0.14901961389999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstItem="5Y5-VC-wpR" firstAttribute="centerX" secondItem="EAM-wj-420" secondAttribute="centerX" id="8YP-me-Fmn"/>
                                                 <constraint firstItem="5Y5-VC-wpR" firstAttribute="centerY" secondItem="EAM-wj-420" secondAttribute="centerY" id="FXE-mh-fQ9"/>
@@ -119,7 +125,7 @@
                                     </constraints>
                                 </stackView>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" red="0.1647058874" green="0.1647058874" blue="0.14901961389999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="MSH-Jz-Dlj" secondAttribute="bottom" id="44u-GI-6FB"/>
                                 <constraint firstItem="MSH-Jz-Dlj" firstAttribute="top" secondItem="MnK-GZ-IFq" secondAttribute="top" id="Eta-uV-BbB"/>
@@ -139,7 +145,7 @@
                 </scrollView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="M3E-HU-1ZA"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" red="0.1647058874" green="0.1647058874" blue="0.14901961389999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstItem="LD2-qP-GTR" firstAttribute="leading" secondItem="M3E-HU-1ZA" secondAttribute="leading" id="5nd-hI-GeM"/>
                 <constraint firstItem="MnK-GZ-IFq" firstAttribute="width" secondItem="M3E-HU-1ZA" secondAttribute="width" id="Yux-8a-NXW"/>
@@ -150,9 +156,4 @@
             <point key="canvasLocation" x="-944.27480916030527" y="35.91549295774648"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

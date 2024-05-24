@@ -21,11 +21,19 @@ class CharactersListViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        customTitle()
         setBind()
         mainViewModel.getCharacters(currentPage: pageControl.currentPage)
         pageControllerSetUp()
+        characterSearchBar.isHidden = true
         characterTable.register(UINib(nibName: "CharacterItem", bundle: nil), forCellReuseIdentifier: "CharacterItem")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        characterSearchBar.isHidden = true
+    }
+    
     private func setBind() {
         getCancellable = mainViewModel.$characterList.sink { list in
             DispatchQueue.main.async {
@@ -38,7 +46,16 @@ class CharactersListViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func searchNavigationBar(_ sender: Any) {
+        if characterSearchBar.isHidden {
+                    characterSearchBar.isHidden = false
+                } else {
+                    characterSearchBar.isHidden = true
+                }
+    }
 }
+
 // MARK: -  Table setup
 extension CharactersListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -71,6 +88,7 @@ extension CharactersListViewController: UITableViewDelegate {
         let character = mainViewModel.characterList[indexPath.row]
         let detailsViewC = DetailsViewController(nibName: "DetailsViewController", bundle: nil)
         detailsViewC.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: character, resourceTye: .character))
+        detailsViewC.title = "Character: \(character.name)"
         self.navigationController?.pushViewController(detailsViewC, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -102,6 +120,31 @@ extension CharactersListViewController {
         }
     }
 }
+
+// MARK: UINavigationBar
+// Configurar fuente personalizada para UINavigationBar
+extension CharactersListViewController {
+    func customTitle() {
+        self.navigationItem.largeTitleDisplayMode = .never
+        self.title = "Characters List"
+        
+        if let navigationBar = navigationController?.navigationBar {
+            navigationBar.shadowImage = UIImage()
+            navigationBar.setBackgroundImage(UIImage(), for: .default)
+        }
+        
+        if let customFont = UIFont(name: "Acme-Regular", size: 25) {
+            let attributes: [NSAttributedString.Key: Any] = [
+                .font: customFont,
+                .foregroundColor: UIColor.white
+            ]
+            self.navigationController?.navigationBar.titleTextAttributes = attributes
+        }
+    }
+    
+}
+
+
 
 
 

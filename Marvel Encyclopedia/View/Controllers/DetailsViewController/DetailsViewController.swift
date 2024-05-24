@@ -20,7 +20,7 @@ class DetailsViewController: UIViewController {
     var cancelebles: Set<AnyCancellable> = []
     var selectedKey = "None"
     var selectedResource: [Any] = []
-    
+    var selectedTitle = ""
     var viewModel: DetailsViewModel?
     
     override func viewDidLoad() {
@@ -29,8 +29,12 @@ class DetailsViewController: UIViewController {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.title = viewModel?.getNavigationTitle()
+    }
+    
     @IBAction func segmentControlClicked(_ sender: UISegmentedControl) {
-        
         let index = sender.selectedSegmentIndex
         selectedKey = sender.titleForSegment(at: index) ?? "Title not found received nill "
         selectSegmentfor(key: selectedKey)
@@ -91,6 +95,7 @@ extension DetailsViewController: UITableViewDelegate {
             }
             self.navigationController?.setViewControllers(viewController, animated: true)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     private func selectedObject(_ resource: [Any], _ indexPath: IndexPath, _ cell: ResourcesViewCell) {
@@ -105,7 +110,6 @@ extension DetailsViewController: UITableViewDelegate {
         guard let item  else { return }
         cell.configure(resorceItem: item)
     }
-    
 }
 
 extension DetailsViewController: UITableViewDataSource  {
@@ -127,13 +131,24 @@ extension DetailsViewController: UITableViewDataSource  {
 }
 private extension DetailsViewController {
     func setupView() {
+        setStyle()
+        setupNavigationBarAppearance()
+        customSegmentedControl()
         name.text = ""
+        image.layer.cornerRadius = 15
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "ResourcesViewCell", bundle: nil), forCellReuseIdentifier: "ResourcesViewCell")
         loadDetails()
         setBinds()
     }
+    
+    func setStyle() {
+        name.font = UIFont(name: "Marvel-Bold", size: 35)
+        desc.font = UIFont(name: "marvel-Regular", size: 20)
+        fullListButton.titleLabel?.font = UIFont(name: "Acme-Regular", size: 19)
+    }
+    
     func loadDetails() {
         guard let viewModel  else { return }
         name.text = viewModel.getName()
@@ -156,7 +171,52 @@ private extension DetailsViewController {
             desc.text = descText
         }
     }
+    
+    func setupNavigationBarAppearance() {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationItem.largeTitleDisplayMode = .always
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.shadowColor = .clear
+        
+        if let customFont = UIFont(name: "Acme-Regular", size: 25) {
+            appearance.largeTitleTextAttributes = [
+                .font: customFont,
+                .foregroundColor: UIColor.white
+            ]
+            appearance.titleTextAttributes = [
+                .font: customFont,
+                .foregroundColor: UIColor.white
+            ]
+        }
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        setupImageTitle()
+    }
+    
+    func setupImageTitle() {
+        let titleView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+        let imageView = UIImageView(frame: CGRect(x: 55, y: 0, width: 80, height: 40))
+        imageView.image = UIImage(named: "marvelTitulo")
+        imageView.contentMode = .scaleAspectFit
+        titleView.addSubview(imageView)
+        navigationItem.titleView = titleView
+    }
+    
+    func customSegmentedControl() {
+        let titleTextColorWhite = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        let tiileTextColorBlack = [NSAttributedString.Key.foregroundColor:UIColor.black]
+        resourceSelector.setTitleTextAttributes(titleTextColorWhite, for: .normal)
+        resourceSelector.setTitleTextAttributes(tiileTextColorBlack, for: .selected)
+    }
 }
+
 extension  DetailsViewController {
     func setBinds() {
         guard let viewModel  else { return }
@@ -184,3 +244,4 @@ extension  DetailsViewController {
         }
     }
 }
+
