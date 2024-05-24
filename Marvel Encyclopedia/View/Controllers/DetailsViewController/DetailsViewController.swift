@@ -95,6 +95,7 @@ extension DetailsViewController: UITableViewDelegate {
             }
             self.navigationController?.setViewControllers(viewController, animated: true)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     private func selectedObject(_ resource: [Any], _ indexPath: IndexPath, _ cell: ResourcesViewCell) {
