@@ -178,8 +178,6 @@ private extension DetailsViewController {
         appearance.configureWithTransparentBackground()
         appearance.shadowColor = .clear
         
-        
-        
         if let customFont = UIFont(name: "Acme-Regular", size: 25) {
             appearance.largeTitleTextAttributes = [
                 .font: customFont
@@ -189,11 +187,11 @@ private extension DetailsViewController {
             ]
         }
         
-        setupImageTitle()
-        
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        setupImageTitle()
     }
     
     func setupImageTitle() {
