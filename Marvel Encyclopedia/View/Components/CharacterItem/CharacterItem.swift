@@ -30,11 +30,12 @@ class CharacterItem: UITableViewCell {
     
     func configure(charater: Character) {
         nameLabel.text = charater.name
-        if let desc = charater.description  {
-            descLabel.isHidden = false
-            descLabel.text = desc
-        }  else {
-            descLabel.isHidden = true
+        if let desc = charater.description {
+            if desc.isEmpty {
+                descLabel.text = "Without description"
+            } else {
+                descLabel.text = desc
+            }
         }
         thumbnail.isHidden = true
         loadingIndicator.style = UIActivityIndicatorView.Style.large
