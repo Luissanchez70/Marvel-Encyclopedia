@@ -2,14 +2,14 @@
 //  AllListadoModelTests.swift
 //  Marvel EncyclopediaTests
 //
-//  Created by Diogo Filipe Abreu Rodrigues on 24/05/2024.
+
+//  Created by Diogo Filipe Abreu Rodrigues on 22/05/2024.
 //
 
 import XCTest
 @testable import Marvel_Encyclopedia
 
 final class AllListadoModelTests: XCTestCase {
-
     var goodModel : AllListadoModel!
     var badModel : AllListadoModel!
     
@@ -75,5 +75,5 @@ final class AllListadoModelTests: XCTestCase {
             XCTAssertEqual(self.badModel.getResources().count, 0)
         }
     }
-    
+  
 }
