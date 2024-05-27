@@ -65,6 +65,7 @@ class DetailsViewController: UIViewController {
         self.navigationController?.pushViewController(nvc, animated: true)
     }
 }
+
 extension DetailsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -129,6 +130,7 @@ extension DetailsViewController: UITableViewDataSource  {
         return cell
     }
 }
+
 private extension DetailsViewController {
     func setupView() {
         setStyle()
