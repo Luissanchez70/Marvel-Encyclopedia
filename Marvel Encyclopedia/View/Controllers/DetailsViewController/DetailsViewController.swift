@@ -185,11 +185,11 @@ private extension DetailsViewController {
         if let customFont = UIFont(name: "Acme-Regular", size: 25) {
             appearance.largeTitleTextAttributes = [
                 .font: customFont,
-                .foregroundColor: UIColor.white
+                .foregroundColor: UIColor.red
             ]
             appearance.titleTextAttributes = [
                 .font: customFont,
-                .foregroundColor: UIColor.white
+                .foregroundColor: UIColor.red
             ]
         }
         

@@ -136,7 +136,7 @@ extension CharactersListViewController {
         if let customFont = UIFont(name: "Acme-Regular", size: 25) {
             let attributes: [NSAttributedString.Key: Any] = [
                 .font: customFont,
-                .foregroundColor: UIColor.white
+                .foregroundColor: UIColor.red
             ]
             self.navigationController?.navigationBar.titleTextAttributes = attributes
         }
