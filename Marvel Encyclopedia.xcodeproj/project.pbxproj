@@ -343,6 +343,7 @@
 		D2D87FD62BD27FFD008352FE /* Marvel EncyclopediaTests */ = {
 			isa = PBXGroup;
 			children = (
+				D2D9FF162BFB3F0C0014646C /* TestUseCase */,
 				1CB9B5992BFE1D2600129E1F /* AllListadoModelTests.swift */,
 				1CB9B5972BFDE94F00129E1F /* DetailsModelTests.swift */,
 				D2D87FD72BD27FFD008352FE /* MarvelEncyclopediaTests.swift */,
@@ -543,6 +544,8 @@
 				1C5126652BD6B70700EA45CA /* Launch Screen.storyboard in Resources */,
 				1C74BFD92BD960B700CC694E /* DetailsViewController.xib in Resources */,
 				D2D87FCA2BD27FFD008352FE /* Assets.xcassets in Resources */,
+				D2D157192BFF43B400B19943 /* CharacterMock.json in Resources */,
+				D2D1571C2BFF459300B19943 /* CharacterNameMock.json in Resources */,
 				9F3278022BFC9CFB000D6FF6 /* marvelbold.ttf in Resources */,
 				9F3278032BFC9CFB000D6FF6 /* marvelregular.ttf in Resources */,
 				D2D87FC82BD27FFB008352FE /* Base in Resources */,
@@ -637,8 +640,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2D9FF1C2BFB4EE70014646C /* FetchEventsTests.swift in Sources */,
+				D2D9FF1E2BFB55B80014646C /* FetchCreatorTests.swift in Sources */,
+				D2D9FF202BFB5C670014646C /* FetchSeriesTests.swift in Sources */,
+				D2D9FF1A2BFB48580014646C /* FetchStoriesTests.swift in Sources */,
+				D2D9FF182BFB40390014646C /* FetchComicsTests.swift in Sources */,
 				1CB9B5982BFDE94F00129E1F /* DetailsModelTests.swift in Sources */,
 				D2C831602BDBC96600D77F24 /* MarvelCharacterUseCase.swift in Sources */,
+				D2D9FF222BFB5EC00014646C /* FetchCharacterTests.swift in Sources */,
+				D2D1570E2BFF2EE100B19943 /* FetchMockResources.swift in Sources */,
 				1CB9B59A2BFE1D2600129E1F /* AllListadoModelTests.swift in Sources */,
 				D2D87FD82BD27FFD008352FE /* MarvelEncyclopediaTests.swift in Sources */,
 				1C63371D2C009C4800975CD9 /* AllListadoModelTests.swift in Sources */,
