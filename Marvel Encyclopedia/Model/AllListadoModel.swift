@@ -10,7 +10,7 @@ import Foundation
 
 
 class AllListadoModel {
-    private var id: Int 
+    private var id: Int
     private var type : ResourceType
     private var targetTyoe : ResourceType
     private var resources: [Any] = []
@@ -27,7 +27,6 @@ class AllListadoModel {
     }
     
     func requestNextPage(completion : @escaping (Bool) -> Void) {
-        
         switch targetTyoe {
         case .comic:
             addToDiccionary(request: FetchComics(), completion: completion)
@@ -44,7 +43,7 @@ class AllListadoModel {
         }
     }
 
-    func addToDiccionary<Request: FetchRequest>( request: Request, completion: @escaping (Bool) -> Void){
+    func addToDiccionary<Request: FetchRequest>( request: Request, completion: @escaping (Bool) -> Void) {
         
         request.execute(baseResource: type, resourceId: id, limit: limit, offset: offset).sink { completion in
             switch completion {
@@ -57,7 +56,6 @@ class AllListadoModel {
         } receiveValue: { data in
             
             DispatchQueue.main.async {
-                
                 if let data = data as? ComicData {
                     self.resources.append(contentsOf: data.results)
                     self.total = data.total
