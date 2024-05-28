@@ -2,7 +2,7 @@
 //  FetchMockResources.swift
 //  Marvel EncyclopediaTests
 //
-//  Created by Luis Fernando Sanchez Muñoz on 23/5/24.
+//  Created by Luis Fernando Sanchez Muñoz on 27/5/24.
 //
 
 import Foundation

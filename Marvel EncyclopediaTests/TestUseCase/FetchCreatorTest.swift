@@ -1,21 +1,20 @@
 //
-//  SeriesMock.swift
+//  FetchCreatorTest.swift
 //  Marvel EncyclopediaTests
 //
-//  Created by Luis Fernando Sanchez Muñoz on 27/5/24.
+//  Created by Sonia Ujaque Ortiz on 27/5/24.
 //
 
 import XCTest
-import Foundation
 import Combine
 @testable import Marvel_Encyclopedia
 
-final class SeriesMock: XCTestCase {
-
-    private var sut: FetchSeries?
+final class FetchCreatorTest: XCTestCase {
+    private var sut: FetchCreator?
     private var cancellable: Set<AnyCancellable> = []
+
     override func setUpWithError() throws {
-       sut = FetchSeries()
+        sut = FetchCreator()
     }
 
     override func tearDownWithError() throws {
@@ -23,11 +22,11 @@ final class SeriesMock: XCTestCase {
         cancellable = []
     }
     
-    func test_fetch_all_series() {
+    func test_fetchCreator() {
         let expectation = self.expectation(description: "Llamada asincrona")
-        let mock: ResponseSeries? = FetchMockResources().execute(for: "SeriesMock", with: ResponseSeries.self)
+        let mock = FetchMockResources().execute(for: "CreatorsMock", with: ResponseCreator.self)
         if let mockData = mock?.data {
-            let _ = sut?.execute(baseResource: .character, resourceId: 1011334, limit: 5, offset: 0)
+            sut?.execute(baseResource: .comic, resourceId: 269, limit: 5, offset: 0)
                 .sink(receiveCompletion: { completion in
                     switch completion {
                     case .finished:
@@ -36,27 +35,32 @@ final class SeriesMock: XCTestCase {
                         XCTFail(error.localizedDescription)
                     }
                     expectation.fulfill()
-                }, receiveValue: { serieData in
-                    XCTAssertEqual(mockData, serieData)
+                }, receiveValue: { creatorData in
+                    XCTAssertEqual(mockData, creatorData)
                     expectation.fulfill()
                 }).store(in: &cancellable)
         } else {
-            XCTFail("Mock no es valido")
+            XCTFail("Mock no valido")
         }
+        
         waitForExpectations(timeout: 5, handler: nil)
     }
+    
+   
+
 }
-extension SeriesData: Equatable {
-    public static func == (lhs: SeriesData, rhs: SeriesData) -> Bool {
+
+extension CreatorData: Equatable {
+    public static func == (lhs: CreatorData, rhs: CreatorData) -> Bool {
         return lhs.total == rhs.total &&
         lhs.results == rhs.results
     }
 }
-extension Series: Equatable {
-    public static func == (lhs: Series, rhs: Series) -> Bool {
+extension Creator: Equatable {
+    public static func == (lhs: Creator, rhs: Creator) -> Bool {
         return lhs.id == rhs.id &&
-        lhs.title == rhs.title &&
-        lhs.description == rhs.description
+        lhs.firstName == rhs.firstName &&
+        lhs.middleName == rhs.middleName &&
+        lhs.lastName == rhs.lastName
     }
 }
-
