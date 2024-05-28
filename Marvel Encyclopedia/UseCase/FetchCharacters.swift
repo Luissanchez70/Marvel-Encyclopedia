@@ -11,18 +11,15 @@ import Combine
 class FetchCharacters {
     
     func execute(limit:Int, offset:Int) -> AnyPublisher<CharacterData, Error> {
-        
-        let urlComponents = URLComponents(path: "/characters")
-            .addParams(name: "limit", value: "\(limit)")
-            .addParams(name: "offset", value: "\(offset)")
-        
-        print("- principal -> \(urlComponents)")
-        
-        let urlRequest = URLRequest(components: urlComponents)
-        return URLSession.shared
-            .fetch(for: urlRequest, with: ResponseCharacter.self)
-            .map { $0.data }
-            .eraseToAnyPublisher()
+            let urlComponents = URLComponents(path: "/characters")
+                .addParams(name: "limit", value: "\(limit)")
+                .addParams(name: "offset", value: "\(offset)")
+
+            let urlRequest = URLRequest(components: urlComponents)
+            return URLSession.shared
+                .fetch(for: urlRequest, with: ResponseCharacter.self)
+                .map { $0.data }
+                .eraseToAnyPublisher()
     }
     
     func execute(_ characterName: String, limit:Int, offset:Int) -> AnyPublisher<CharacterData, Error> {
@@ -47,7 +44,7 @@ extension FetchCharacters: FetchRequest{
         let urlComponents = URLComponents(path: "/\(baseResource.rawValue)/\(resourceId)/characters")
             .addParams(name: "limit", value: "\(limit)")
             .addParams(name: "offset", value: "\(offset)")
-        print("-----> \(urlComponents.url)")
+
         let urlRequest = URLRequest(components: urlComponents)
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseCharacter.self)

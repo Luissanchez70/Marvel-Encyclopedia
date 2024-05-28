@@ -14,10 +14,11 @@ class CharactersListViewController: UIViewController {
     @IBOutlet weak var characterTable: UITableView!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var noResustsWarning: UIView!
+    @IBOutlet weak var labelNoResultsWarning: UILabel!
     private let mainViewModel = CharactersListViewModel()
     private var getCancellable: AnyCancellable?
     private var getCancellablePage: AnyCancellable?
-
+    private var getCancellableError: AnyCancellable?
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,14 +46,21 @@ class CharactersListViewController: UIViewController {
                 self.pageControl.numberOfPages = num
             }
         }
+        getCancellableError = mainViewModel.$errorActual.sink { error in
+            DispatchQueue.main.async {
+                guard let customError = error else {return}
+                self.showErrors(error: customError)
+            }
+        }
+        
     }
     
     @IBAction func searchNavigationBar(_ sender: Any) {
         if characterSearchBar.isHidden {
                     characterSearchBar.isHidden = false
-                } else {
-                    characterSearchBar.isHidden = true
-                }
+        } else {
+            characterSearchBar.isHidden = true
+        }
     }
 }
 
@@ -120,7 +128,15 @@ extension CharactersListViewController {
         }
     }
 }
-
+// MARK: - Show error
+extension CharactersListViewController {
+    func showErrors(error: CustomError) {
+        if noResustsWarning.isHidden {
+            noResustsWarning.isHidden = false
+        }
+        labelNoResultsWarning.text = error.description
+    }
+}
 // MARK: UINavigationBar
 // Configurar fuente personalizada para UINavigationBar
 extension CharactersListViewController {

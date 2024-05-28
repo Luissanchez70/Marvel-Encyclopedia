@@ -31,11 +31,24 @@ private extension URLSession {
         guard let response = response as? HTTPURLResponse else { throw URLError(.unknown) }
         switch response.statusCode {
         case 400...499:
-            throw URLError(.badURL)
+            throw CustomError.errorCliente(cod: response.statusCode)
         case 500...599:
-            throw URLError(.badServerResponse)
+            throw CustomError.errorServidor(cod: response.statusCode)
         default:
             return data
+        }
+    }
+}
+enum CustomError: Error{
+    case errorCliente(cod: Int), errorServidor(cod: Int)
+}
+extension CustomError {
+    var description: String {
+        switch self {
+        case .errorCliente(let cod):
+            return "Error con el cliente cod: \(cod)"
+        case .errorServidor(let cod):
+            return "Error con el servidor cod: \(cod)"
         }
     }
 }

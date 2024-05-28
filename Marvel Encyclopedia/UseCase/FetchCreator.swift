@@ -15,7 +15,6 @@ class FetchCreator: FetchRequest {
         let urlComponents = URLComponents(path: "/\(baseResource.rawValue)/\(resourceId)/creators")
             .addParams(name: "limit", value: "\(limit)")
             .addParams(name: "offset", value: "\(offset)")
-        print("-----> \(urlComponents.url)")
 
         let urlRequest = URLRequest(components: urlComponents)
         return URLSession.shared
