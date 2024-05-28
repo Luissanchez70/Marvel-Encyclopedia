@@ -65,6 +65,7 @@ class DetailsViewController: UIViewController {
         self.navigationController?.pushViewController(nvc, animated: true)
     }
 }
+
 extension DetailsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -129,6 +130,7 @@ extension DetailsViewController: UITableViewDataSource  {
         return cell
     }
 }
+
 private extension DetailsViewController {
     func setupView() {
         setStyle()
@@ -185,11 +187,11 @@ private extension DetailsViewController {
         if let customFont = UIFont(name: "Acme-Regular", size: 25) {
             appearance.largeTitleTextAttributes = [
                 .font: customFont,
-                .foregroundColor: UIColor.white
+                .foregroundColor: UIColor.red
             ]
             appearance.titleTextAttributes = [
                 .font: customFont,
-                .foregroundColor: UIColor.white
+                .foregroundColor: UIColor.red
             ]
         }
         
