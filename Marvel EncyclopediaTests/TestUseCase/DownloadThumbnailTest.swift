@@ -45,9 +45,5 @@ final class DownloadThumbnailTest: XCTestCase {
         }
         
         waitForExpectations(timeout: 5, handler: nil)
-        
     }
-
-
-
 }
