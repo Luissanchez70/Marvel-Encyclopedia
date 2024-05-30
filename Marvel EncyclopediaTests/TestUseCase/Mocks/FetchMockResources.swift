@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class FetchMockResources {
     
@@ -20,5 +21,10 @@ class FetchMockResources {
             return nil
         }
         return response
+    }
+    
+    func execute() -> UIImage? {
+       
+        return UIImage(named: "imageMock.jpg")
     }
 }
