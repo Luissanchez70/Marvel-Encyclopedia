@@ -76,8 +76,8 @@ class DetailsModel {
         thumbnail
     }
     
-    func fetchResources(completionHandle: @escaping (Bool) -> Void) {
-    
+    func fetchResources(completionHandle: @escaping (Bool, CustomError?) -> Void) {
+        
         for request in requests {
             
             if let comicRequest = request as? FetchComics {
@@ -90,19 +90,23 @@ class DetailsModel {
                 addToDiccionary(request: storieRequest, key: "Stories", completion: completionHandle)
             }
         }
+      
     }
-    func addToDiccionary<Request: FetchRequest>( request: Request, key: String, completion: @escaping (Bool) -> Void){
+    func addToDiccionary<Request: FetchRequest>( request: Request, key: String, completion: @escaping (Bool, CustomError?) -> Void){
         
-        request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0).sink { completion in
-            switch completion {
+        request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0).sink(receiveCompletion: { sinkCompletion in
+            switch sinkCompletion {
             case .finished:
                 break
             case .failure(let error):
                 print("\(self.type.rawValue)-_-> \(error.localizedDescription)")
+                let customError = error as? CustomError
+                completion(false, customError)
             }
-        } receiveValue: { data in
+        }, receiveValue: { data in
             
             DispatchQueue.main.async {
+                print("Datos recibidos para la clave \(key) : \(data)")
                 
                 if let data = data as? ComicData {
                     self.resources[key] = data.results
@@ -114,8 +118,8 @@ class DetailsModel {
                     self.resources[key] = data.results
                 }
             
-                completion(true)
+                completion(true, nil)
             }
-        }.store(in: &cancellables)
+        }).store(in: &cancellables)
     }
 }

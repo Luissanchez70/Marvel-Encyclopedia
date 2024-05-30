@@ -22,6 +22,7 @@ class DetailsViewController: UIViewController {
     var selectedResource: [Any] = []
     var selectedTitle = ""
     var viewModel: DetailsViewModel?
+    private var getCancellableError: AnyCancellable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -229,6 +230,13 @@ extension  DetailsViewController {
         viewModel.thumbnail.sink(receiveValue: { image in
             self.image.image = image
         }).store(in: &cancelebles)
+        
+        getCancellableError = viewModel.$errorActual.sink { error in
+            DispatchQueue.main.async {
+                guard let customError = error else {return}
+                self.showErrors(error: customError)
+            }
+        }
     }
     func setSegmentedControl(resources : [String:[Any]]) {
         DispatchQueue.main.async {
@@ -244,6 +252,17 @@ extension  DetailsViewController {
                 }
             }
         }
+    }
+}
+
+// MARK: - Show error
+extension DetailsViewController{
+    func showErrors(error: CustomError) {
+        self.desc.text = error.description
+        //self.image.image = nil
+        //self.name.text = ""
+        //self.resourceSelector.isHidden = true
+        //self.tableView.isHidden = true
     }
 }
 

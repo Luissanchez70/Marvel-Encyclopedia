@@ -19,6 +19,7 @@ import Combine
 class DetailsViewModel {
     
     var detailsModel: DetailsModel
+    @Published var errorActual: CustomError? = nil
     var name: String
     var desc: String?
     
@@ -87,9 +88,11 @@ class DetailsViewModel {
     }
     
     func fetchResources() {
-        detailsModel.fetchResources { success in
+        detailsModel.fetchResources { success, error in
             if success {
                 self.resources.send(self.detailsModel.getResources())
+            } else if let error = error {
+                self.errorActual = error
             }
         }
     }
