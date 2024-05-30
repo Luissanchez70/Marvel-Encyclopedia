@@ -81,13 +81,21 @@ class DetailsModel {
         for request in requests {
             
             if let comicRequest = request as? FetchComics {
-                addToDiccionary(request: comicRequest, key: "Comics", completion: completionHandle)
+                if type != .comic {
+                    addToDiccionary(request: comicRequest, key: "Comics", completion: completionHandle)
+                }
             } else  if let eventRequest = request as? FetchEvents {
-                addToDiccionary(request: eventRequest, key: "Events", completion: completionHandle)
+                if type != .event {
+                    addToDiccionary(request: eventRequest, key: "Events", completion: completionHandle)
+                }
             } else  if let seriesRequest = request as? FetchSeries {
-                addToDiccionary(request: seriesRequest, key: "Series", completion: completionHandle)
+                if type != .serie {
+                    addToDiccionary(request: seriesRequest, key: "Series", completion: completionHandle)
+                }
             } else  if let storieRequest = request as? FetchStories {
-                addToDiccionary(request: storieRequest, key: "Stories", completion: completionHandle)
+                if type != .story {
+                    addToDiccionary(request: storieRequest, key: "Stories", completion: completionHandle)
+                }
             }
         }
       
