@@ -85,7 +85,7 @@ class DetailsModel {
     func fetchResources(completionHandle: @escaping (Bool, CustomError?) -> Void) {
         for request in requests {
             if let comicRequest = request as? FetchComics {
-                if type != .comic {
+                if type != .comic || type != .serie {
                     addToDiccionary(request: comicRequest, key: "Comics", completion: completionHandle)
                 }
             } else  if let eventRequest = request as? FetchEvents {
