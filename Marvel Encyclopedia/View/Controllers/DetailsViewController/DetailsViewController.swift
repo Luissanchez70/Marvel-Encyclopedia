@@ -13,6 +13,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var desc: UILabel!
+    @IBOutlet weak var showError: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var resourceSelector: UISegmentedControl!
     @IBOutlet weak var fullListButton: UIButton!
@@ -132,6 +133,7 @@ private extension DetailsViewController {
         customSegmentedControl()
         name.text = ""
         image.layer.cornerRadius = 15
+        showError.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "ResourcesViewCell", bundle: nil), forCellReuseIdentifier: "ResourcesViewCell")
@@ -250,6 +252,12 @@ extension  DetailsViewController {
 // MARK: - Show error
 extension DetailsViewController{
     func showErrors(error: CustomError) {
-        self.desc.text = error.description
+        if showError.isHidden {
+            showError.isHidden = false
+            self.showError.text = error.description
+        } else {
+            showError.isHidden = true
+        }
+       
     }
 }
