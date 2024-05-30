@@ -36,7 +36,7 @@ class CharactersListViewController: UIViewController {
     }
     
     private func setBind() {
-        getCancellable = mainViewModel.$characterList.sink { list in
+        getCancellable = mainViewModel.$characterList.sink { _ in
             DispatchQueue.main.async {
                 self.characterTable.reloadData()
             }
@@ -52,7 +52,6 @@ class CharactersListViewController: UIViewController {
                 self.showErrors(error: customError)
             }
         }
-        
     }
     
     @IBAction func searchNavigationBar(_ sender: Any) {
@@ -86,7 +85,7 @@ extension CharactersListViewController: UITableViewDataSource {
             let character = mainViewModel.characterList[indexPath.row]
             cell.configure(charater: character)
         }
-        
+    
         return cell
     }
 }
@@ -115,7 +114,7 @@ extension CharactersListViewController: UISearchBarDelegate {
 // MARK: - UIPageControl
 extension CharactersListViewController {
     
-    func pageControllerSetUp(){
+    func pageControllerSetUp() {
         pageControl.numberOfPages = 10
         pageControl.currentPage = 0
     }
@@ -157,10 +156,4 @@ extension CharactersListViewController {
             self.navigationController?.navigationBar.titleTextAttributes = attributes
         }
     }
-    
 }
-
-
-
-
-

@@ -11,11 +11,9 @@ class AllListadoViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var moreResultsButton: UIButton!
-    
-    var resource:[Any] =  []
+    var resource: [Any] =  []
     var cancelebles: Set<AnyCancellable> = []
-    
-    var viewModel : AllListadoViewModel?
+    var viewModel: AllListadoViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +25,7 @@ class AllListadoViewController: UIViewController {
         viewModel.requestMoreResults()
     }
     
-    func setTableView(){
+    func setTableView() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: "ResourcesViewCell", bundle: nil), forCellReuseIdentifier: "ResourcesViewCell")
@@ -62,13 +60,18 @@ class AllListadoViewController: UIViewController {
         guard let viewModel else { return }
         viewModel.requestMoreResults()
     }
-    
 }
 
-extension AllListadoViewController : UITableViewDataSource, UITableViewDelegate {
+extension AllListadoViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let index = indexPath.row
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ResourcesViewCell", for: indexPath) as! ResourcesViewCell
+        guard let cell = tableView
+            .dequeueReusableCell(withIdentifier: "ResourcesViewCell", for: indexPath) as? ResourcesViewCell
+        else {
+            let defaultCell = UITableViewCell(style: .default, reuseIdentifier: "DefaultCell")
+            defaultCell.textLabel?.text = "error"
+            return defaultCell
+        }
         if index < resource.count {
             selectedObject(resource[index], cell)
         }
@@ -79,9 +82,9 @@ extension AllListadoViewController : UITableViewDataSource, UITableViewDelegate 
         var item: ResourcesItemViewModel?
         if let resourceItem  = resource as? ResourceItem {
             item = ResourcesItemViewModel(from: resourceItem)
-        }else if let character = resource as? Character {
+        } else if let character = resource as? Character {
             item = ResourcesItemViewModel(from: character)
-        }else if let creator = resource as? Creator {
+        } else if let creator = resource as? Creator {
             item = ResourcesItemViewModel(from: creator)
         }
         guard let item  else { return }
@@ -91,10 +94,11 @@ extension AllListadoViewController : UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         resource.count
     }
-    
+}
+
+extension AllListadoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nvc = DetailsViewController()
-        
         if let comic = resource[indexPath.row] as? Comic {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: comic, resourceTye: .comic))
         } else if let series = resource[indexPath.row] as? Series {

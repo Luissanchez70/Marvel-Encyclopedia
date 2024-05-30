@@ -18,15 +18,8 @@ class ResourcesViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         tittleLabel.font = UIFont(name: "Marvel-Bold", size: 20)
         descriptionLabel.font = UIFont(name: "Marvel-Regular", size: 15)
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func configure(resorceItem: ResourcesItemViewModel) {

@@ -19,13 +19,12 @@ import Combine
 class DetailsViewModel {
     
     var detailsModel: DetailsModel
-    @Published var errorActual: CustomError? = nil
+    @Published var errorActual: CustomError?
     var name: String
     var desc: String?
-    
     private var cancellables = Set<AnyCancellable>()
     var thumbnail = PassthroughSubject<UIImage?, Never>()
-    var resources = CurrentValueSubject<[String:[Any]], Never>([:])
+    var resources = CurrentValueSubject<[String: [Any]], Never>([:])
 
     init(detailsModel: DetailsModel) {
         self.detailsModel = detailsModel

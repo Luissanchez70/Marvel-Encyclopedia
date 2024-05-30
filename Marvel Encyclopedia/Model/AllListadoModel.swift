@@ -10,12 +10,12 @@ import Foundation
 
 
 class AllListadoModel {
+    
     private var id: Int
-    private var type : ResourceType
-    private var targetTyoe : ResourceType
+    private var type: ResourceType
+    private var targetTyoe: ResourceType
     private var resources: [Any] = []
     private var cancellables = Set<AnyCancellable>()
-
     private var offset = 0
     private var limit = 5
     private var total = 0
@@ -26,7 +26,7 @@ class AllListadoModel {
         self.targetTyoe = targetTyoe
     }
     
-    func requestNextPage(completion : @escaping (Bool) -> Void) {
+    func requestNextPage(completion: @escaping (Bool) -> Void) {
         switch targetTyoe {
         case .comic:
             addToDiccionary(request: FetchComics(), completion: completion)
@@ -35,7 +35,7 @@ class AllListadoModel {
         case .serie:
             addToDiccionary(request: FetchSeries(), completion: completion)
         case .story:
-            addToDiccionary(request: FetchStories(),completion: completion)
+            addToDiccionary(request: FetchStories(), completion: completion)
         case .creator:
             addToDiccionary(request: FetchCreator(), completion: completion)
         case .character:
@@ -44,7 +44,6 @@ class AllListadoModel {
     }
 
     func addToDiccionary<Request: FetchRequest>( request: Request, completion: @escaping (Bool) -> Void) {
-        
         request.execute(baseResource: type, resourceId: id, limit: limit, offset: offset).sink { completion in
             switch completion {
             case .finished:
@@ -54,7 +53,6 @@ class AllListadoModel {
 
             }
         } receiveValue: { data in
-            
             DispatchQueue.main.async {
                 if let data = data as? ComicData {
                     self.resources.append(contentsOf: data.results)

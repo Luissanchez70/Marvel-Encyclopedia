@@ -46,7 +46,7 @@ private extension URLSession {
         }
     }
 }
-enum CustomError: Error{
+enum CustomError: Error {
     case error400(url: String),
          error403(url: String),
          error404(url: String),

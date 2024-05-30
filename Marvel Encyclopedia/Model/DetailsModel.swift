@@ -23,10 +23,16 @@ class DetailsModel {
     private var name: String
     private var desc: String?
     private var thumbnail: Thumbnail?
-    private var type : ResourceType
-    private var resources: [String : [Any]] = [:]
+    private var type: ResourceType
+    private var resources: [String: [Any]] = [:]
     private var cancellables = Set<AnyCancellable>()
-    private var requests: [Any] = [FetchComics(), FetchEvents(), FetchSeries(), FetchCreator(), FetchStories(),FetchCreator(), FetchCharacters()]
+    private var requests: [Any] = [FetchComics(),
+                                   FetchEvents(),
+                                   FetchSeries(),
+                                   FetchCreator(),
+                                   FetchStories(),
+                                   FetchCreator(),
+                                   FetchCharacters()]
     
     init( from resorceItem: ResourceItem, resourceTye: ResourceType ) {
         id = resorceItem.id ?? 1
@@ -56,11 +62,11 @@ class DetailsModel {
         type
     }
     
-    func getId() -> Int{
+    func getId() -> Int {
         id
     }
     
-    func getResources() -> [String : [Any]] {
+    func getResources() -> [String: [Any]] {
         resources
     }
     
@@ -77,9 +83,7 @@ class DetailsModel {
     }
     
     func fetchResources(completionHandle: @escaping (Bool, CustomError?) -> Void) {
-        
         for request in requests {
-            
             if let comicRequest = request as? FetchComics {
                 if type != .comic {
                     addToDiccionary(request: comicRequest, key: "Comics", completion: completionHandle)
@@ -98,11 +102,11 @@ class DetailsModel {
                 }
             }
         }
-      
     }
+    
     func addToDiccionary<Request: FetchRequest>( request: Request, key: String, completion: @escaping (Bool, CustomError?) -> Void){
-        
-        request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0).sink(receiveCompletion: { sinkCompletion in
+        request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0)
+            .sink(receiveCompletion: { sinkCompletion in
             switch sinkCompletion {
             case .finished:
                 break
@@ -112,10 +116,8 @@ class DetailsModel {
                 completion(false, customError)
             }
         }, receiveValue: { data in
-            
             DispatchQueue.main.async {
                 print("Datos recibidos para la clave \(key) : \(data)")
-                
                 if let data = data as? ComicData {
                     self.resources[key] = data.results
                 } else  if let data = data as? EventData {
@@ -125,7 +127,6 @@ class DetailsModel {
                 } else  if let data = data as? StorieData {
                     self.resources[key] = data.results
                 }
-            
                 completion(true, nil)
             }
         }).store(in: &cancellables)
