@@ -19,12 +19,12 @@ import Combine
 class DetailsViewModel {
     
     var detailsModel: DetailsModel
+    @Published var errorActual: CustomError?
     var name: String
     var desc: String?
-    
     private var cancellables = Set<AnyCancellable>()
     var thumbnail = PassthroughSubject<UIImage?, Never>()
-    var resources = CurrentValueSubject<[String:[Any]], Never>([:])
+    var resources = CurrentValueSubject<[String: [Any]], Never>([:])
 
     init(detailsModel: DetailsModel) {
         self.detailsModel = detailsModel
@@ -87,9 +87,11 @@ class DetailsViewModel {
     }
     
     func fetchResources() {
-        detailsModel.fetchResources { success in
+        detailsModel.fetchResources { success, error in
             if success {
                 self.resources.send(self.detailsModel.getResources())
+            } else if let error = error {
+                self.errorActual = error
             }
         }
     }

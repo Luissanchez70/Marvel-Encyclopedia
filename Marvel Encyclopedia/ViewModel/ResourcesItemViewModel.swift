@@ -9,10 +9,10 @@ import UIKit
 import Combine
 
 protocol ResourceItem {
-    var thumbnail: Thumbnail? {set get}
-    var title : String? {set get}
-    var description : String? {set get}
-    var id : Int? {set get}
+    var thumbnail: Thumbnail? { get set  }
+    var title: String? { get set }
+    var description: String? { get set  }
+    var id: Int? { get set  }
 }
 class ResourcesItemViewModel {
     var thumbnail = PassthroughSubject<UIImage?, Never>()

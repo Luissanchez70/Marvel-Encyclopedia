@@ -8,10 +8,10 @@
 import Combine
 
 class AllListadoViewModel {
-    var moreResults = true 
-    var resource = PassthroughSubject<[Any], Never>()
     
-    var allListadoModel : AllListadoModel
+    var moreResults = true
+    var resource = PassthroughSubject<[Any], Never>()
+    var allListadoModel: AllListadoModel
     
     init(allListModel: AllListadoModel) {
         allListadoModel = allListModel

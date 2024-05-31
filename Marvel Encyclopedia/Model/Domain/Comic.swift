@@ -14,7 +14,7 @@ struct Comic: Decodable, ResourceItem {
     var thumbnail: Thumbnail?
 }
 
-struct ComicData: Decodable{
+struct ComicData: Decodable {
     let results: [Comic]
     let offset: Int
     let limit: Int

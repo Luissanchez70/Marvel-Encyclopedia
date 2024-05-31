@@ -13,7 +13,7 @@ class CharactersListViewModel {
 
     @Published var characterList: [Character] = []
     @Published var numberPage = 0
-    @Published var errorActual: CustomError? = nil
+    @Published var errorActual: CustomError?
     private var getCancellable: AnyCancellable?
     private var okResponse: Bool = false
  
@@ -32,7 +32,6 @@ class CharactersListViewModel {
             self.numberPage = characterData.total / 20
             self.characterList = characterData.results
         })
-    
     }
 
     func getCharactersFilter(filter: String, currentPage: Int) {

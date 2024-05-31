@@ -11,7 +11,6 @@ import Combine
 class FetchComics: FetchRequest {
     
     func execute (baseResource: ResourceType, resourceId: Int, limit: Int, offset: Int) -> AnyPublisher<ComicData, Error> {
-        
         let urlComponents = URLComponents(path: "/\(baseResource.rawValue)/\(resourceId)/comics")
             .addParams(name: "limit", value: "\(limit)")
             .addParams(name: "offset", value: "\(offset)")

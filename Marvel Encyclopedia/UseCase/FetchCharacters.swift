@@ -10,7 +10,7 @@ import Combine
 
 class FetchCharacters {
     
-    func execute(limit:Int, offset:Int) -> AnyPublisher<CharacterData, Error> {
+    func execute(limit: Int, offset: Int) -> AnyPublisher<CharacterData, Error> {
             let urlComponents = URLComponents(path: "/characters")
                 .addParams(name: "limit", value: "\(limit)")
                 .addParams(name: "offset", value: "\(offset)")
@@ -22,8 +22,7 @@ class FetchCharacters {
                 .eraseToAnyPublisher()
     }
     
-    func execute(_ characterName: String, limit:Int, offset:Int) -> AnyPublisher<CharacterData, Error> {
-        
+    func execute(_ characterName: String, limit: Int, offset: Int) -> AnyPublisher<CharacterData, Error> {
         let urlComponents = URLComponents(path: "/characters")
             .addParams(name: "nameStartsWith", value: characterName)
             .addParams(name: "limit", value: "\(limit)")
@@ -37,10 +36,9 @@ class FetchCharacters {
     }
 }
 
-extension FetchCharacters: FetchRequest{
+extension FetchCharacters: FetchRequest {
     
     func execute (baseResource: ResourceType, resourceId: Int, limit: Int, offset: Int) -> AnyPublisher<CharacterData, Error> {
-        
         let urlComponents = URLComponents(path: "/\(baseResource.rawValue)/\(resourceId)/characters")
             .addParams(name: "limit", value: "\(limit)")
             .addParams(name: "offset", value: "\(offset)")

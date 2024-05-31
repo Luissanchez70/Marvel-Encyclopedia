@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,6 +16,7 @@
                 <outlet property="image" destination="tqV-iN-cY9" id="xGk-5N-F7j"/>
                 <outlet property="name" destination="yVa-ro-7OY" id="sRH-Me-lpS"/>
                 <outlet property="resourceSelector" destination="3kg-lT-5VS" id="OCh-uj-3Y9"/>
+                <outlet property="showError" destination="obL-cq-dv6" id="BHZ-o7-zpT"/>
                 <outlet property="tableView" destination="tlj-2g-SGf" id="eM0-6M-XnR"/>
                 <outlet property="view" destination="fPO-Ew-sIG" id="eph-PX-c3R"/>
             </connections>
@@ -50,10 +52,19 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QU8-TA-6bk" userLabel="Description">
-                                            <rect key="frame" x="0.0" y="259" width="369" height="212.66666666666663"/>
+                                            <rect key="frame" x="0.0" y="259" width="369" height="164.66666666666663"/>
                                             <string key="text">May Mayday Parker is the daughter of Spider-Man and Mary Jane Watson-Parker. Born with all her father powers-and the same silly sense of humor-shes grown up to become one of Earths most trusted heroes and a fitting tribute to her proud papa.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obL-cq-dv6">
+                                            <rect key="frame" x="10" y="431.66666666666669" width="349" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="NsM-eA-Bwn"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                            <color key="textColor" systemColor="systemRedColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3kg-lT-5VS">
@@ -101,7 +112,7 @@
                                                         <color key="baseBackgroundColor" red="0.44730508209999997" green="0.44730508209999997" blue="0.44730508209999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </buttonConfiguration>
                                                     <connections>
-                                                        <action selector="IrAllListadoPressed:" destination="-1" eventType="touchUpInside" id="nU4-JW-hZX"/>
+                                                        <action selector="irAllListadoPressed:" destination="-1" eventType="touchUpInside" id="nU4-JW-hZX"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -115,11 +126,13 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="EAM-wj-420" secondAttribute="trailing" id="0Ya-Lk-cJw"/>
+                                        <constraint firstAttribute="trailing" secondItem="obL-cq-dv6" secondAttribute="trailing" constant="10" id="EuN-2A-o5d"/>
                                         <constraint firstItem="EAM-wj-420" firstAttribute="leading" secondItem="MSH-Jz-Dlj" secondAttribute="leading" id="O2h-N3-3j1"/>
                                         <constraint firstItem="EAM-wj-420" firstAttribute="centerX" secondItem="MSH-Jz-Dlj" secondAttribute="centerX" id="cJP-LR-RkA"/>
                                         <constraint firstItem="3kg-lT-5VS" firstAttribute="leading" secondItem="MSH-Jz-Dlj" secondAttribute="leading" constant="20" symbolic="YES" id="dAG-km-LJE"/>
                                         <constraint firstAttribute="trailing" secondItem="hF6-02-Ujz" secondAttribute="trailing" id="oEc-2F-40Y"/>
                                         <constraint firstAttribute="trailing" secondItem="3kg-lT-5VS" secondAttribute="trailing" constant="20" symbolic="YES" id="omz-8k-0UA"/>
+                                        <constraint firstItem="obL-cq-dv6" firstAttribute="leading" secondItem="MSH-Jz-Dlj" secondAttribute="leading" constant="10" id="uap-0s-rvf"/>
                                         <constraint firstAttribute="bottom" secondItem="EAM-wj-420" secondAttribute="bottom" id="w92-73-xKA"/>
                                         <constraint firstItem="hF6-02-Ujz" firstAttribute="leading" secondItem="MSH-Jz-Dlj" secondAttribute="leading" id="xp7-TK-k7O"/>
                                     </constraints>
@@ -156,4 +169,9 @@
             <point key="canvasLocation" x="-944.27480916030527" y="35.91549295774648"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

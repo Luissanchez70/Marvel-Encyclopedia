@@ -23,10 +23,16 @@ class DetailsModel {
     private var name: String
     private var desc: String?
     private var thumbnail: Thumbnail?
-    private var type : ResourceType
-    private var resources: [String : [Any]] = [:]
+    private var type: ResourceType
+    private var resources: [String: [Any]] = [:]
     private var cancellables = Set<AnyCancellable>()
-    private var requests: [Any] = [FetchComics(), FetchEvents(), FetchSeries(), FetchCreator(), FetchStories(),FetchCreator(), FetchCharacters()]
+    private var requests: [Any] = [FetchComics(),
+                                   FetchEvents(),
+                                   FetchSeries(),
+                                   FetchCreator(),
+                                   FetchStories(),
+                                   FetchCreator(),
+                                   FetchCharacters()]
     
     init( from resorceItem: ResourceItem, resourceTye: ResourceType ) {
         id = resorceItem.id ?? 1
@@ -56,11 +62,11 @@ class DetailsModel {
         type
     }
     
-    func getId() -> Int{
+    func getId() -> Int {
         id
     }
     
-    func getResources() -> [String : [Any]] {
+    func getResources() -> [String: [Any]] {
         resources
     }
     
@@ -76,34 +82,42 @@ class DetailsModel {
         thumbnail
     }
     
-    func fetchResources(completionHandle: @escaping (Bool) -> Void) {
-    
+    func fetchResources(completionHandle: @escaping (Bool, CustomError?) -> Void) {
         for request in requests {
-            
             if let comicRequest = request as? FetchComics {
-                addToDiccionary(request: comicRequest, key: "Comics", completion: completionHandle)
+                if type != .comic || type != .serie {
+                    addToDiccionary(request: comicRequest, key: "Comics", completion: completionHandle)
+                }
             } else  if let eventRequest = request as? FetchEvents {
-                addToDiccionary(request: eventRequest, key: "Events", completion: completionHandle)
+                if type != .event {
+                    addToDiccionary(request: eventRequest, key: "Events", completion: completionHandle)
+                }
             } else  if let seriesRequest = request as? FetchSeries {
-                addToDiccionary(request: seriesRequest, key: "Series", completion: completionHandle)
+                if type != .serie {
+                    addToDiccionary(request: seriesRequest, key: "Series", completion: completionHandle)
+                }
             } else  if let storieRequest = request as? FetchStories {
-                addToDiccionary(request: storieRequest, key: "Stories", completion: completionHandle)
+                if type != .story {
+                    addToDiccionary(request: storieRequest, key: "Stories", completion: completionHandle)
+                }
             }
         }
     }
-    func addToDiccionary<Request: FetchRequest>( request: Request, key: String, completion: @escaping (Bool) -> Void){
-        
-        request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0).sink { completion in
-            switch completion {
+    
+    func addToDiccionary<Request: FetchRequest>( request: Request, key: String, completion: @escaping (Bool, CustomError?) -> Void){
+        request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0)
+            .sink(receiveCompletion: { sinkCompletion in
+            switch sinkCompletion {
             case .finished:
                 break
             case .failure(let error):
                 print("\(self.type.rawValue)-_-> \(error.localizedDescription)")
+                let customError = error as? CustomError
+                completion(false, customError)
             }
-        } receiveValue: { data in
-            
+        }, receiveValue: { data in
             DispatchQueue.main.async {
-                
+                print("Datos recibidos para la clave \(key) : \(data)")
                 if let data = data as? ComicData {
                     self.resources[key] = data.results
                 } else  if let data = data as? EventData {
@@ -113,9 +127,8 @@ class DetailsModel {
                 } else  if let data = data as? StorieData {
                     self.resources[key] = data.results
                 }
-            
-                completion(true)
+                completion(true, nil)
             }
-        }.store(in: &cancellables)
+        }).store(in: &cancellables)
     }
 }

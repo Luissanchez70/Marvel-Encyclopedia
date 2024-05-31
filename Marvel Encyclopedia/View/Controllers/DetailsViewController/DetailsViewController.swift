@@ -13,15 +13,16 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var desc: UILabel!
+    @IBOutlet weak var showError: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var resourceSelector: UISegmentedControl!
     @IBOutlet weak var fullListButton: UIButton!
-
     var cancelebles: Set<AnyCancellable> = []
     var selectedKey = "None"
     var selectedResource: [Any] = []
     var selectedTitle = ""
     var viewModel: DetailsViewModel?
+    private var getCancellableError: AnyCancellable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +41,7 @@ class DetailsViewController: UIViewController {
         selectSegmentfor(key: selectedKey)
     }
     
-    func selectSegmentfor(key : String) {
+    func selectSegmentfor(key: String) {
         guard let viewModel  else { return  }
         selectedResource = viewModel.resources.value[key] ?? []
         if selectedResource.count == 5 {
@@ -51,9 +52,7 @@ class DetailsViewController: UIViewController {
         tableView.reloadData()
     }
     
-    @IBAction func IrAllListadoPressed(_ sender: UIButton) {
-        print("entro")
-        
+    @IBAction func irAllListadoPressed(_ sender: UIButton) {
         let nvc = AllListadoViewController()
         guard let viewModel else  { return }
         let id = viewModel.getID()
@@ -70,7 +69,6 @@ extension DetailsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nvc = DetailsViewController()
-        
         if let comic = selectedResource[indexPath.row] as? Comic {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: comic, resourceTye: .comic))
         } else if let series = selectedResource[indexPath.row] as? Series {
@@ -85,9 +83,6 @@ extension DetailsViewController: UITableViewDelegate {
             nvc.viewModel = DetailsViewModel(detailsModel: DetailsModel(from: story, resourceTye: .story))
         }
         
-        //self.navigationController?.pushViewController(nvc, animated: true)
-        //Remplazamos el stack de navegación con el nuevo view controller
-        //Solo queda el root viewController y el nuevo viewControler
         if var viewController = self.navigationController?.viewControllers {
             if viewController.count > 1 {
                 viewController = viewController.prefix(2) + [nvc]
@@ -100,12 +95,12 @@ extension DetailsViewController: UITableViewDelegate {
     }
     
     private func selectedObject(_ resource: [Any], _ indexPath: IndexPath, _ cell: ResourcesViewCell) {
-        var item : ResourcesItemViewModel?
+        var item: ResourcesItemViewModel?
         if let resource = resource[indexPath.row] as? ResourceItem {
             item = ResourcesItemViewModel(from: resource)
-        }else if let character = resource[indexPath.row] as? Character {
+        } else if let character = resource[indexPath.row] as? Character {
             item = ResourcesItemViewModel(from: character)
-        }else if let creator = resource[indexPath.row] as? Creator {
+        } else if let creator = resource[indexPath.row] as? Creator {
             item = ResourcesItemViewModel(from: creator)
         }
         guard let item  else { return }
@@ -113,7 +108,7 @@ extension DetailsViewController: UITableViewDelegate {
     }
 }
 
-extension DetailsViewController: UITableViewDataSource  {
+extension DetailsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return selectedResource.count
@@ -138,6 +133,7 @@ private extension DetailsViewController {
         customSegmentedControl()
         name.text = ""
         image.layer.cornerRadius = 15
+        showError.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "ResourcesViewCell", bundle: nil), forCellReuseIdentifier: "ResourcesViewCell")
@@ -194,7 +190,7 @@ private extension DetailsViewController {
                 .foregroundColor: UIColor.red
             ]
         }
-        
+
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
@@ -212,8 +208,8 @@ private extension DetailsViewController {
     }
     
     func customSegmentedControl() {
-        let titleTextColorWhite = [NSAttributedString.Key.foregroundColor:UIColor.white]
-        let tiileTextColorBlack = [NSAttributedString.Key.foregroundColor:UIColor.black]
+        let titleTextColorWhite = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        let tiileTextColorBlack = [NSAttributedString.Key.foregroundColor: UIColor.black]
         resourceSelector.setTitleTextAttributes(titleTextColorWhite, for: .normal)
         resourceSelector.setTitleTextAttributes(tiileTextColorBlack, for: .selected)
     }
@@ -223,14 +219,20 @@ extension  DetailsViewController {
     func setBinds() {
         guard let viewModel  else { return }
         viewModel.resources.sink(receiveValue: { received in
-            self.setSegmentedControl(resources : received)
+            self.setSegmentedControl(resources: received)
         }).store(in: &cancelebles)
-        
         viewModel.thumbnail.sink(receiveValue: { image in
             self.image.image = image
         }).store(in: &cancelebles)
+        
+        getCancellableError = viewModel.$errorActual.sink { error in
+            DispatchQueue.main.async {
+                guard let customError = error else {return}
+                self.showErrors(error: customError)
+            }
+        }
     }
-    func setSegmentedControl(resources : [String:[Any]]) {
+    func setSegmentedControl(resources: [String:[Any]]) {
         DispatchQueue.main.async {
             self.resourceSelector.removeAllSegments()
             let sortedKeys = resources.keys.sorted(by: <)
@@ -247,3 +249,15 @@ extension  DetailsViewController {
     }
 }
 
+// MARK: - Show error
+extension DetailsViewController{
+    func showErrors(error: CustomError) {
+        if showError.isHidden {
+            showError.isHidden = false
+            self.showError.text = error.description
+        } else {
+            showError.isHidden = true
+        }
+       
+    }
+}
