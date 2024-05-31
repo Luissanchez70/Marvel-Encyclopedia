@@ -8,11 +8,14 @@
 import Foundation
 import Combine
 
-class FetchStories {
+class FetchStories: FetchRequest {
     
-    func execute (_ characterID: Int) -> AnyPublisher<StorieData, Error> {
+    func execute (baseResource: ResourceType, resourceId: Int, limit: Int, offset: Int) -> AnyPublisher<StorieData, Error> {
+        let urlComponents = URLComponents(path: "/\(baseResource.rawValue)/\(resourceId)/stories")
+            .addParams(name: "limit", value: "\(limit)")
+            .addParams(name: "offset", value: "\(offset)")
         
-        let urlRequest = URLRequest(components: URLComponents(path: "/characters/\(characterID)/stories"))
+        let urlRequest = URLRequest(components: urlComponents)
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseStorie.self)
             .map { $0.data }

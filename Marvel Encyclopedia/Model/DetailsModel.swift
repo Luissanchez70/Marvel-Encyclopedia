@@ -21,16 +21,23 @@ class DetailsModel {
     
     private var id: Int
     private var name: String
-    private var desc: String
+    private var desc: String?
     private var thumbnail: Thumbnail?
-    private var type : ResourceType
-    private var resources: [String : [Any]] = [:]
+    private var type: ResourceType
+    private var resources: [String: [Any]] = [:]
     private var cancellables = Set<AnyCancellable>()
+    private var requests: [Any] = [FetchComics(),
+                                   FetchEvents(),
+                                   FetchSeries(),
+                                   FetchCreator(),
+                                   FetchStories(),
+                                   FetchCreator(),
+                                   FetchCharacters()]
     
     init( from resorceItem: ResourceItem, resourceTye: ResourceType ) {
         id = resorceItem.id ?? 1
         name = resorceItem.title ?? "No title"
-        desc = resorceItem.description ?? "No description"
+        desc = resorceItem.description
         thumbnail = resorceItem.thumbnail
         type = resourceTye
     }
@@ -46,20 +53,28 @@ class DetailsModel {
     init( from creator: Creator, resourceTye: ResourceType ) {
         id = creator.id ?? 0
         name = "\(creator.firstName!) \(creator.lastName!)"
-        desc = "No description"
+        desc = nil
         thumbnail = creator.thumbnail
         type = resourceTye
     }
     
-    func getResources() -> [String : [Any]] {
-        return resources
+    func getType() -> ResourceType {
+        type
+    }
+    
+    func getId() -> Int {
+        id
+    }
+    
+    func getResources() -> [String: [Any]] {
+        resources
     }
     
     func getName() -> String {
         name
     }
     
-    func getDesc() -> String {
+    func getDesc() -> String? {
         desc
     }
     
@@ -67,67 +82,53 @@ class DetailsModel {
         thumbnail
     }
     
-    func getResources(_ completionHandle: @escaping (Bool) -> (),
-                 _ baseResource: ResourceType,
-                 _ targetResource: ResourceType){
-        
-        FetchAnyByAnyIDList().execute(baseResource: baseResource, baseID: id, targetResource: targetResource).sink { completion in
-            switch completion {
+    func fetchResources(completionHandle: @escaping (Bool, CustomError?) -> Void) {
+        for request in requests {
+            if let comicRequest = request as? FetchComics {
+                if type != .comic || type != .serie {
+                    addToDiccionary(request: comicRequest, key: "Comics", completion: completionHandle)
+                }
+            } else  if let eventRequest = request as? FetchEvents {
+                if type != .event {
+                    addToDiccionary(request: eventRequest, key: "Events", completion: completionHandle)
+                }
+            } else  if let seriesRequest = request as? FetchSeries {
+                if type != .serie {
+                    addToDiccionary(request: seriesRequest, key: "Series", completion: completionHandle)
+                }
+            } else  if let storieRequest = request as? FetchStories {
+                if type != .story {
+                    addToDiccionary(request: storieRequest, key: "Stories", completion: completionHandle)
+                }
+            }
+        }
+    }
+    
+    func addToDiccionary<Request: FetchRequest>( request: Request, key: String, completion: @escaping (Bool, CustomError?) -> Void){
+        request.execute(baseResource: type, resourceId: id, limit: 5, offset: 0)
+            .sink(receiveCompletion: { sinkCompletion in
+            switch sinkCompletion {
             case .finished:
                 break
             case .failure(let error):
-                print(error.localizedDescription)
+                print("\(self.type.rawValue)-_-> \(error.localizedDescription)")
+                let customError = error as? CustomError
+                completion(false, customError)
             }
-        } receiveValue: { data in
+        }, receiveValue: { data in
             DispatchQueue.main.async {
-                let list = self.decodeResponse(data: data, targetType: targetResource)
-                self.resources[targetResource.rawValue] = list
-                completionHandle(true)
+                print("Datos recibidos para la clave \(key) : \(data)")
+                if let data = data as? ComicData {
+                    self.resources[key] = data.results
+                } else  if let data = data as? EventData {
+                    self.resources[key] = data.results
+                } else  if let data = data as? SeriesData {
+                    self.resources[key] = data.results
+                } else  if let data = data as? StorieData {
+                    self.resources[key] = data.results
+                }
+                completion(true, nil)
             }
-        }.store(in: &cancellables)
-        
-    }
-    
-    func decodeResponse(data: Data, targetType : ResourceType) -> [Any] {
-        do {
-            switch targetType {
-            case .character:
-                return try JSONDecoder().decode(ResponseCharacter.self, from: data).data.results
-            case .comic:
-                return try JSONDecoder().decode(ResponseComic.self, from: data).data.results
-            case .creator:
-                return try JSONDecoder().decode(ResponseCreator.self, from: data).data.results
-            case .event:
-                return try JSONDecoder().decode(ResponseEvent.self, from: data).data.results
-            case .serie:
-                return try JSONDecoder().decode(ResponseSeries.self, from: data).data.results
-            case .story:
-                return try JSONDecoder().decode(ResponseStorie.self, from: data).data.results
-            }
-        } catch {
-            print(error.localizedDescription.localizedLowercase)
-        }
-        return []
-    }
-        
-    func fetchResources(completionHandle: @escaping (Bool) -> Void) {
-        if type != .comic {
-            getResources(completionHandle, type, .comic)
-        }
-        if type != .character && type != .creator {
-            getResources(completionHandle, type, .character)
-        }
-        if type != .creator && type != .character {
-            getResources(completionHandle, type, .creator)
-        }
-        if type != .event {
-            getResources(completionHandle, type, .event)
-        }
-        if type != .comic && type != .serie {
-            getResources(completionHandle, type, .serie)
-        }
-        if type != .story {
-            getResources(completionHandle, type, .serie)
-        }
+        }).store(in: &cancellables)
     }
 }

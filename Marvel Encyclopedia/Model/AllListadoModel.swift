@@ -10,12 +10,12 @@ import Foundation
 
 
 class AllListadoModel {
-    private var id: Int 
-    private var type : ResourceType
-    private var targetTyoe : ResourceType
+    
+    private var id: Int
+    private var type: ResourceType
+    private var targetTyoe: ResourceType
     private var resources: [Any] = []
     private var cancellables = Set<AnyCancellable>()
-
     private var offset = 0
     private var limit = 5
     private var total = 0
@@ -26,68 +26,62 @@ class AllListadoModel {
         self.targetTyoe = targetTyoe
     }
     
-    func requestNextPage(completion : @escaping ([Any] ,Bool) -> Void) {
-        FetchAnyByAnyIDList().execute(baseResource: type, baseID: id, targetResource: targetTyoe, limit: limit, offset: offset+limit).sink { completion in
+    func requestNextPage(completion: @escaping (Bool) -> Void) {
+        switch targetTyoe {
+        case .comic:
+            addToDiccionary(request: FetchComics(), completion: completion)
+        case .event:
+            addToDiccionary(request: FetchEvents(), completion: completion)
+        case .serie:
+            addToDiccionary(request: FetchSeries(), completion: completion)
+        case .story:
+            addToDiccionary(request: FetchStories(), completion: completion)
+        case .creator:
+            addToDiccionary(request: FetchCreator(), completion: completion)
+        case .character:
+            addToDiccionary(request: FetchCharacters(), completion: completion)
+        }
+    }
+
+    func addToDiccionary<Request: FetchRequest>( request: Request, completion: @escaping (Bool) -> Void) {
+        request.execute(baseResource: type, resourceId: id, limit: limit, offset: offset).sink { completion in
             switch completion {
             case .finished:
                 break
             case .failure(let error):
-                print(error.localizedDescription)
+                print("\(self.type.rawValue)--> \(error.localizedDescription)")
+
             }
         } receiveValue: { data in
             DispatchQueue.main.async {
-                let response = self.decodeResponse(data: data)
-                self.resources.append(contentsOf: response)
-                completion(self.resources, (self.offset + self.limit < self.total))
+                if let data = data as? ComicData {
+                    self.resources.append(contentsOf: data.results)
+                    self.total = data.total
+                } else  if let data = data as? EventData {
+                    self.resources.append(contentsOf: data.results)
+                    self.total = data.total
+                } else  if let data = data as? SeriesData {
+                    self.resources.append(contentsOf: data.results)
+                    self.total = data.total
+                } else  if let data = data as? StorieData {
+                    self.resources.append(contentsOf: data.results)
+                    self.total = data.total
+                } else  if let data = data as? CreatorData {
+                    self.resources.append(contentsOf: data.results)
+                    self.total = data.total
+                } else  if let data = data as? CharacterData {
+                    self.resources.append(contentsOf: data.results)
+                    self.total = data.total
+                }
                 self.offset += self.limit
+                completion(true)
             }
         }.store(in: &cancellables)
-        
     }
-
-    func decodeResponse(data: Data) -> [Any] {
-        do {
-            switch targetTyoe {
-            case .character:
-                let response = try JSONDecoder().decode(ResponseCharacter.self, from: data).data
-                offset = response.offset
-                limit = response.limit
-                total = response.total
-                return response.results
-            case .comic:
-                let response = try JSONDecoder().decode(ResponseComic.self, from: data).data
-                offset = response.offset
-                limit = response.limit
-                total = response.total
-                return response.results
-            case .creator:
-                let response = try JSONDecoder().decode(ResponseCreator.self, from: data).data
-                offset = response.offset
-                limit = response.limit
-                total = response.total
-                return response.results
-            case .event:
-                let response = try JSONDecoder().decode(ResponseEvent.self, from: data).data
-                offset = response.offset
-                limit = response.limit
-                total = response.total
-                return response.results
-            case .serie:
-                let response = try JSONDecoder().decode(ResponseSeries.self, from: data).data
-                offset = response.offset
-                limit = response.limit
-                total = response.total
-                return response.results
-            case .story:
-                let response = try JSONDecoder().decode(ResponseStorie.self, from: data).data
-                offset = response.offset
-                limit = response.limit
-                total = response.total
-                return response.results
-            }
-        } catch {
-            print(error.localizedDescription.localizedLowercase)
-        }
-        return []
+    
+    func getResources() -> [Any] { resources }
+    
+    func moreResults() -> Bool {
+        offset <= total
     }
 }

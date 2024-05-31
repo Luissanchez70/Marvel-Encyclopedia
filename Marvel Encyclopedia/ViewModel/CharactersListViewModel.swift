@@ -12,19 +12,43 @@ import Combine
 class CharactersListViewModel {
 
     @Published var characterList: [Character] = []
+    @Published var numberPage = 0
+    @Published var errorActual: CustomError?
     private var getCancellable: AnyCancellable?
-
-    func getCharacters() {
-        getCancellable = FetchCharacters().execute()
-            .map { $0.results}
-            .replaceError(with: [])
-            .assign(to: \.characterList, on: self)
+    private var okResponse: Bool = false
+ 
+    func getCharacters(currentPage: Int) {
+        getCancellable = FetchCharacters().execute(limit: 20, offset: currentPage * 20)
+            .sink(receiveCompletion: { completion in
+            switch completion {
+            case .finished:
+                self.okResponse = true
+            case .failure(let error):
+                self.okResponse = false
+                self.errorActual = error as? CustomError
+            }
+        }, receiveValue: { characterData in
+            self.okResponse = true
+            self.numberPage = characterData.total / 20
+            self.characterList = characterData.results
+        })
     }
 
-    func getCharactersFilter(filter: String) {
-        getCancellable = FetchCharacters().execute(filter)
-            .map { $0.results}
-            .replaceError(with: [])
-            .assign(to: \.characterList, on: self)
+    func getCharactersFilter(filter: String, currentPage: Int) {
+        getCancellable = FetchCharacters().execute(filter, limit: 20, offset: currentPage * 20)
+            .sink(receiveCompletion: { completion in
+            switch completion {
+            case .finished:
+                self.okResponse = true
+            case .failure(let error):
+                self.okResponse = false
+                self.characterList = []
+                self.errorActual = error as? CustomError
+            }
+        }, receiveValue: { characterData in
+            self.okResponse = true
+            self.numberPage = characterData.total / 20
+            self.characterList = characterData.results
+        })
     }
 }

@@ -8,11 +8,14 @@
 import Foundation
 import Combine
 
-class FetchComics {
+class FetchComics: FetchRequest {
     
-    func execute (_ characterID: Int) -> AnyPublisher<ComicData, Error> {
+    func execute (baseResource: ResourceType, resourceId: Int, limit: Int, offset: Int) -> AnyPublisher<ComicData, Error> {
+        let urlComponents = URLComponents(path: "/\(baseResource.rawValue)/\(resourceId)/comics")
+            .addParams(name: "limit", value: "\(limit)")
+            .addParams(name: "offset", value: "\(offset)")
         
-        let urlRequest = URLRequest(components: URLComponents(path: "/characters/\(characterID)/comics"))
+        let urlRequest = URLRequest(components: urlComponents)
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseComic.self)
             .map { $0.data }

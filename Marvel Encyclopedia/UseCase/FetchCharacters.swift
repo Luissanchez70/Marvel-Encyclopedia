@@ -10,18 +10,40 @@ import Combine
 
 class FetchCharacters {
     
-    func execute() -> AnyPublisher<CharacterData, Error> {
+    func execute(limit: Int, offset: Int) -> AnyPublisher<CharacterData, Error> {
+            let urlComponents = URLComponents(path: "/characters")
+                .addParams(name: "limit", value: "\(limit)")
+                .addParams(name: "offset", value: "\(offset)")
+
+            let urlRequest = URLRequest(components: urlComponents)
+            return URLSession.shared
+                .fetch(for: urlRequest, with: ResponseCharacter.self)
+                .map { $0.data }
+                .eraseToAnyPublisher()
+    }
+    
+    func execute(_ characterName: String, limit: Int, offset: Int) -> AnyPublisher<CharacterData, Error> {
+        let urlComponents = URLComponents(path: "/characters")
+            .addParams(name: "nameStartsWith", value: characterName)
+            .addParams(name: "limit", value: "\(limit)")
+            .addParams(name: "offset", value: "\(offset)")
         
-        let urlRequest = URLRequest(components: URLComponents(path: "/characters"))
+        let urlRequest = URLRequest(components: urlComponents)
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseCharacter.self)
             .map { $0.data }
             .eraseToAnyPublisher()
     }
+}
+
+extension FetchCharacters: FetchRequest {
     
-    func execute(_ characterName: String) -> AnyPublisher<CharacterData, Error> {
-        
-        let urlRequest = URLRequest(components: URLComponents(path: "/characters").fetchCharactersByName(characterName))
+    func execute (baseResource: ResourceType, resourceId: Int, limit: Int, offset: Int) -> AnyPublisher<CharacterData, Error> {
+        let urlComponents = URLComponents(path: "/\(baseResource.rawValue)/\(resourceId)/characters")
+            .addParams(name: "limit", value: "\(limit)")
+            .addParams(name: "offset", value: "\(offset)")
+
+        let urlRequest = URLRequest(components: urlComponents)
         return URLSession.shared
             .fetch(for: urlRequest, with: ResponseCharacter.self)
             .map { $0.data }

@@ -8,27 +8,61 @@
 import UIKit
 import Combine
 
+// Vista conoce a ViewModel
+// ViewModel conoce a Model
+// V -> VM -> M
+
+//Modelo no conoce a el ViewModel ni a la vista
+//ViewModel no conoce a la vista
+// M X VM X V
+
 class DetailsViewModel {
     
-    private var cancellables = Set<AnyCancellable>()
     var detailsModel: DetailsModel
+    @Published var errorActual: CustomError?
     var name: String
-    var desc: String
+    var desc: String?
+    private var cancellables = Set<AnyCancellable>()
     var thumbnail = PassthroughSubject<UIImage?, Never>()
-    var resources = CurrentValueSubject<[String:[Any]], Never>([:])
+    var resources = CurrentValueSubject<[String: [Any]], Never>([:])
 
     init(detailsModel: DetailsModel) {
         self.detailsModel = detailsModel
         name = detailsModel.getName()
         desc = detailsModel.getDesc()
     }
+    
+    func getNavigationTitle() -> String {
+        switch detailsModel.getType() {
+        case .character:
+            return "Character: \(name)"
+        case .comic:
+            return "Comics: \(name)"
+        case .creator:
+            return "Creators: \(name)"
+        case .event:
+            return "Events: \(name)"
+        case .serie:
+            return "Series: \(name)"
+        case .story:
+            return "Stories: \(name)"
+        }
+    }
 
     func getName() -> String {
         name
     }
     
-    func getDesc() -> String {
+    func getDesc() -> String? {
         desc
+    }
+    
+    func getID() -> Int {
+        detailsModel.getId()
+    }
+    
+    func getType() -> ResourceType {
+        detailsModel.getType()
     }
     
     func fetThumbnail() {
@@ -53,9 +87,11 @@ class DetailsViewModel {
     }
     
     func fetchResources() {
-        detailsModel.fetchResources { success in
+        detailsModel.fetchResources { success, error in
             if success {
                 self.resources.send(self.detailsModel.getResources())
+            } else if let error = error {
+                self.errorActual = error
             }
         }
     }
